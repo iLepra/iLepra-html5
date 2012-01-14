@@ -139,7 +139,8 @@ var iLepra = (function() {
 					iLepra.latestPosts.push(posts[i]);
 				}
 				
-				iLepra.getNewsCounters();
+				$(document).trigger(iLepra.events.ready);
+				//iLepra.getNewsCounters();
 			});
 		},
 		
