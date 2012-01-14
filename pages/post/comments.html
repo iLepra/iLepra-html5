@@ -1,0 +1,17 @@
+<div data-role="page" id="postCommentsPage" data-add-back-btn="true">
+	<div data-role="header">
+		<h1 id="postTitle">Пост</h1>
+	</div>
+
+	<div data-role="content">
+		<ul data-role="listview" id="commentsList">
+			<script id="commentTemplate" type="text/x-jquery-tmpl">
+				<li>
+				   <p class="commentText">{{html text}}</p>
+				   <p>${wrote}</p>
+				   <p class="ui-li-count">${rating}</p>
+				</li>
+			</script>
+		</ul>
+	</div>
+</div>

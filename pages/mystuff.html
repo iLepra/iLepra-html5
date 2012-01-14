@@ -1,0 +1,33 @@
+<div data-role="page" id="mystuffPage">
+	<div data-role="header" data-position="fixed">
+		<h1>Мои вещи</h1>
+	</div>
+
+	<div data-role="content">
+		<ul data-role="listview" id="mystuffList">
+			<script id="mystuffTemplate" type="text/x-jquery-tmpl">
+				<li>
+					<a href="#" class="mystuffListItem" data-id="${id}">
+						<img src="${$item.image}" class="postThumb" />
+						<h1>${$item.text}</h1>
+						<p>${wrote}</p>
+						<p>${comments}</i></p>
+						<p class="ui-li-count">${rating}</p>
+					</a>
+				</li>
+			</script>
+		</ul>
+	</div>
+	
+	<div data-role="footer" data-position="fixed" data-theme="a" data-id="main-nav"
+		class="nav-toolbar">
+		<div data-role="navbar" data-iconpos="top" class="nav-toolbar" data-grid="c">
+			<ul>
+				<li><a href="#" id="postsBar" data-icon="posts">Посты</a></li>
+				<li><a href="#" class="ui-btn-active" data-icon="mystuff">Мои вещи</a></li>
+				<li><a href="#" id="inboxBar" data-icon="inbox">Инбокс</a></li>
+				<li><a href="#" id="settingsBar" data-icon="settings">Настройки</a></li>
+			</ul>
+		</div><!-- /navbar -->
+	</div>
+</div>
