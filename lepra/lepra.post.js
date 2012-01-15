@@ -21,6 +21,8 @@ iLepra.post = (function() {
 				
 				iLepra.post.comments = [];
 				
+				iLepra.post.current.wtf = $("#comments-form input[name='wtf']", doc).val();
+				
 				$("#js-commentsHolder .post", doc).each(function(index, item){
 					var data = $(item);
 					var add = $(".dd .p", data);
@@ -28,6 +30,7 @@ iLepra.post = (function() {
 					var wrote = add.text().replace(/\s\s+/gi, "").split("|")[0];
 					
 					var post = {
+						id: data.attr('id'),
 						text: $(".dt", data).html(),
 						rating: $(".rating", data).text(),
 						user: $( $("a", add)[1] ).text(),
@@ -41,6 +44,35 @@ iLepra.post = (function() {
 				$(document).trigger(iLepra.events.ready);
 			});
 		},
+		
+		// add comment to post
+		addComment: function(comment, inReplyTo){
+			var url = "http://";
+			if( iLepra.post.current.domain_url != "" ){
+				url += iLepra.post.current.domain_url;
+			}else{
+				url += "leprosorium.ru";
+			}
+			url += "/commctl/";
+			
+			var data = {
+				wtf: iLepra.post.current.wtf,
+				pid: iLepra.post.current.id,
+				comment: comment
+			}
+			
+			if(typeof inReplyTo != 'undefined' && inReplyTo != null) data.replyto = inReplyTo;
+			
+			$.post(url, data, function(data){
+				data = $.parseJSON(data);
+				
+				if( data.status == "ERR" ){
+					$(document).trigger(iLepra.events.error);
+				}else{
+					iLepra.post.getComments();
+				}
+			});
+		}
 	};
 
 	return post;
