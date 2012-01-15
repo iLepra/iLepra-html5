@@ -205,10 +205,11 @@ var iLepra = (function() {
 					var wrote = add.text().replace(/\s\s+/gi, " ").split("|");
 					
 					var post = {
-						id: data.attr('id'),
+						id: data.attr('id').replace('p', ''),
 						body: $(".dt", data).html(),
 						rating: $(".rating", data).text(),
 						user: $( $("a", add)[0] ).text(),
+						domain_url: $(".sub_domain_url", data).text(),
 						wrote: wrote[0],
 						comments: wrote[1]
 					};
