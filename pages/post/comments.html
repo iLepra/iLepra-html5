@@ -1,5 +1,5 @@
 <div data-role="page" id="postCommentsPage" data-add-back-btn="true">
-	<div data-role="header">
+	<div data-role="header" data-position="fixed">
 		<h1 id="postCommentsTitle">Пост</h1>
 		<a data-role="button" data-icon="plus" id="addCommentButton"
 		   data-iconpos="notext" class="ui-btn-right">New comment</a>
@@ -20,7 +20,7 @@
 		</ul>
 		
 		<script id="commentTemplate" type="text/x-jquery-tmpl">
-			<li>
+			<li {{if isNew == 1}}data-theme="d"{{/if}}>
 				<a>
 					<p class="commentText">{{html text}}</p>
 					<p>${wrote}</p>

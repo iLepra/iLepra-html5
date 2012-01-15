@@ -34,6 +34,7 @@ iLepra.post = (function() {
 					
 					var post = {
 						id: data.attr('id'),
+						isNew: data.hasClass('new') ? 1 : 0,
 						text: $(".dt", data).html(),
 						rating: $(".rating", data).text(),
 						user: $( $("a", add)[1] ).text(),
