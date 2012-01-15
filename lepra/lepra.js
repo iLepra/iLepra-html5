@@ -43,6 +43,8 @@ var iLepra = (function() {
 		
 		// posts data
 		latestPosts: null,
+		postCount: null,
+		
 		// mystuff data
 		myStuffPosts: null,
 		// inbox data
@@ -130,7 +132,13 @@ var iLepra = (function() {
 		 Gets last posts from JSON interface
 		 ***/
 		getLastPosts: function(){
-			$.getJSON("http://leprosorium.ru/idxctl/", function(data){
+			iLepra.postCount = 0;
+		
+			$.post("http://leprosorium.ru/idxctl/", {from:iLepra.postCount}, function(data){
+				// convert string to object
+				data = $.parseJSON(data);
+				
+				// init posts array
 				iLepra.latestPosts = [];
 				
 				var i;
@@ -141,6 +149,27 @@ var iLepra = (function() {
 				
 				$(document).trigger(iLepra.events.ready);
 				//iLepra.getNewsCounters();
+			});
+		},
+		
+		/***
+		 Gets more posts from JSON interface from specified count
+		 ***/
+		getMorePosts: function(){
+			iLepra.postCount += 42;
+			
+			$.post("http://leprosorium.ru/idxctl/", {from:iLepra.postCount}, function(data){
+				// convert string to object
+				data = $.parseJSON(data);
+				
+				var i;
+				var posts = data.posts;
+				for(i in posts){
+					if( iLepra.latestPosts.indexOf(posts[i]) == -1 )
+						iLepra.latestPosts.push(posts[i]);
+				}
+				
+				$(document).trigger(iLepra.events.ready);
 			});
 		},
 		

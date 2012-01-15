@@ -1,5 +1,6 @@
 <div data-role="page" id="postsPage">
 	<div data-role="header" data-position="fixed">
+		<a href="#" id="refreshPostsButton" data-role="button" data-icon="refresh" data-iconpos="notext">Refresh</a>
 		<h1>Последние посты</h1>
 		<a data-role="button" data-icon="grid" data-inline="true"
 		href="dialogues/mainlayout.html" data-rel="dialog" data-transition="slidedown"
@@ -8,19 +9,20 @@
 
 	<div data-role="content">
 		<ul data-role="listview" id="postsList">
-			<script id="postTemplate" type="text/x-jquery-tmpl">
-				<li>
-					<a href="#" class="postListItem" data-id="${id}">
-						<img src="${$item.image}" class="postThumb" />
-						<h1>${$item.text}</h1>
-						<p>Написал ${user_rank} ${login}</p>
-						<p>${textdate} ${posttime} {{if domain_url != ""}} / ${domain_url} {{/if}}</p>
-						<p>Комментариев: ${comm_count} / <i>${unread}</i></p>
-						<p class="ui-li-count">${rating}</p>
-					</a>
-				</li>
-			</script>
 		</ul>
+		<script id="postTemplate" type="text/x-jquery-tmpl">
+			<li>
+				<a href="#" class="postListItem" data-id="${id}">
+					<img src="${$item.image}" class="postThumb" />
+					<h1>${$item.text}</h1>
+					<p>Написал ${user_rank} ${login}</p>
+					<p>${textdate} ${posttime} {{if domain_url != ""}} / ${domain_url} {{/if}}</p>
+					<p>Комментариев: ${comm_count} / <i>${unread}</i></p>
+					<p class="ui-li-count">${rating}</p>
+				</a>
+			</li>
+		</script>
+		<a href="#" data-role="button" id="morePostsButton">Еще? Еще!</a>
 	</div>
 	
 	<div data-role="footer" data-position="fixed" data-theme="a" data-id="main-nav"

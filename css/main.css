@@ -5,9 +5,9 @@ img {
 .postThumb {
 	/*width:100px; 
 	height:100px;*/
-	max-width: 200px;
-	height: 100px;
-	clip: rect(0px 80px 80px 0px);
+	max-width: 80px;
+	max-height: 80px;
+	/*clip: rect(0px 80px 80px 0px);*/
 }
 
 .commentText {

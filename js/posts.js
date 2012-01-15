@@ -1,6 +1,5 @@
 $(function(){
-	// render page on creation
-	$("#postsPage").live('pagecreate', function(){
+	var renderNewPosts = function(){
 		// render posts
 		$("#postTemplate").tmpl(iLepra.latestPosts, {
 			image: function(){ 
@@ -18,6 +17,11 @@ $(function(){
 				return this.data.body.replace(/(<([^>]+)>)/ig," ").substr(0, 128) + "...";
 			}
 		}).appendTo("#postsList");
+	}
+
+	// render page on creation
+	$("#postsPage").live('pagecreate', function(){
+		renderNewPosts();
 	});
 
 	// show full post
@@ -35,6 +39,7 @@ $(function(){
 		$.mobile.changePage("post/full.html");
 	});
 	
+	// render full post text
 	$("#fullPostPage").live('pagecreate', function(){
 		// render html
 		$("#postContent").html(iLepra.post.current.body);
@@ -50,5 +55,64 @@ $(function(){
 		add += ", "+iLepra.post.current.textdate + " в " + iLepra.post.current.posttime;
 		add += " | Комментариев: "+ iLepra.post.current.comm_count + " / " + iLepra.post.current.unread;
 		$("#postAdditional").text( add )
+	});
+	
+	// refresh
+	$("#refreshPostsButton").live('vclick', function(){
+		// show loader
+		$.mobile.showPageLoadingMsg();
+	
+		// on posts data
+		$(document).bind(iLepra.events.ready, function(event){
+			// unbind
+			$(document).unbind(event);
+			
+			// remove loader
+			$.mobile.hidePageLoadingMsg();
+			
+			// clean old data
+			$("#postsList").empty();
+			
+			// render
+			renderNewPosts();
+			
+			// refresh list
+			$("#postsList").listview('refresh');
+		});
+		
+		// get posts
+		iLepra.getLastPosts();
+	});
+	
+	// more posts
+	$("#morePostsButton").live('vclick', function(){
+		// show loader
+		$.mobile.showPageLoadingMsg();
+		
+		var scroll = $(window).scrollTop();
+	
+		// on posts data
+		$(document).bind(iLepra.events.ready, function(event){
+			// unbind
+			$(document).unbind(event);
+			
+			// remove loader
+			$.mobile.hidePageLoadingMsg();
+			
+			// clean old data
+			$("#postsList").empty();
+			
+			// render
+			renderNewPosts();
+			
+			// refresh list
+			$("#postsList").listview('refresh');
+			
+			// set position
+			$(window).scrollTop(scroll);
+		});
+		
+		// get posts
+		iLepra.getMorePosts();
 	});
 });
