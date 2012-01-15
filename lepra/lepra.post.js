@@ -21,7 +21,10 @@ iLepra.post = (function() {
 				
 				iLepra.post.comments = [];
 				
-				iLepra.post.current.wtf = $("#comments-form input[name='wtf']", doc).val();
+				iLepra.post.current.wtf = { 
+					comment: $("#comments-form input[name='wtf']", doc).val(),
+					vote: /wtf_vote = '(.+?)'/gi.exec(data)[1]
+				}
 				
 				$("#js-commentsHolder .post", doc).each(function(index, item){
 					var data = $(item);
@@ -56,7 +59,7 @@ iLepra.post = (function() {
 			url += "/commctl/";
 			
 			var data = {
-				wtf: iLepra.post.current.wtf,
+				wtf: iLepra.post.current.wtf.comment,
 				pid: iLepra.post.current.id,
 				comment: comment
 			}
@@ -72,6 +75,28 @@ iLepra.post = (function() {
 					iLepra.post.getComments();
 				}
 			});
+		},
+		
+		// vote for comment
+		voteComment: function(commentId, value){
+			var url = "http://";
+			if( iLepra.post.current.domain_url != "" ){
+				url += iLepra.post.current.domain_url;
+			}else{
+				url += "leprosorium.ru";
+			}
+			url += "/rate/";
+			
+			var data = {
+				type: 0,
+				wtf: iLepra.post.current.wtf.vote,
+				post_id: iLepra.post.current.id,
+				id: commentId,
+				value: value // 1 || -1
+			}
+			
+			// post
+			$.post(url, data, function(data){});
 		}
 	};
 

@@ -58,6 +58,9 @@ $(function(){
 	$("#commentMenu").live("change", function(event, ui) {
 		var value = $('#commentMenu').val();
 		
+		// remove selection
+		$( $(".ui-selectmenu-list .ui-btn-active")[0] ).removeClass('ui-btn-active');
+		
 		switch(value){
 			case 'reply':			
 				$.mobile.changePage("addcomment.html", {
@@ -68,9 +71,11 @@ $(function(){
 				break;	
 			
 			case 'plus':
+				iLepra.post.voteComment(commentId, "1");
 				break;
 				
 			case 'minus':
+				iLepra.post.voteComment(commentId, "-1");
 				break;
 		}
 	});
