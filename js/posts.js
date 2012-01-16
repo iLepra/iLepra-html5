@@ -43,6 +43,13 @@ $(function(){
 					break;
 				}
 			}
+		}else if( $.mobile.activePage.attr('id') == "inboxPage" ){
+			for(var i in iLepra.inboxPosts){
+				if(iLepra.inboxPosts[i].id == currentPostId){
+					iLepra.post.current = iLepra.inboxPosts[i];
+					break;
+				}
+			}
 		}
 		
 		$.mobile.changePage("post/full.html");

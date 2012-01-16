@@ -35,13 +35,22 @@ $(function(){
 		$.mobile.changePage("addcomment.html", {
 			role: "dialog", 
 			transition: "slidedown", 
-			inline: "true" 
+			inline: "true",
+			changeHash: false
 		});
 	});
 	
 	// show comment menu
 	$(".postCommentItemMenu").live('vclick', function(e){
 		e.preventDefault();
+		
+		var voteMenu = $( $(".ui-selectmenu li")[2] );
+		
+		if( iLepra.post.current.type == "inbox" && voteMenu.is(':visible') ){
+		    voteMenu.hide().next().hide();
+		}else if( !voteMenu.is(':visible') ){
+    		voteMenu.show().next().show();
+		}
 		
 		commentId = $(this).data('id');
 		commentUser = $(this).data('user');
@@ -66,7 +75,8 @@ $(function(){
 				$.mobile.changePage("addcomment.html", {
 					role: "dialog", 
 					transition: "slidedown", 
-					inline: "true" 
+					inline: "true",
+					changeHash: false
 				});
 				break;	
 			

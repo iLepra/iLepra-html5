@@ -11,19 +11,29 @@ iLepra.post = (function() {
 		comments: null,
 		
 		// get post comments
-		getComments: function(id){
+		getComments: function(id, type){
 			if( typeof id == 'undefined' ) id = iLepra.post.current.id;
+			if( typeof type == 'undefined' ) type = iLepra.post.current.type;
 			
-			var server = "leprosorium.ru";
-			if( iLepra.post.current.domain_url.length > 0 ) server = iLepra.post.current.domain_url;
-			$.get("http://"+server+"/comments/"+id, function(data){
+			var url;
+			if( type == 'inbox' ){
+			    url = "http://leprosorium.ru/my/inbox/"+id
+			}else{
+    			var server = "leprosorium.ru";
+	    		if( iLepra.post.current.domain_url.length > 0 ) server = iLepra.post.current.domain_url;
+		    	url = "http://"+server+"/comments/"+id
+		    }
+		    
+			$.get(url, function(data){
 				var doc = $(data);
 				
 				iLepra.post.comments = [];
 				
+				var voteRes = /wtf_vote = '(.+?)'/gi.exec(data);
+				
 				iLepra.post.current.wtf = { 
 					comment: $("#comments-form input[name='wtf']", doc).val(),
-					vote: /wtf_vote = '(.+?)'/gi.exec(data)[1]
+					vote: voteRes != null ? voteRes[1] : null
 				}
 				
 				$("#js-commentsHolder .post", doc).each(function(index, item){
@@ -52,7 +62,7 @@ iLepra.post = (function() {
 		// add comment to post
 		addComment: function(comment, inReplyTo){
 			var url = "http://";
-			if( iLepra.post.current.domain_url != "" ){
+			if( iLepra.post.current.domain_url != "" && iLepra.post.current.type != "inbox" ){
 				url += iLepra.post.current.domain_url;
 			}else{
 				url += "leprosorium.ru";

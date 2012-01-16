@@ -3,7 +3,7 @@ $(function(){
 		$.mobile.showPageLoadingMsg();
 		$(document).bind(iLepra.events.ready, function(event){
 			$(document).unbind(event);
-			$.mobile.changePage("posts.html", { changeHash:false });
+			$.mobile.changePage("posts.html");
 		});
 		iLepra.getLastPosts();
 	});
@@ -12,7 +12,7 @@ $(function(){
 		$.mobile.showPageLoadingMsg();
 		$(document).bind(iLepra.events.ready, function(event){
 			$(document).unbind(event);
-			$.mobile.changePage("mystuff.html", { changeHash:false });
+			$.mobile.changePage("mystuff.html");
 		});
 		iLepra.getMyStuff();
 	});
@@ -21,7 +21,7 @@ $(function(){
 		$.mobile.showPageLoadingMsg();
 		$(document).bind(iLepra.events.ready, function(event){
 			$(document).unbind(event);
-			$.mobile.changePage("inbox.html", { changeHash:false });
+			$.mobile.changePage("inbox.html");
 		});
 		iLepra.getInbox();
 	});

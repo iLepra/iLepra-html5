@@ -237,11 +237,12 @@ var iLepra = (function() {
 					var wrote = add.text().replace(/\s\s+/gi, " ").split("|");
 					
 					var post = {
-						id: data.attr('id'),
+						id: data.attr('id').replace('p', ''),
 						body: $(".dt", data).html(),
 						user: $( $("a", add)[0] ).text(),
 						wrote: wrote[0],
-						comments: wrote[1]
+						comments: wrote[1],
+						type: 'inbox'
 					};
 					
 					iLepra.inboxPosts.push(post);
