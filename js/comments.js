@@ -35,8 +35,7 @@ $(function(){
 		$.mobile.changePage("addcomment.html", {
 			role: "dialog", 
 			transition: "slidedown", 
-			inline: "true",
-			changeHash: false
+			inline: "true"
 		});
 	});
 	
@@ -75,8 +74,7 @@ $(function(){
 				$.mobile.changePage("addcomment.html", {
 					role: "dialog", 
 					transition: "slidedown", 
-					inline: "true",
-					changeHash: false
+					inline: "true"
 				});
 				break;	
 			
