@@ -34,6 +34,9 @@ var iLepra = (function() {
 		// error message
 		errorMessage: null,
 		
+		// user data
+		username: null,
+		
 		// news data
 		inboxNewPosts: null,
 		inboxNewComments: null,
@@ -70,6 +73,8 @@ var iLepra = (function() {
 				}else{
 					//iLepra.getLastPosts();
 					iLepra.isAuthenticated = true;
+					
+					iLepra.username = $( $("#greetings a", $(data))[0] ).text();
 				}
 				// dispatch event
 				$(document).trigger(iLepra.events.init);
@@ -103,6 +108,8 @@ var iLepra = (function() {
 					// dispatch error event and die
 					$(document).trigger(iLepra.events.error);
 				}else{
+				    iLepra.username = $( $("#greetings a", $(data))[0] ).text();
+				
 					// dispatch ready event
 					$(document).trigger(iLepra.events.ready);
 				}
