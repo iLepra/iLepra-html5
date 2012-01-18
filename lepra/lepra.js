@@ -49,6 +49,8 @@ var iLepra = (function() {
 		
 		// mystuff data
 		myStuffPosts: null,
+		// fav data
+		favouritePosts: null,
 		// inbox data
 		inboxPosts: null,
 		
@@ -217,6 +219,39 @@ var iLepra = (function() {
 					};
 					
 					iLepra.myStuffPosts.push(post);
+				});
+				
+				$(document).trigger(iLepra.events.ready);
+			});
+		},
+		
+		/***
+		 Gets favourite posts
+		 ***/
+		getFavourites: function(){
+			$.get("http://leprosorium.ru/my/favourites/", function(data){
+				var res = $(data);
+				
+				iLepra.favouritePosts = [];
+				
+				$(".post", res).each(function(index, item){
+					var data = $(item);
+					var add = $(".dd .p", data);
+					
+					var wrote = add.text().replace(/\s\s+/gi, " ").split("|");
+					
+					var post = {
+						id: data.attr('id').replace('p', ''),
+						body: $(".dt", data).html(),
+						rating: $(".rating", data).text(),
+						user: $( $("a", add)[0] ).text(),
+						domain_url: $(".sub_domain_url", data).text(),
+						wrote: wrote[0],
+						comments: wrote[1],
+						type: 'fav'
+					};
+					
+					iLepra.favouritePosts.push(post);
 				});
 				
 				$(document).trigger(iLepra.events.ready);

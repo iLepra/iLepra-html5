@@ -1,0 +1,22 @@
+<div data-role="page" id="favsPage" data-add-back-btn="true">
+	<div data-role="header" data-position="fixed">
+		<h1>Избранное</h1>
+	</div>
+
+	<div data-role="content">
+		<ul data-role="listview" id="favsList">
+		</ul>
+		
+		<script id="favsTemplate" type="text/x-jquery-tmpl">
+            <li>
+                <a href="#" class="postListItem" data-id="${id}">
+                    <img src="${$item.image}" class="postThumb" />
+                    <h1>${$item.text}</h1>
+                    <p>${wrote}</p>
+                    <p>${comments}</i></p>
+                    <p class="ui-li-count">${rating}</p>
+                </a>
+            </li>
+        </script>
+	</div>
+</div>

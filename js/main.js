@@ -66,7 +66,7 @@ $(function(){
 	});
 	
 	var getLatestPosts = function(fromIndex){
-		if( typeof fromIndex == 'undefined' ) fromIndex = false;
+	    if( typeof fromIndex == 'undefined' ) fromIndex = false;
 		// on posts data
 		$(document).bind(iLepra.events.ready, function(event){
 			// unbind
