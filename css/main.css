@@ -47,25 +47,20 @@ img {
 
 .ui-icon-posts {
 	background: url("img/home.png") 50% 50% no-repeat;
-	background-size: 24px 22px;
+	background-size: 24px 24px;
 }
 
 .ui-icon-mystuff {
 	background: url("img/mystuff.png") 50% 50% no-repeat;
-	background-size: 24px 22px;
+	background-size: 24px 24px;
 }
 
 .ui-icon-inbox {
 	background: url("img/inbox.png") 50% 50% no-repeat;
-	background-size: 24px 22px;
+	background-size: 24px 24px;
 }
 
-.ui-icon-profile {
-	background: url("img/profile.png") 50% 50% no-repeat;
-	background-size: 24px 22px;
-}
-
-.ui-icon-settings {
-	background: url("img/settings.png") 50% 50% no-repeat;
-	background-size: 24px 22px;
+.ui-icon-more {
+	background: url("img/more.png") 50% 50% no-repeat;
+	background-size: 24px 24px;
 }
