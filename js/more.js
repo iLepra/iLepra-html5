@@ -32,6 +32,11 @@ $(function(){
 	});
 	
 	$("#govButton").live('vclick', function(){
-	    
+	    $.mobile.showPageLoadingMsg();
+		$(document).bind(iLepra.events.ready, function(event){
+			$(document).unbind(event);
+			$.mobile.changePage("more/gov.html", {transition: 'slide'});
+		});
+		iLepra.gov.getCurrent();
 	});
 });

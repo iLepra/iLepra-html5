@@ -81,12 +81,12 @@ $(function(){
 			add = iLepra.post.current.wrote + " | " + iLepra.post.current.comments;
 		}else{ 
 			add = iLepra.post.current.gender == "1" ? "Написал " : "Написала ";
-			add += iLepra.post.current.user_rank + " " + iLepra.post.current.login;
+			add += iLepra.post.current.user_rank + " <a href='#' class='username'>" + iLepra.post.current.login + "</a>";
 			add += iLepra.post.current.domain_url != "" ? " в "+iLepra.post.current.domain_url : "";
 			add += ", "+iLepra.post.current.textdate + " в " + iLepra.post.current.posttime;
 			add += " | Комментариев: "+ iLepra.post.current.comm_count + " / " + iLepra.post.current.unread;
 		}
-		$("#postAdditional").text( add )
+		$("#postAdditional").html( add )
 	});
 	
 	// refresh

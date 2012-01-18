@@ -239,7 +239,12 @@ var iLepra = (function() {
 					var data = $(item);
 					var add = $(".dd .p", data);
 					
-					var wrote = add.text().replace(/\s\s+/gi, " ").split("|");
+					// create replace link for user
+					var user = $("a", add).wrap('<div></div>').parent().html();
+					var newUser = user.replace(/href="(.+?)"/g, "href=\"#\"").replace(/class="(.+?)"/g, "class=\"username\"");
+					
+					// get wrote line
+					var wrote = add.html().replace(/\s\s+/gi, " ").split("|");
 					
 					var post = {
 						id: data.attr('id').replace('p', ''),
@@ -247,8 +252,8 @@ var iLepra = (function() {
 						rating: $(".rating", data).text(),
 						user: $( $("a", add)[0] ).text(),
 						domain_url: $(".sub_domain_url", data).text(),
-						wrote: wrote[0],
-						comments: wrote[1]
+						wrote: wrote[0].replace(user, newUser),
+						comments: wrote[1].replace(/<.+?>/g, "")
 					};
 					
 					iLepra.myStuffPosts.push(post);

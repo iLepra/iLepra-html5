@@ -1,10 +1,25 @@
 $(function(){
+    $(".username").live('vclick', function(){
+        var name = $(this).text();
+        
+        $.mobile.showPageLoadingMsg();
+		$(document).bind(iLepra.events.ready, function(event){
+			$(document).unbind(event);
+			$.mobile.changePage("/iLepra/pages/more/profile.html", {transition: 'slide'});
+		});
+		iLepra.profile.getProfile(name);
+    });
+
 	// render page on creation
 	$("#profilePage").live('pagecreate', function(){
 	    var data = iLepra.profile.data;
 	    
 	    // set username
 		$("#profileUsername").text( data.username );
+		
+		// set userpic
+		if( data.userpic != undefined )
+	    	$("#userImage").attr('src', data.userpic);
 		
 		// basic info
 		$("#fullName").text( data.fullName );

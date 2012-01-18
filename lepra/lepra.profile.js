@@ -12,6 +12,8 @@ iLepra.profile = (function() {
 		    $.get(url, function(data){
 		        var doc = $(data);
 		        
+		        var userpic = $(".userpic img", doc).attr('src');
+		        
 		        var regdata = $(".userregisterdate", doc).text().replace(/\./g, "").split(', ');
 		        var num = regdata[0];
 		        var date = regdata[1];
@@ -31,6 +33,7 @@ iLepra.profile = (function() {
 		        
 		        iLepra.profile.data = {
 		            username: username,
+		            userpic: userpic,
 		            number: num,
 		            regDate: date,
 		            fullName: name,
