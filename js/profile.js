@@ -15,7 +15,9 @@ $(function(){
 		
 		// statistic info
 		$("#userStat").text( $( data.userstat.replace(/<br\/>/g, " ") ).text() );
-		$("#userVote").html( data.votestat.replace(/<br>/g, ", ") );
+		var vote = data.votestat.split("<br>");
+		$("#userVote").html( vote[0] );
+		$("#userVoteCount").html( vote[1] );
 		
 		$("#userDescription").html( data.description );
 		
