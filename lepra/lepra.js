@@ -36,6 +36,7 @@ var iLepra = (function() {
 		
 		// user data
 		username: null,
+		userSubLepras: null,
 		
 		// news data
 		inboxNewPosts: null,
@@ -74,11 +75,35 @@ var iLepra = (function() {
 					//iLepra.getLastPosts();
 					iLepra.isAuthenticated = true;
 					
-					iLepra.username = $( $("#greetings a", $(data))[0] ).text();
+					// process user's data
+					iLepra.processMain(data);
 				}
 				// dispatch event
 				$(document).trigger(iLepra.events.init);
 			});
+		},
+		
+		/***
+		 Processes given html string for user's data
+		 ***/
+		processMain: function(data){
+		    // get doc 
+            var doc = $(data);
+            // get username
+            iLepra.username = $( $("#greetings a", doc)[0] ).text();
+            // get sublepras
+            iLepra.userSubLepras = [];
+            var subs = $(".subs_loaded.hidden", doc);
+            $(".sub", subs).each(function(index, item){
+                item = $(item);
+                var sublepra = {
+                    name: $("h5", item).text(),
+                    creator: $(".creator", item).text(),
+                    link: $(".link", item).attr('href'),
+                    logo: $("img", item).attr('src')
+                }
+                iLepra.userSubLepras.push(sublepra);
+            });
 		},
 		
 		/***
@@ -108,7 +133,8 @@ var iLepra = (function() {
 					// dispatch error event and die
 					$(document).trigger(iLepra.events.error);
 				}else{
-				    iLepra.username = $( $("#greetings a", $(data))[0] ).text();
+				    // process user's data
+					iLepra.processMain(data);
 				
 					// dispatch ready event
 					$(document).trigger(iLepra.events.ready);
