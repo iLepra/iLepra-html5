@@ -30,4 +30,8 @@ $(function(){
 		});
 		iLepra.sub.getList();
 	});
+	
+	$("#govButton").live('vclick', function(){
+	    
+	});
 });
