@@ -16,6 +16,9 @@ $(function(){
 			},
 			text: function(){
 				return this.data.body.replace(/(<([^>]+)>)/ig," ").substr(0, 128) + "...";
+			},
+			wrote: function(){
+			    return this.data.wrote.replace(/(<([^>]+)>)/ig," ");
 			}
 		}).appendTo("#mystuffList");
 	});
