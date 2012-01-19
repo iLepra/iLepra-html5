@@ -1,0 +1,22 @@
+<div data-role="page" id="subpostsPage" data-add-back-btn="true">
+	<div data-role="header" data-position="fixed">
+		<h1 id="subpostsTitle">Подлепра</h1>
+	</div>
+
+	<div data-role="content">
+		<ul data-role="listview" id="subpostsList">
+		</ul>
+		<script id="subpostTemplate" type="text/x-jquery-tmpl">
+            <li>
+                <a href="#" class="postListItem" data-id="${id}">
+                    <img src="${$item.image}" class="postThumb" />
+                    <h1>${$item.text}</h1>
+                    <p>${$item.wrote}</p>
+                    <p>${comments}</i></p>
+                    <p class="ui-li-count">${rating}</p>
+                </a>
+            </li>
+        </script>
+	</div>
+	
+</div>

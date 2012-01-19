@@ -5,6 +5,7 @@ iLepra.sub = (function() {
 	
 	sub = {
 	    list: null,
+	    posts: null,
 	
 		getList: function(shift){
 		    $.get("http://leprosorium.ru/underground/", function(data){
@@ -27,6 +28,40 @@ iLepra.sub = (function() {
 		        // dispatch event
 				$(document).trigger(iLepra.events.ready);
 		    });
+		},
+		
+		getPosts: function(url){
+		    $.get(url, function(data){
+				var res = $(data);
+				
+				iLepra.sub.posts = [];
+				
+				$(".post", res).each(function(index, item){
+					var data = $(item);
+					var add = $(".dd .p", data);
+					
+					// create replace link for user
+					var user = $("a", add).wrap('<div></div>').parent().html();
+					var newUser = user.replace(/href="(.+?)"/g, "href=\"#\"").replace(/class="(.+?)"/g, "class=\"username\"");
+					
+					// get wrote line
+					var wrote = add.html().replace(/\s\s+/gi, " ").split("|");
+					
+					var post = {
+						id: data.attr('id').replace('p', ''),
+						body: $(".dt", data).html(),
+						rating: $(".rating", data).text(),
+						user: $( $("a", add)[0] ).text(),
+						domain_url: $(".sub_domain_url", data).text(),
+						wrote: wrote[0].replace(user, newUser),
+						comments: wrote[1].replace(/<.+?>/g, "")
+					};
+					
+					iLepra.sub.posts.push(post);
+				});
+				
+				$(document).trigger(iLepra.events.ready);
+			});
 		}
 	};
 
