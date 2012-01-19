@@ -5,7 +5,7 @@ $(function(){
         $.mobile.showPageLoadingMsg();
 		$(document).bind(iLepra.events.ready, function(event){
 			$(document).unbind(event);
-			$.mobile.changePage("/iLepra/pages/more/profile.html", {transition: 'slide'});
+			$.mobile.changePage("/iLepra/pages/more/profile.html");
 		});
 		iLepra.profile.getProfile(name);
     });

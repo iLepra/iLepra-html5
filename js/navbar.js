@@ -3,7 +3,7 @@ $(function(){
 		$.mobile.showPageLoadingMsg();
 		$(document).bind(iLepra.events.ready, function(event){
 			$(document).unbind(event);
-			$.mobile.changePage("posts.html", {transition: 'slide', reverse:true});
+			$.mobile.changePage("posts.html");
 		});
 		iLepra.getLastPosts();
 	});
@@ -12,7 +12,7 @@ $(function(){
 		$.mobile.showPageLoadingMsg();
 		$(document).bind(iLepra.events.ready, function(event){
 			$(document).unbind(event);
-			$.mobile.changePage("mystuff.html", {transition: 'slide'});
+			$.mobile.changePage("mystuff.html");
 		});
 		iLepra.getMyStuff();
 	});
@@ -21,13 +21,13 @@ $(function(){
 		$.mobile.showPageLoadingMsg();
 		$(document).bind(iLepra.events.ready, function(event){
 			$(document).unbind(event);
-			$.mobile.changePage("inbox.html", {transition: 'slide'});
+			$.mobile.changePage("inbox.html");
 		});
 		iLepra.getInbox();
 	});
 	
 	$("#moreBar").live('vclick', function(){
-    	$.mobile.changePage("more.html", {transition: 'slide'});
+    	$.mobile.changePage("more.html");
 	});
 	
 	var updateNavText = function(){
