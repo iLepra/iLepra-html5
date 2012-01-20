@@ -14,7 +14,8 @@ $(function(){
     requestNewChatData = function(){
 		$(document).bind(iLepra.events.ready, function(event){
 			$(document).unbind(event);
-		    data = iLepra.chat.messages.reverse();
+		    data = iLepra.chat.messages.slice(0);
+		    data.reverse();
 		    refreshMessages();
 		});
 		iLepra.chat.getMessages();
@@ -22,7 +23,8 @@ $(function(){
 
     // render page on creation
 	$("#chatPage").live('pagecreate', function(){
-	    data = iLepra.chat.messages.reverse();
+	    data = iLepra.chat.messages.slice(0);
+	    data.reverse();
 	    // render posts
 		$("#chatTemplate").tmpl(data).appendTo("#chatList");
 		// set refresh interval
@@ -39,12 +41,20 @@ $(function(){
 	    // clean old text
 	    $("#chatInput").val("");
 	    
+	    // clear interval to evade overlap
+	    clearInterval( refreshInterval );
+	    
 	    $.mobile.showPageLoadingMsg();
 		$(document).bind(iLepra.events.ready, function(event){
 			$(document).unbind(event);
 			$.mobile.hidePageLoadingMsg();
-			data = iLepra.chat.messages.reverse();
+			// get data
+			data = iLepra.chat.messages.slice(0);
+			data.reverse();
+			// render
 		    refreshMessages();
+		    // put refresh interval back
+		    refreshInterval = setInterval ( "requestNewChatData()", 10000 );
 		});
 	    iLepra.chat.sendMessage(text);
 	});

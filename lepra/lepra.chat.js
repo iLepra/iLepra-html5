@@ -3,16 +3,26 @@
 iLepra.chat = (function() {
 	var chat;
 	
+	var getLastId = function(){
+	    var last = "";
+        if( iLepra.chat.messages.length > 0 ){
+            var biggestId = 0;
+            for( var i in iLepra.chat.messages ){
+                if( parseInt(iLepra.chat.messages[i].id) > biggestId ) 
+                    biggestId = parseInt( iLepra.chat.messages[i].id );
+            }
+            if( biggestId != 0 ) last = biggestId;
+        }
+        return last;
+	}
+	
 	chat = {
 		messages: [],
 		wtf: null,
 		defaultKey: "leprosorium.ru/",
 		
 		getMessages: function(){
-		    var last = "";
-		    if( iLepra.chat.messages.length > 0 ){
-		        last = iLepra.chat.messages[iLepra.chat.messages.length-1].id;
-		    }
+		    var last = getLastId();
 		
 		    var data = {
 		        wtf: iLepra.chat.wtf,
@@ -24,7 +34,8 @@ iLepra.chat = (function() {
 		        var res = $.parseJSON(data);
 		        
 		        for(var i in res.messages){
-		            iLepra.chat.messages.push( res.messages[i] );
+		            if( iLepra.chat.messages.indexOf(res.messages[i]) == -1 )
+    		            iLepra.chat.messages.push( res.messages[i] );
 		        }
 		        
 		        // dispatch event
@@ -33,10 +44,7 @@ iLepra.chat = (function() {
 		},
 		
 		sendMessage: function(text){
-		    var last = "";
-		    if( iLepra.chat.messages != null ){
-		        last = iLepra.chat.messages[iLepra.chat.messages.length-1].id;
-		    }
+		    var last = getLastId();
 		
 		    var data = {
 		        wtf: iLepra.chat.wtf,
@@ -49,7 +57,8 @@ iLepra.chat = (function() {
 		        var res = $.parseJSON(data);
 		        
 		        for(var i in res.messages){
-		            iLepra.chat.messages.push( res.messages[i] );
+		            if( iLepra.chat.messages.indexOf(res.messages[i]) == -1 )
+    		            iLepra.chat.messages.push( res.messages[i] );
 		        }
 		        
 		        // dispatch event
