@@ -89,6 +89,8 @@ var iLepra = (function() {
 		processMain: function(data){
 		    // get doc 
             var doc = $(data);
+            // get chat wtf
+            iLepra.chat.wtf = /chatHandler.wtf = '(.+?)'/g.exec(data)[1];
             // get username
             iLepra.username = $( $("#greetings a", doc)[0] ).text();
             // get sublepras

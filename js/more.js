@@ -39,4 +39,13 @@ $(function(){
 		});
 		iLepra.gov.getCurrent();
 	});
+	
+	$("#chatButton").live('vclick', function(){
+	    $.mobile.showPageLoadingMsg();
+		$(document).bind(iLepra.events.ready, function(event){
+			$(document).unbind(event);
+			$.mobile.changePage("more_chat.html");
+		});
+		iLepra.chat.getMessages();
+	});
 });

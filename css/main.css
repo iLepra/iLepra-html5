@@ -64,3 +64,11 @@ img {
 	background: url("img/more.png") 50% 50% no-repeat;
 	background-size: 24px 24px;
 }
+
+.maxedFootButton {
+    max-width: 90% !important;
+    max-height: 90% !important;
+    width: 90% !important;
+    height: 90% !important;
+    padding-top: 5px;
+}
