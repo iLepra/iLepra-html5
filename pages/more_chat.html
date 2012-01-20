@@ -9,7 +9,7 @@
 		<script id="chatTemplate" type="text/x-jquery-tmpl">
             <li>
                 <a href="#" class="chatMessage" data-user="${user_login}">
-                    <h1>${body}</h1>
+                    <h1 class="commentText">{{html body}}</h1>
                     <p>${user_login}</p>
                     <p class="ui-li-count">${createdate}</p>
                 </a>
