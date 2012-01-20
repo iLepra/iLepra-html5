@@ -28,8 +28,6 @@ $(function(){
 	$(".postListItem").live('vclick', function(){
 		currentPostId = $(this).data('id');
 		
-		var add = "";
-		
 		// get selected post
 		if( $.mobile.activePage.attr('id') == "postsPage" ){
 			for(var i in iLepra.latestPosts){
@@ -53,17 +51,22 @@ $(function(){
 				}
 			}
 		}else if( $.mobile.activePage.attr('id') == "favsPage" ){
-		    add = "../";
-		    
 			for(var i in iLepra.favouritePosts){
 				if(iLepra.favouritePosts[i].id == currentPostId){
 					iLepra.post.current = iLepra.favouritePosts[i];
 					break;
 				}
 			}
+		}else if( $.mobile.activePage.attr('id') == "subpostsPage"){
+		    for(var i in iLepra.sub.posts){
+				if(iLepra.sub.posts[i].id == currentPostId){
+					iLepra.post.current = iLepra.sub.posts[i];
+					break;
+				}
+			}
 		}
 		
-		$.mobile.changePage(add+"post/full.html");
+		$.mobile.changePage("post_full.html");
 	});
 	
 	// render full post text

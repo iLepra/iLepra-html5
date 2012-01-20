@@ -15,7 +15,7 @@ $(function(){
 		// on posts data
 		$(document).bind(iLepra.events.ready, function(event){
 			$(document).unbind(event);		
-			$.mobile.changePage("subposts.html");
+			$.mobile.changePage("more_subposts.html");
 		});
 		
 		subName = $(this).children('h1').text();

@@ -3,7 +3,7 @@ $(function(){
 	    $.mobile.showPageLoadingMsg();
 		$(document).bind(iLepra.events.ready, function(event){
 			$(document).unbind(event);
-			$.mobile.changePage("more/favs.html");
+			$.mobile.changePage("more_favs.html");
 		});
 		iLepra.getFavourites();
 	});
@@ -12,21 +12,21 @@ $(function(){
 	    $.mobile.showPageLoadingMsg();
 		$(document).bind(iLepra.events.ready, function(event){
 			$(document).unbind(event);
-			$.mobile.changePage("more/profile.html");
+			$.mobile.changePage("more_profile.html");
 		});
 		iLepra.profile.getProfile(iLepra.username);
 	});
 	
 	$("#mySubsButton").live('vclick', function(){
 	    iLepra.sub.list = iLepra.userSubLepras;
-	    $.mobile.changePage("more/subs.html");
+	    $.mobile.changePage("more_subs.html");
 	});
 	
 	$("#allSubsButton").live('vclick', function(){
 	    $.mobile.showPageLoadingMsg();
 		$(document).bind(iLepra.events.ready, function(event){
 			$(document).unbind(event);
-			$.mobile.changePage("more/subs.html");
+			$.mobile.changePage("more_subs.html");
 		});
 		iLepra.sub.getList();
 	});
@@ -35,7 +35,7 @@ $(function(){
 	    $.mobile.showPageLoadingMsg();
 		$(document).bind(iLepra.events.ready, function(event){
 			$(document).unbind(event);
-			$.mobile.changePage("more/gov.html");
+			$.mobile.changePage("more_gov.html");
 		});
 		iLepra.gov.getCurrent();
 	});

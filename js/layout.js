@@ -23,7 +23,7 @@ $(function(){
 			// unbind
 			$(document).unbind(event);
 			
-			$.mobile.changePage("../posts.html");
+			$.mobile.changePage("posts.html");
 		});
 	}
 });

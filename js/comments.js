@@ -12,7 +12,7 @@ $(function(){
 			// unbind
 			$(document).unbind(event);
 			
-			$.mobile.changePage("comments.html");
+			$.mobile.changePage("post_comments.html");
 		});
 	
 		iLepra.post.getComments();
@@ -32,7 +32,7 @@ $(function(){
 		commentId = null;
 		commentUser = null;
 	
-		$.mobile.changePage("addcomment.html", {
+		$.mobile.changePage("post_addcomment.html", {
 			role: "dialog", 
 			transition: "slidedown", 
 			inline: "true"
@@ -71,7 +71,7 @@ $(function(){
 		
 		switch(value){
 			case 'reply':			
-				$.mobile.changePage("addcomment.html", {
+				$.mobile.changePage("post_addcomment.html", {
 					role: "dialog", 
 					transition: "slidedown", 
 					inline: "true"
@@ -121,7 +121,7 @@ $(function(){
 			$(document).unbind(event);
 			$(document).unbind(iLepra.events.error);
 			// change page
-			$.mobile.changePage("comments.html");
+			$.mobile.changePage("post_comments.html");
 		});
 	
 		iLepra.post.addComment(commentText, commentId);
