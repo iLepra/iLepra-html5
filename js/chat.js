@@ -15,7 +15,7 @@ $(function(){
 		$(document).bind(iLepra.events.ready, function(event){
 			$(document).unbind(event);
 		    data = iLepra.chat.messages.slice(0);
-		    data.reverse();
+		    data.sort(function(a,b){ return a.id > b.id ? -1 : 1});
 		    refreshMessages();
 		});
 		iLepra.chat.getMessages();
@@ -24,7 +24,7 @@ $(function(){
     // render page on creation
 	$("#chatPage").live('pagecreate', function(){
 	    data = iLepra.chat.messages.slice(0);
-	    data.reverse();
+	    data.sort(function(a,b){ return a.id > b.id ? -1 : 1});
 	    // render posts
 		$("#chatTemplate").tmpl(data).appendTo("#chatList");
 		// set refresh interval
@@ -50,7 +50,7 @@ $(function(){
 			$.mobile.hidePageLoadingMsg();
 			// get data
 			data = iLepra.chat.messages.slice(0);
-			data.reverse();
+			data.sort(function(a,b){ return a.id > b.id ? -1 : 1});
 			// render
 		    refreshMessages();
 		    // put refresh interval back
