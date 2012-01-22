@@ -13,7 +13,7 @@
 		<script id="postTemplate" type="text/x-jquery-tmpl">
 			<li>
 				<a href="#" class="postListItem" data-id="${id}">
-					<img src="${$item.image}" class="postThumb" />
+					{{if iLepra.config.loadImages}}<img src="${$item.image}" class="postThumb" />{{/if}}
 					<h1>${$item.text}</h1>
 					<p>Написал ${user_rank} ${login}</p>
 					<p>${textdate} ${posttime} {{if domain_url != ""}} / ${domain_url} {{/if}}</p>

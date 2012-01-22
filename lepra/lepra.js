@@ -23,6 +23,13 @@ var iLepra = (function() {
 		},
 		
 		// 
+		// app config
+		//
+		config: {
+		    loadImages: true
+		}, 
+		
+		// 
 		// vars
 		//
 	

@@ -8,7 +8,7 @@
 			<script id="mystuffTemplate" type="text/x-jquery-tmpl">
 				<li>
 					<a href="#" class="postListItem" data-id="${id}">
-						<img src="${$item.image}" class="postThumb" />
+						{{if iLepra.config.loadImages}}<img src="${$item.image}" class="postThumb" />{{/if}}
 						<h1>${$item.text}</h1>
 						<p>${$item.wrote}</p>
 						<p>${comments}</i></p>
