@@ -7,7 +7,7 @@ $(function(){
 				var res = imgReg.exec(this.data.body);
 				var img = "";
 				if( res != null ){ 
-					img = res[1];
+					img = "http://src.sencha.io/80/80/"+res[1];
 				}else{
 					img = "../css/img/placeholder.png";
 				}
