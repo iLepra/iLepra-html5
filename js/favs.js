@@ -1,4 +1,4 @@
-$(function(){
+$(window).load(function(){
 	// render page on creation
 	$("#favsPage").live('pagecreate', function(){
 		// render posts

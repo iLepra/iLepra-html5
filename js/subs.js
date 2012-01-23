@@ -1,4 +1,4 @@
-$(function(){
+$(window).load(function(){
     var subName = null;
 
 	// render page on creation

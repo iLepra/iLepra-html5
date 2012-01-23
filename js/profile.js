@@ -1,4 +1,4 @@
-$(function(){
+$(window).load(function(){
     $(".username").live('vclick', function(){
         var name = $(this).text();
         

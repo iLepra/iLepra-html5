@@ -1,4 +1,4 @@
-$(function(){
+$(window).load(function(){
 	var commentId = null;
 	var commentUser = null;
 

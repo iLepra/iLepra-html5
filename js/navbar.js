@@ -1,4 +1,4 @@
-$(function(){
+$(window).load(function(){
 	$("#postsBar").live('vclick', function(){
 		$.mobile.showPageLoadingMsg();
 		$(document).bind(iLepra.events.ready, function(event){

@@ -108,8 +108,8 @@ var iLepra = (function() {
                 var sublepra = {
                     name: $("h5", item).text(),
                     creator: $(".creator", item).text(),
-                    link: $(".link", item).attr('href'),
-                    logo: $("img", item).attr('src')
+                    link: $("a.link", item).attr('href'),
+                    logo: $("strong a img", item).attr('src')
                 }
                 iLepra.userSubLepras.push(sublepra);
             });

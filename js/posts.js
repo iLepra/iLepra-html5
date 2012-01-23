@@ -1,4 +1,4 @@
-$(function(){
+$(window).load(function(){
 	var renderNewPosts = function(){
 		// render posts
 		$("#postTemplate").tmpl(iLepra.latestPosts).appendTo("#postsList");

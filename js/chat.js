@@ -1,4 +1,4 @@
-$(function(){
+$(window).load(function(){
     var data = null;
     var refreshInterval = null;
 

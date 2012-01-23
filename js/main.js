@@ -1,4 +1,4 @@
-$(function(){
+$(window).load(function(){
     $.mobile.page.prototype.options.backBtnText = "Назад";
 
 	// show loader

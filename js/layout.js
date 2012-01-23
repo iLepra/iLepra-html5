@@ -1,4 +1,4 @@
-$(function(){
+$(window).load(function(){
 	$("#layoutBL").live('vclick', function(){
 		prepareReadyEvent();
 		iLepra.switchLayout(1);
