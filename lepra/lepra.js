@@ -190,6 +190,20 @@ var iLepra = (function() {
 				var i;
 				var posts = data.posts;
 				for(i in posts){
+				    // get img and short text
+					var imgReg = /img src="(.+?)"/g
+					var res = imgReg.exec(posts[i].body);
+				    var img = "";
+				    if( res != null ){ 
+					    img = "http://src.sencha.io/80/80/"+res[1];
+				    }else{
+					    img = "../css/img/placeholder.png";
+				    }
+	        		var text = posts[i].body.replace(/(<([^>]+)>)/ig," ").substr(0, 128) + "...";
+	        		
+	        		posts[i].image = img;
+	        		posts[i].text = text;
+				
 					iLepra.latestPosts.push(posts[i]);
 				}
 				
@@ -211,8 +225,23 @@ var iLepra = (function() {
 				var i;
 				var posts = data.posts;
 				for(i in posts){
-					if( iLepra.latestPosts.indexOf(posts[i]) == -1 )
+					if( iLepra.latestPosts.indexOf(posts[i]) == -1 ){
+					    // get img and short text
+                        var imgReg = /img src="(.+?)"/g
+                        var res = imgReg.exec(posts[i].body);
+                        var img = "";
+                        if( res != null ){ 
+                            img = "http://src.sencha.io/80/80/"+res[1];
+                        }else{
+                            img = "../css/img/placeholder.png";
+                        }
+                        var text = posts[i].body.replace(/(<([^>]+)>)/ig," ").substr(0, 128) + "...";
+                        
+                        posts[i].image = img;
+                        posts[i].text = text;
+					
 						iLepra.latestPosts.push(posts[i]);
+					}
 				}
 				
 				$(document).trigger(iLepra.events.ready);
@@ -248,21 +277,38 @@ var iLepra = (function() {
 					var data = $(item);
 					var add = $(".dd .p", data);
 					
+					var body = $(".dt", data).html();
+					
 					// create replace link for user
 					var user = $("a", add).wrap('<div></div>').parent().html();
 					var newUser = user.replace(/href="(.+?)"/g, "href=\"#\"").replace(/class="(.+?)"/g, "class=\"username\"");
 					
 					// get wrote line
 					var wrote = add.html().replace(/\s\s+/gi, " ").split("|");
+					var wroteFull = wrote[0].replace(user, newUser);
+					
+					// get img and short text
+					var imgReg = /img src="(.+?)"/g
+					var res = imgReg.exec(body);
+				    var img = "";
+				    if( res != null ){ 
+					    img = "http://src.sencha.io/80/80/"+res[1];
+				    }else{
+					    img = "../css/img/placeholder.png";
+				    }
+	        		var text = body.replace(/(<([^>]+)>)/ig," ").substr(0, 128) + "...";
 					
 					var post = {
 						id: data.attr('id').replace('p', ''),
-						body: $(".dt", data).html(),
+						body: body,
 						rating: $(".rating", data).text(),
 						user: $( $("a", add)[0] ).text(),
 						domain_url: $(".sub_domain_url", data).text(),
-						wrote: wrote[0].replace(user, newUser),
-						comments: wrote[1].replace(/<.+?>/g, "")
+						wrote: wroteFull,
+						wroteText: wroteFull.replace(/(<([^>]+)>)/ig," "),
+						comments: wrote[1].replace(/<.+?>/g, ""),
+						image: img,
+						text: text
 					};
 					
 					iLepra.myStuffPosts.push(post);
@@ -285,16 +331,29 @@ var iLepra = (function() {
 					var data = $(item);
 					var add = $(".dd .p", data);
 					
+					var body = $(".dt", data).html();
 					var wrote = add.text().replace(/\s\s+/gi, " ").split("|");
+					
+					var imgReg = /img src="(.+?)"/g
+					var res = imgReg.exec(body);
+				    var img = "";
+				    if( res != null ){ 
+					    img = "http://src.sencha.io/80/80/"+res[1];
+				    }else{
+					    img = "../css/img/placeholder.png";
+				    }
+	        		var text = body.replace(/(<([^>]+)>)/ig," ").substr(0, 128) + "...";
 					
 					var post = {
 						id: data.attr('id').replace('p', ''),
-						body: $(".dt", data).html(),
+						body: body,
 						rating: $(".rating", data).text(),
 						user: $( $("a", add)[0] ).text(),
 						domain_url: $(".sub_domain_url", data).text(),
 						wrote: wrote[0],
 						comments: wrote[1],
+						image: img,
+						text: text,
 						type: 'fav'
 					};
 					
@@ -318,14 +377,27 @@ var iLepra = (function() {
 					var data = $(item);
 					var add = $(".dd .p", data);
 					
+					var body = $(".dt", data).html();
 					var wrote = add.text().replace(/\s\s+/gi, " ").split("|");
+					
+					var imgReg = /img src="(.+?)"/g
+					var res = imgReg.exec(body);
+				    var img = "";
+				    if( res != null ){ 
+					    img = "http://src.sencha.io/80/80/"+res[1];
+				    }else{
+					    img = "../css/img/placeholder.png";
+				    }
+	        		var text = body.replace(/(<([^>]+)>)/ig," ").substr(0, 128) + "...";
 					
 					var post = {
 						id: data.attr('id').replace('p', ''),
-						body: $(".dt", data).html(),
+						body: body,
 						user: $( $("a", add)[0] ).text(),
 						wrote: wrote[0],
 						comments: wrote[1],
+						image: img,
+						text: text,
 						type: 'inbox'
 					};
 					

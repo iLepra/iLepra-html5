@@ -40,6 +40,8 @@ iLepra.sub = (function() {
 					var data = $(item);
 					var add = $(".dd .p", data);
 					
+					var body = $(".dt", data).html();
+					
 					// create replace link for user
 					var user = $("a", add).wrap('<div></div>').parent().html();
 					var newUser = user.replace(/href="(.+?)"/g, "href=\"#\"").replace(/class="(.+?)"/g, "class=\"username\"");
@@ -47,14 +49,27 @@ iLepra.sub = (function() {
 					// get wrote line
 					var wrote = add.html().replace(/\s\s+/gi, " ").split("|");
 					
+					// get img and short text
+					var imgReg = /img src="(.+?)"/g
+					var res = imgReg.exec(body);
+				    var img = "";
+				    if( res != null ){ 
+					    img = "http://src.sencha.io/80/80/"+res[1];
+				    }else{
+					    img = "../css/img/placeholder.png";
+				    }
+	        		var text = body.replace(/(<([^>]+)>)/ig," ").substr(0, 128) + "...";
+					
 					var post = {
 						id: data.attr('id').replace('p', ''),
-						body: $(".dt", data).html(),
+						body: body,
 						rating: $(".rating", data).text(),
 						user: $( $("a", add)[0] ).text(),
 						domain_url: $(".sub_domain_url", data).text(),
 						wrote: wrote[0].replace(user, newUser),
-						comments: wrote[1].replace(/<.+?>/g, "")
+						comments: wrote[1].replace(/<.+?>/g, ""),
+						image: img,
+						text: text
 					};
 					
 					iLepra.sub.posts.push(post);
