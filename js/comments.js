@@ -25,7 +25,10 @@ $(window).load(function(){
 		
 		// render comments
 		$("#commentsList").empty();
-		$("#commentTemplate").tmpl(iLepra.post.comments).appendTo("#commentsList");
+		var p = "";
+	    for(var i = 0; i < iLepra.post.comments.length; i++)
+            p += _.template(commentTemplate, iLepra.post.comments[i]);
+		$("#commentsList").append(p);
 	});
 	
 	$("#addCommentButton").live('vclick', function(){

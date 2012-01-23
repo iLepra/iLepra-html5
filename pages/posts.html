@@ -10,18 +10,6 @@
 	<div data-role="content">
 		<ul data-role="listview" id="postsList">
 		</ul>
-		<script id="postTemplate" type="text/x-jquery-tmpl">
-			<li>
-				<a href="#" class="postListItem" data-id="${id}">
-					{{if iLepra.config.loadImages}}<img src="${image}" class="postThumb" />{{/if}}
-					<h1>${text}</h1>
-					<p>Написал ${user_rank} ${login}</p>
-					<p>${textdate} ${posttime} {{if domain_url != ""}} / ${domain_url} {{/if}}</p>
-					<p>Комментарии: ${comm_count} / <i>${unread}</i></p>
-					<p class="ui-li-count">${rating}</p>
-				</a>
-			</li>
-		</script>
 		<br/>
 		<a href="#" data-role="button" id="morePostsButton">Еще? Еще!</a>
 	</div>

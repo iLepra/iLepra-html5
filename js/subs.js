@@ -4,7 +4,10 @@ $(window).load(function(){
 	// render page on creation
 	$("#subsPage").live('pagecreate', function(){
 	    // render posts
-		$("#subsTemplate").tmpl(iLepra.sub.list).appendTo("#subsList");
+	    var p = "";
+	    for(var i = 0; i < iLepra.sub.list.length; i++)
+            p += _.template(subsTemplate, iLepra.sub.list[i]);
+		$("#subsList").append(p);
 	});
 	
 	// sub click
@@ -27,7 +30,10 @@ $(window).load(function(){
 	
 	$("#subpostsPage").live('pagecreate', function(){
 	    // render posts
-		$("#subpostTemplate").tmpl(iLepra.sub.posts).appendTo("#subpostsList");
+	    var p = "";
+	    for(var i = 0; i < iLepra.sub.posts.length; i++)
+            p += _.template(subpostTemplate, iLepra.sub.posts[i]);
+		$("#subpostsList").append(p);
 		
 		// title 
 		$("#subpostsTitle").text(subName);

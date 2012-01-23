@@ -2,6 +2,9 @@ $(window).load(function(){
 	// render page on creation
 	$("#inboxPage").live('pagecreate', function(){
 		// render posts
-		$("#inboxTemplate").tmpl(iLepra.inboxPosts).appendTo("#inboxList");
+		var p = "";
+	    for(var i = 0; i < iLepra.inboxPosts.length; i++)
+            p += _.template(inboxTemplate, iLepra.inboxPosts[i]);
+		$("#inboxList").append(p);
 	});
 });

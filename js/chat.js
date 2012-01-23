@@ -6,7 +6,10 @@ $(window).load(function(){
         // clean old
         $("#chatList").empty();
 	    // render posts
-		$("#chatTemplate").tmpl(data).appendTo("#chatList");
+	    var p = "";
+	    for(var i = 0; i < data.length; i++)
+            p += _.template(chatTemplate, data[i]);
+		$("#chatList").append(p);
 		// redraw styles
 		$("#chatList").listview('refresh');
     }
@@ -26,7 +29,10 @@ $(window).load(function(){
 	    data = iLepra.chat.messages.slice(0);
 	    data.sort(function(a,b){ return a.id > b.id ? -1 : 1});
 	    // render posts
-		$("#chatTemplate").tmpl(data).appendTo("#chatList");
+		var p = "";
+	    for(var i = 0; i < data.length; i++)
+            p += _.template(chatTemplate, data[i]);
+		$("#chatList").append(p);
 		// set refresh interval
 		refreshInterval = setInterval ( "requestNewChatData()", 10000 );
 	});

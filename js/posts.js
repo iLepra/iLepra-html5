@@ -1,7 +1,10 @@
 $(window).load(function(){
 	var renderNewPosts = function(){
 		// render posts
-		$("#postTemplate").tmpl(iLepra.latestPosts).appendTo("#postsList");
+		var p = "";
+	    for(var i = 0; i < iLepra.latestPosts.length; i++)
+            p += _.template(postTemplate, iLepra.latestPosts[i]);
+		$("#postsList").append(p);
 	}
 
 	// render page on creation

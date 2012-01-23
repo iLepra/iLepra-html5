@@ -18,16 +18,5 @@
 	
  		<ul data-role="listview" id="commentsList" data-split-icon="gear">
 		</ul>
-		
-		<script id="commentTemplate" type="text/x-jquery-tmpl">
-			<li {{if isNew == 1}}data-theme="d"{{/if}}>
-				<a>
-					<p class="commentText">{{html text}}</p>
-					<p>${wrote}</p>
-					<p class="ui-li-count">${rating}</p>
-				</a>
-				<a href="#" class="postCommentItemMenu" data-id="${id}" data-user="${user}">split</a>
-			</li>
-		</script>
 	</div>
 </div>
