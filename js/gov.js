@@ -1,4 +1,4 @@
-$(window).load(function(){
+(function(){
 	// render page on creation
 	$("#govPage").live('pagecreate', function(){
 	    // render posts
@@ -6,4 +6,4 @@ $(window).load(function(){
 		    "<a href='#' class='username'>"+iLepra.gov.president + "</a> - " + iLepra.gov.time
 		);
 	});
-});
+})();

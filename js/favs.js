@@ -1,4 +1,4 @@
-$(window).load(function(){
+(function(){
 	// render page on creation
 	$("#favsPage").live('pagecreate', function(){
 		// render posts
@@ -7,4 +7,4 @@ $(window).load(function(){
             p += _.template(postTemplate, iLepra.favouritePosts[i]);
 		$("#favsList").append(p);
 	});
-});
+})();

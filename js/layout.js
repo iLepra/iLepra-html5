@@ -1,20 +1,5 @@
-$(window).load(function(){
-	$("#layoutBL").live('vclick', function(){
-		prepareReadyEvent();
-		iLepra.switchLayout(1);
-	});
-	
-	$("#layoutAll").live('vclick', function(){
-		prepareReadyEvent();
-		iLepra.switchLayout(0);
-	});
-	
-	$("#layoutSubL").live('vclick', function(){
-		prepareReadyEvent();
-		iLepra.switchLayout(2);
-	});
-	
-	var prepareReadyEvent = function(){
+(function(){
+    var prepareReadyEvent = function(){
 		// show loader
 		$.mobile.showPageLoadingMsg();
 		
@@ -26,4 +11,21 @@ $(window).load(function(){
 			$.mobile.changePage("posts.html");
 		});
 	}
-});
+	
+    $("#layoutSwitchPage").live('pagecreate', function(){
+        $("#layoutBL").bind('vclick', function(){
+            prepareReadyEvent();
+            iLepra.switchLayout(1);
+        });
+        
+        $("#layoutAll").bind('vclick', function(){
+            prepareReadyEvent();
+            iLepra.switchLayout(0);
+        });
+        
+        $("#layoutSubL").bind('vclick', function(){
+            prepareReadyEvent();
+            iLepra.switchLayout(2);
+        });
+	});
+})();

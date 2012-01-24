@@ -1,4 +1,4 @@
-$(window).load(function(){
+(function(){
 	$("#postsBar").live('vclick', function(){
 		$.mobile.showPageLoadingMsg();
 		$(document).bind(iLepra.events.ready, function(event){
@@ -44,4 +44,4 @@ $(window).load(function(){
 		}
 		$("#inboxBar").text(barText);
 	}
-});
+})();

@@ -1,4 +1,4 @@
-$(window).load(function(){
+(function(){
 	// render page on creation
 	$("#mystuffPage").live('pagecreate', function(){
 		// render posts
@@ -7,4 +7,4 @@ $(window).load(function(){
             p += _.template(postTemplate, iLepra.myStuffPosts[i]);
 		$("#mystuffList").append(p);
 	});
-});
+})();

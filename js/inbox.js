@@ -1,4 +1,4 @@
-$(window).load(function(){
+(function(){
 	// render page on creation
 	$("#inboxPage").live('pagecreate', function(){
 		// render posts
@@ -7,4 +7,4 @@ $(window).load(function(){
             p += _.template(postTemplate, iLepra.inboxPosts[i]);
 		$("#inboxList").append(p);
 	});
-});
+})();

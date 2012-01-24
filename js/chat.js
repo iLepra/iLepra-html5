@@ -1,4 +1,4 @@
-$(window).load(function(){
+(function(){
     var data = null;
     var refreshInterval = null;
 
@@ -26,6 +26,28 @@ $(window).load(function(){
 
     // render page on creation
 	$("#chatPage").live('pagecreate', function(){
+	    $("#submitChat").bind('vclick', function(){
+            var text = $("#chatInput").val();
+            $("#chatInput").val("");
+            
+            // clear interval to evade overlap
+            clearInterval( refreshInterval );
+            
+            $.mobile.showPageLoadingMsg();
+            $(document).bind(iLepra.events.ready, function(event){
+                $(document).unbind(event);
+                $.mobile.hidePageLoadingMsg();
+                // get data
+                data = iLepra.chat.messages.slice(0);
+                data.sort(function(a,b){ return a.id > b.id ? -1 : 1});
+                // render
+                refreshMessages();
+                // put refresh interval back
+                refreshInterval = setInterval ( "requestNewChatData()", 10000 );
+            });
+            iLepra.chat.sendMessage(text);
+        });
+	
 	    data = iLepra.chat.messages.slice(0);
 	    data.sort(function(a,b){ return a.id > b.id ? -1 : 1});
 	    // render posts
@@ -41,33 +63,9 @@ $(window).load(function(){
 	    clearInterval( refreshInterval );
 	});
 	
-	$("#submitChat").live('vclick', function(){
-	    // get text
-	    var text = $("#chatInput").val();
-	    // clean old text
-	    $("#chatInput").val("");
-	    
-	    // clear interval to evade overlap
-	    clearInterval( refreshInterval );
-	    
-	    $.mobile.showPageLoadingMsg();
-		$(document).bind(iLepra.events.ready, function(event){
-			$(document).unbind(event);
-			$.mobile.hidePageLoadingMsg();
-			// get data
-			data = iLepra.chat.messages.slice(0);
-			data.sort(function(a,b){ return a.id > b.id ? -1 : 1});
-			// render
-		    refreshMessages();
-		    // put refresh interval back
-		    refreshInterval = setInterval ( "requestNewChatData()", 10000 );
-		});
-	    iLepra.chat.sendMessage(text);
-	});
-	
 	$(".chatMessage").live('vclick', function(){
 	    var username = $(this).data('user');
 	    
 	    $("#chatInput").val(username+": ");
 	});
-});
+})();

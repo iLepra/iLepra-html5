@@ -1,4 +1,4 @@
-$(window).load(function(){
+(function(){
 	var commentId = null;
 	var commentUser = null;
 	
@@ -13,6 +13,32 @@ $(window).load(function(){
                 transition: "slidedown", 
                 inline: "true"
             });
+        });
+        
+        // on comment option pick
+        $("#commentMenu").bind("change", function(event, ui) {
+            var value = $('#commentMenu').val();
+            
+            // remove selection
+            $( $(".ui-selectmenu-list .ui-btn-active")[0] ).removeClass('ui-btn-active');
+            
+            switch(value){
+                case 'reply':			
+                    $.mobile.changePage("post_addcomment.html", {
+                        role: "dialog", 
+                        transition: "slidedown", 
+                        inline: "true"
+                    });
+                    break;	
+                
+                case 'plus':
+                    iLepra.post.voteComment(commentId, "1");
+                    break;
+                    
+                case 'minus':
+                    iLepra.post.voteComment(commentId, "-1");
+                    break;
+            }
         });
 	
 		// render title
@@ -49,68 +75,44 @@ $(window).load(function(){
 		$(".ui-selectmenu").css('left', '').css('right', '50px').css('top', top+'px');
 	});
 	
-	// on comment option pick
-	$("#commentMenu").live("change", function(event, ui) {
-		var value = $('#commentMenu').val();
-		
-		// remove selection
-		$( $(".ui-selectmenu-list .ui-btn-active")[0] ).removeClass('ui-btn-active');
-		
-		switch(value){
-			case 'reply':			
-				$.mobile.changePage("post_addcomment.html", {
-					role: "dialog", 
-					transition: "slidedown", 
-					inline: "true"
-				});
-				break;	
-			
-			case 'plus':
-				iLepra.post.voteComment(commentId, "1");
-				break;
-				
-			case 'minus':
-				iLepra.post.voteComment(commentId, "-1");
-				break;
-		}
-	});
+	
 	
 	// on add comment show
 	$("#addCommentPage").live('pagecreate', function(){
+	    // submit comment
+        $("#submitComment").bind('vclick', function(){
+            var commentText = $("#commentTextarea").val();
+        
+            // show loader
+            $.mobile.showPageLoadingMsg();
+            
+            // on comment error
+            $(document).bind(iLepra.events.error, function(event){
+                // unbind
+                $(document).unbind(event);
+                $(document).unbind(iLepra.events.ready);
+                // hide
+                $.mobile.hidePageLoadingMsg();
+                // show error
+                iLepra.ui.showError("Ошибка добавлени комментария! Попробуйте еще раз?");
+            });
+        
+            // on successful comment
+            $(document).bind(iLepra.events.ready, function(event){
+                // unbind
+                $(document).unbind(event);
+                $(document).unbind(iLepra.events.error);
+                // change page
+                $.mobile.changePage("post_comments.html");
+            });
+        
+            iLepra.post.addComment(commentText, commentId);
+        });
+	
 		if( commentUser != null ){
 			$("#commentTextarea").val(commentUser+": ");
 		}else{
 			$("#commentTextarea").val("");
 		}
 	});
-	
-	// submit comment
-	$("#submitComment").live('vclick', function(){
-		var commentText = $("#commentTextarea").val();
-	
-		// show loader
-		$.mobile.showPageLoadingMsg();
-		
-		// on comment error
-		$(document).bind(iLepra.events.error, function(event){
-			// unbind
-			$(document).unbind(event);
-			$(document).unbind(iLepra.events.ready);
-			// hide
-			$.mobile.hidePageLoadingMsg();
-			// show error
-			iLepra.ui.showError("Ошибка добавлени комментария! Попробуйте еще раз?");
-		});
-	
-		// on successful comment
-		$(document).bind(iLepra.events.ready, function(event){
-			// unbind
-			$(document).unbind(event);
-			$(document).unbind(iLepra.events.error);
-			// change page
-			$.mobile.changePage("post_comments.html");
-		});
-	
-		iLepra.post.addComment(commentText, commentId);
-	});
-})
+})();
