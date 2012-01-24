@@ -6,7 +6,7 @@ $( document ).bind( "mobileinit", function() {
     $.loadingMessage = "";
 });
 
-// fired up when phonegap is ready
+// fired up when phonegap is ready - this requires a phonegap.js file :|
 //document.addEventListener("deviceready", function(){
 $(document).ready(function(){
     $.mobile.page.prototype.options.backBtnText = "Назад";
