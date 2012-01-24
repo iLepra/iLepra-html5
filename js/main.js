@@ -7,8 +7,8 @@ $( document ).bind( "mobileinit", function() {
 });
 
 // fired up when phonegap is ready
-document.addEventListener("deviceready", function(){
-//$(document).ready(function(){
+//document.addEventListener("deviceready", function(){
+$(document).ready(function(){
     $.mobile.page.prototype.options.backBtnText = "Назад";
     
     var getLatestPosts = function(fromIndex){

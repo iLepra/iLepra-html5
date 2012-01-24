@@ -24,7 +24,7 @@
                 
                 postLimit += postIncrement;
                 if( postLimit >= iLepra.myStuffPosts.length ){
-                    $(this).hide();
+                    $("#moreMystuffButton").hide();
                 }
                     
                 // clean old data

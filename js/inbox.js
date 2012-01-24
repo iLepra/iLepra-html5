@@ -23,8 +23,8 @@
                 var scroll = $(window).scrollTop();
                 
                 postLimit += postIncrement;
-                if( postLimit >= iLepra.inboxPosts ){
-                    $(this).hide();
+                if( postLimit >= iLepra.inboxPosts.length ){
+                    $("#moreInboxButton").hide();
                 }
                     
                 // clean old data
