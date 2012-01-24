@@ -23,7 +23,7 @@
                 var scroll = $(window).scrollTop();
                 
                 postLimit += postIncrement;
-                if( postLimit > iLepra.myStuffPosts.length ){
+                if( postLimit >= iLepra.myStuffPosts.length ){
                     $(this).hide();
                 }
                     
