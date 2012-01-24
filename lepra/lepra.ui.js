@@ -1,9 +1,5 @@
-(function( iLepra ) {
-
 iLepra.ui = (function() {
-	var ui;
-	
-	ui = {
+	return {
 		showError: function(message){
 			$("<div class='errorMessage ui-overlay-shadow ui-body-e ui-corner-all'>"+ message +"</div>")
 				.css({ "top": $(window).scrollTop() + 100 })
@@ -14,8 +10,4 @@ iLepra.ui = (function() {
 				});
 		},
 	};
-
-	return ui;
 })();
-
-})( iLepra );

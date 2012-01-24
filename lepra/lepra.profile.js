@@ -1,9 +1,5 @@
-(function( iLepra ) {
-
 iLepra.profile = (function() {
-	var profile;
-	
-	profile = {
+	return {
 	    data: null,
 	
 		getProfile: function(username){
@@ -50,8 +46,4 @@ iLepra.profile = (function() {
 		    });
 		}
 	};
-
-	return profile;
 })();
-
-})( iLepra );

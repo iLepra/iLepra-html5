@@ -32,7 +32,7 @@ $(window).load(function(){
 	    // render posts
 	    var p = "";
 	    for(var i = 0; i < iLepra.sub.posts.length; i++)
-            p += _.template(subpostTemplate, iLepra.sub.posts[i]);
+            p += _.template(postTemplate, iLepra.sub.posts[i]);
 		$("#subpostsList").append(p);
 		
 		// title 

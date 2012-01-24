@@ -1,18 +1,77 @@
-$( document ).bind( "mobileinit", function() {
-	$.support.cors = true;
-    $.mobile.allowCrossDomainPages = true;
-    $.mobile.pushStateEnabled = false;
-    $.loadingMessage = "";
-});
-
 /**
  ** Main iLepra class that handles all the logic
  */
-(function( window, undefined ) {
+iLepra = (function() {
+    /***
+     Processes given html string for captcha data
+     ***/
+    var processCaptcha = function(source){
+        var captchaReg = /img alt="captcha" src="(.+?)"/g;
+        var loginReg = /<input type="hidden" name="logincode" value="(.+?)"/g;
+        
+        this.captchaURL = "http://leprosorium.ru" + captchaReg.exec(source)[1];
+        this.loginCode = loginReg.exec(source)[1];
+    };
 
-var iLepra = (function() {
-	// Define a local copy of Mukava
-	var iLepra = {
+    /***
+     Processes given html string for user's data
+     ***/
+    var processMain = function(data){
+        // get chat wtf
+        iLepra.chat.wtf = /chatHandler.wtf = '(.+?)'/g.exec(data)[1];
+        // get username
+        iLepra.username = $( $("#greetings a", data)[0] ).text();
+        // get sublepras
+        iLepra.userSubLepras = [];
+        var subs = $(".subs_loaded.hidden", data);
+        $(".sub", subs).each(function(index, item){
+            item = $(item);
+            var sublepra = {
+                name: $("h5", item).text(),
+                creator: $(".creator", item).text(),
+                link: $("a.link", item).attr('href'),
+                logo: $("strong a img", item).attr('src')
+            }
+            iLepra.userSubLepras.push(sublepra);
+        });
+    };
+    
+    /***
+     Processes given JSON object for latest posts
+     ***/
+    var processJSONPosts = function(posts){
+        for(var i in posts){
+            var post = {};
+            // get img and short text
+            var imgReg = /img src="(.+?)"/g
+            var res = imgReg.exec(posts[i].body);
+            var img = "";
+            if( res != null ){ 
+                img = "http://src.sencha.io/80/80/"+res[1];
+            }else{
+                img = "../css/img/placeholder.png";
+            }
+            var text = posts[i].body.replace(/(<([^>]+)>)/ig," ").substr(0, 128) + "...";
+            
+            post.id = posts[i].id;
+            post.body = posts[i].body;
+            post.rating = posts[i].rating;
+            post.domain_url = posts[i].domain_url;
+            post.image = img;
+            post.text = text;
+            post.user = posts[i].login;
+            post.comments = "Комментарии: " + posts[i].comm_count + " / " + posts[i].unread;
+            post.wrote = (posts[i].gender == 1 ? "Написал " : "Написала ") + posts[i].user_rank + " " +posts[i].login;
+            post.when = posts[i].textdate + " в " + posts[i].posttime;
+        
+            if( iLepra.latestPosts.indexOf(post) == -1 ){
+                iLepra.latestPosts.push(post);
+            }
+        }
+    };
+
+	// Define a local copy of iLepra
+	return {
 		// 
 		// events
 		//
@@ -76,54 +135,18 @@ var iLepra = (function() {
 		init: function() {
 			$.get("http://leprosorium.ru", function(data){
 				if(data.indexOf('<input type="password"') > 0){
-					iLepra.processCaptcha(data);
+					processCaptcha(data);
 					iLepra.isAuthenticated = false;
 				}else{
 					//iLepra.getLastPosts();
 					iLepra.isAuthenticated = true;
 					
 					// process user's data
-					iLepra.processMain(data);
+					processMain(data);
 				}
 				// dispatch event
 				$(document).trigger(iLepra.events.init);
 			});
-		},
-		
-		/***
-		 Processes given html string for user's data
-		 ***/
-		processMain: function(data){
-		    // get doc 
-            var doc = $(data);
-            // get chat wtf
-            iLepra.chat.wtf = /chatHandler.wtf = '(.+?)'/g.exec(data)[1];
-            // get username
-            iLepra.username = $( $("#greetings a", doc)[0] ).text();
-            // get sublepras
-            iLepra.userSubLepras = [];
-            var subs = $(".subs_loaded.hidden", doc);
-            $(".sub", subs).each(function(index, item){
-                item = $(item);
-                var sublepra = {
-                    name: $("h5", item).text(),
-                    creator: $(".creator", item).text(),
-                    link: $("a.link", item).attr('href'),
-                    logo: $("strong a img", item).attr('src')
-                }
-                iLepra.userSubLepras.push(sublepra);
-            });
-		},
-		
-		/***
-		 Processes given html string for captcha data
-		 ***/
-		processCaptcha: function(source){
-			var captchaReg = /img alt="captcha" src="(.+?)"/g;
-			var loginReg = /<input type="hidden" name="logincode" value="(.+?)"/g;
-			
-			this.captchaURL = "http://leprosorium.ru" + captchaReg.exec(source)[1];
-			this.loginCode = loginReg.exec(source)[1];
 		},
 		
 		/***
@@ -137,13 +160,13 @@ var iLepra = (function() {
 					iLepra.errorMessage = errorReg.exec(data)[1];
 					
 					// get new captcha
-					iLepra.processCaptcha(data);
+					processCaptcha(data);
 					
 					// dispatch error event and die
 					$(document).trigger(iLepra.events.error);
 				}else{
 				    // process user's data
-					iLepra.processMain(data);
+					processMain(data);
 				
 					// dispatch ready event
 					$(document).trigger(iLepra.events.ready);
@@ -153,6 +176,7 @@ var iLepra = (function() {
 		
 		/***
 		 Gets last posts from JSON interface
+		 NOT IMPLEMENTED IN UI YET
 		 ***/
 		getNewsCounters: function(){
 			$.ajax({
@@ -183,32 +207,12 @@ var iLepra = (function() {
 			$.post("http://leprosorium.ru/idxctl/", {from:iLepra.postCount}, function(data){
 				// convert string to object
 				data = $.parseJSON(data);
-				
 				// init posts array
 				iLepra.latestPosts = [];
-				
-				var i;
-				var posts = data.posts;
-				for(i in posts){
-				    // get img and short text
-					var imgReg = /img src="(.+?)"/g
-					var res = imgReg.exec(posts[i].body);
-				    var img = "";
-				    if( res != null ){ 
-					    img = "http://src.sencha.io/80/80/"+res[1];
-				    }else{
-					    img = "../css/img/placeholder.png";
-				    }
-	        		var text = posts[i].body.replace(/(<([^>]+)>)/ig," ").substr(0, 128) + "...";
-	        		
-	        		posts[i].image = img;
-	        		posts[i].text = text;
-				
-					iLepra.latestPosts.push(posts[i]);
-				}
-				
+				// parse
+				processJSONPosts(data.posts);
+				// trigger event
 				$(document).trigger(iLepra.events.ready);
-				//iLepra.getNewsCounters();
 			});
 		},
 		
@@ -221,29 +225,9 @@ var iLepra = (function() {
 			$.post("http://leprosorium.ru/idxctl/", {from:iLepra.postCount}, function(data){
 				// convert string to object
 				data = $.parseJSON(data);
-				
-				var i;
-				var posts = data.posts;
-				for(i in posts){
-					if( iLepra.latestPosts.indexOf(posts[i]) == -1 ){
-					    // get img and short text
-                        var imgReg = /img src="(.+?)"/g
-                        var res = imgReg.exec(posts[i].body);
-                        var img = "";
-                        if( res != null ){ 
-                            img = "http://src.sencha.io/80/80/"+res[1];
-                        }else{
-                            img = "../css/img/placeholder.png";
-                        }
-                        var text = posts[i].body.replace(/(<([^>]+)>)/ig," ").substr(0, 128) + "...";
-                        
-                        posts[i].image = img;
-                        posts[i].text = text;
-					
-						iLepra.latestPosts.push(posts[i]);
-					}
-				}
-				
+				// parse
+				processJSONPosts(data.posts);
+				// trigger event
 				$(document).trigger(iLepra.events.ready);
 			});
 		},
@@ -269,51 +253,8 @@ var iLepra = (function() {
 		 ***/
 		getMyStuff: function(){
 			$.get("http://leprosorium.ru/my/", function(data){
-				var res = $(data);
-				
 				iLepra.myStuffPosts = [];
-				
-				$(".post", res).each(function(index, item){
-					var data = $(item);
-					var add = $(".dd .p", data);
-					
-					var body = $(".dt", data).html();
-					
-					// create replace link for user
-					var user = $("a", add).wrap('<div></div>').parent().html();
-					var newUser = user.replace(/href="(.+?)"/g, "href=\"#\"").replace(/class="(.+?)"/g, "class=\"username\"");
-					
-					// get wrote line
-					var wrote = add.html().replace(/\s\s+/gi, " ").split("|");
-					var wroteFull = wrote[0].replace(user, newUser);
-					
-					// get img and short text
-					var imgReg = /img src="(.+?)"/g
-					var res = imgReg.exec(body);
-				    var img = "";
-				    if( res != null ){ 
-					    img = "http://src.sencha.io/80/80/"+res[1];
-				    }else{
-					    img = "../css/img/placeholder.png";
-				    }
-	        		var text = body.replace(/(<([^>]+)>)/ig," ").substr(0, 128) + "...";
-					
-					var post = {
-						id: data.attr('id').replace('p', ''),
-						body: body,
-						rating: $(".rating", data).text(),
-						user: $( $("a", add)[0] ).text(),
-						domain_url: $(".sub_domain_url", data).text(),
-						wrote: wroteFull,
-						wroteText: wroteFull.replace(/(<([^>]+)>)/ig," "),
-						comments: wrote[1].replace(/<.+?>/g, ""),
-						image: img,
-						text: text
-					};
-					
-					iLepra.myStuffPosts.push(post);
-				});
-				
+				iLepra.util.processHTMLPosts(data, iLepra.myStuffPosts, undefined);
 				$(document).trigger(iLepra.events.ready);
 			});
 		},
@@ -323,43 +264,8 @@ var iLepra = (function() {
 		 ***/
 		getFavourites: function(){
 			$.get("http://leprosorium.ru/my/favourites/", function(data){
-				var res = $(data);
-				
 				iLepra.favouritePosts = [];
-				
-				$(".post", res).each(function(index, item){
-					var data = $(item);
-					var add = $(".dd .p", data);
-					
-					var body = $(".dt", data).html();
-					var wrote = add.text().replace(/\s\s+/gi, " ").split("|");
-					
-					var imgReg = /img src="(.+?)"/g
-					var res = imgReg.exec(body);
-				    var img = "";
-				    if( res != null ){ 
-					    img = "http://src.sencha.io/80/80/"+res[1];
-				    }else{
-					    img = "../css/img/placeholder.png";
-				    }
-	        		var text = body.replace(/(<([^>]+)>)/ig," ").substr(0, 128) + "...";
-					
-					var post = {
-						id: data.attr('id').replace('p', ''),
-						body: body,
-						rating: $(".rating", data).text(),
-						user: $( $("a", add)[0] ).text(),
-						domain_url: $(".sub_domain_url", data).text(),
-						wrote: wrote[0],
-						comments: wrote[1],
-						image: img,
-						text: text,
-						type: 'fav'
-					};
-					
-					iLepra.favouritePosts.push(post);
-				});
-				
+				iLepra.util.processHTMLPosts(data, iLepra.favouritePosts, 'fav');
 				$(document).trigger(iLepra.events.ready);
 			});
 		},
@@ -369,51 +275,10 @@ var iLepra = (function() {
 		 ***/
 		getInbox: function(){
 			$.get("http://leprosorium.ru/my/inbox/", function(data){
-				var res = $(data);
-				
 				iLepra.inboxPosts = [];
-				
-				$(".post", res).each(function(index, item){
-					var data = $(item);
-					var add = $(".dd .p", data);
-					
-					var body = $(".dt", data).html();
-					var wrote = add.text().replace(/\s\s+/gi, " ").split("|");
-					
-					var imgReg = /img src="(.+?)"/g
-					var res = imgReg.exec(body);
-				    var img = "";
-				    if( res != null ){ 
-					    img = "http://src.sencha.io/80/80/"+res[1];
-				    }else{
-					    img = "../css/img/placeholder.png";
-				    }
-	        		var text = body.replace(/(<([^>]+)>)/ig," ").substr(0, 128) + "...";
-					
-					var post = {
-						id: data.attr('id').replace('p', ''),
-						body: body,
-						user: $( $("a", add)[0] ).text(),
-						wrote: wrote[0],
-						comments: wrote[1],
-						image: img,
-						text: text,
-						type: 'inbox'
-					};
-					
-					iLepra.inboxPosts.push(post);
-				});
-				
+				iLepra.util.processHTMLPosts(data, iLepra.inboxPosts, 'inbox');
 				$(document).trigger(iLepra.events.ready);
 			});
 		}
 	}
-	
-	return iLepra;
-
 })();
-
-// Expose Mukava to the global object
-window.iLepra = iLepra;
-
-})( window );

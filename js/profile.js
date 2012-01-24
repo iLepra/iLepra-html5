@@ -1,4 +1,4 @@
-$(window).load(function(){
+(function(){
     $(".username").live('vclick', function(){
         var name = $(this).text();
         
@@ -50,4 +50,4 @@ $(window).load(function(){
     		}
 		}
 	});
-});
+})();

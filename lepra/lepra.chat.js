@@ -1,8 +1,4 @@
-(function( iLepra ) {
-
 iLepra.chat = (function() {
-	var chat;
-	
 	var getLastId = function(){
 	    var last = "";
         if( iLepra.chat.messages.length > 0 ){
@@ -16,7 +12,7 @@ iLepra.chat = (function() {
         return last;
 	}
 	
-	chat = {
+	return {
 		messages: [],
 		wtf: null,
 		defaultKey: "leprosorium.ru/",
@@ -66,17 +62,4 @@ iLepra.chat = (function() {
 		    });
 		}
 	};
-
-	return chat;
 })();
-
-})( iLepra );
-
-/*
-msg example:
-body: "juslex: а кто это там так накосячил"
-createdate: "15:02"
-id: "19947"
-id_user: "45398"
-user_login: "JasF"
-*/

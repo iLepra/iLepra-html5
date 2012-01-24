@@ -1,25 +1,20 @@
 $(window).load(function(){
 	var commentId = null;
 	var commentUser = null;
-
-	// on comments request
-	$("#postCommentsButton").live('vclick', function(){
-		// show loader
-		$.mobile.showPageLoadingMsg();
-	
-		// on posts data
-		$(document).bind(iLepra.events.ready, function(event){
-			// unbind
-			$(document).unbind(event);
-			
-			$.mobile.changePage("post_comments.html");
-		});
-	
-		iLepra.post.getComments();
-	});
 	
 	// on post comments show
 	$("#postCommentsPage").live('pagecreate', function(){
+	    $("#addCommentButton").bind('vclick', function(){
+            commentId = null;
+            commentUser = null;
+        
+            $.mobile.changePage("post_addcomment.html", {
+                role: "dialog", 
+                transition: "slidedown", 
+                inline: "true"
+            });
+        });
+	
 		// render title
 		$("#postCommentsTitle").text( iLepra.post.current.body.replace(/(<([^>]+)>)/ig,"").substr(0, 64) );
 		
@@ -29,17 +24,6 @@ $(window).load(function(){
 	    for(var i = 0; i < iLepra.post.comments.length; i++)
             p += _.template(commentTemplate, iLepra.post.comments[i]);
 		$("#commentsList").append(p);
-	});
-	
-	$("#addCommentButton").live('vclick', function(){
-		commentId = null;
-		commentUser = null;
-	
-		$.mobile.changePage("post_addcomment.html", {
-			role: "dialog", 
-			transition: "slidedown", 
-			inline: "true"
-		});
 	});
 	
 	// show comment menu

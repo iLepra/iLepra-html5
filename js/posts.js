@@ -1,7 +1,7 @@
-$(window).load(function(){
+(function(){
 	var renderNewPosts = function(){
-		// render posts
-		var p = "";
+	    // render posts
+	    var p = "";
 	    for(var i = 0; i < iLepra.latestPosts.length; i++)
             p += _.template(postTemplate, iLepra.latestPosts[i]);
 		$("#postsList").append(p);
@@ -10,6 +10,53 @@ $(window).load(function(){
 	// render page on creation
 	$("#postsPage").live('pagecreate', function(){
 		renderNewPosts();
+		
+		// refresh
+        $("#refreshPostsButton").bind('vclick', function(){
+            // show loader
+            $.mobile.showPageLoadingMsg();
+        
+            // on posts data
+            $(document).bind(iLepra.events.ready, function(event){
+                $(document).unbind(event);
+                $.mobile.hidePageLoadingMsg();
+                
+                // clean old data & render
+                $("#postsList").empty();
+                renderNewPosts();
+                $("#postsList").listview('refresh');
+            });
+            
+            // get posts
+            iLepra.getLastPosts();
+        });
+        
+        // more posts
+        $("#morePostsButton").bind('vclick', function(){
+            // show loader
+            $.mobile.showPageLoadingMsg();
+            
+            var scroll = $(window).scrollTop();
+        
+            // on posts data
+            $(document).bind(iLepra.events.ready, function(event){
+                $(document).unbind(event);
+                
+                // remove loader
+                $.mobile.hidePageLoadingMsg();
+                
+                // clean old data
+                $("#postsList").empty();
+                renderNewPosts();
+                $("#postsList").listview('refresh');
+                
+                // set position
+                $(window).scrollTop(scroll);
+            });
+            
+            // get posts
+            iLepra.getMorePosts();
+        });
 	});
 
 	// show full post
@@ -59,6 +106,20 @@ $(window).load(function(){
 	
 	// render full post text
 	$("#fullPostPage").live('pagecreate', function(){
+	    // on comments request
+        $("#postCommentsButton").bind('vclick', function(){
+            // show loader
+            $.mobile.showPageLoadingMsg();
+        
+            // on posts data
+            $(document).bind(iLepra.events.ready, function(event){
+                $(document).unbind(event);
+                $.mobile.changePage("post_comments.html");
+            });
+        
+            iLepra.post.getComments();
+        });
+	
 		// render html
 		$("#postContent").html(iLepra.post.current.body);
 		
@@ -67,75 +128,9 @@ $(window).load(function(){
 		
 		// render additional info
 		// Написал мелом судьбы NotJust в | 46036 games.leprosorium.ru, 12.01.2012 в 23.28 | 96 комментариев / 96 новых | x
-		var add; 
-		if( typeof iLepra.post.current.comments != 'undefined' ){
-			add = iLepra.post.current.wrote + " | " + iLepra.post.current.comments;
-		}else{ 
-			add = iLepra.post.current.gender == "1" ? "Написал " : "Написала ";
-			add += iLepra.post.current.user_rank + " <a href='#' class='username'>" + iLepra.post.current.login + "</a>";
-			add += iLepra.post.current.domain_url != "" ? " в "+iLepra.post.current.domain_url : "";
-			add += ", "+iLepra.post.current.textdate + " в " + iLepra.post.current.posttime;
-			add += " | Комментариев: "+ iLepra.post.current.comm_count + " / " + iLepra.post.current.unread;
-		}
+		var add = iLepra.post.current.wrote + ", " + iLepra.post.current.when + " | " + iLepra.post.current.comments;
 		$("#postAdditional").html( add )
 	});
 	
-	// refresh
-	$("#refreshPostsButton").live('vclick', function(){
-		// show loader
-		$.mobile.showPageLoadingMsg();
 	
-		// on posts data
-		$(document).bind(iLepra.events.ready, function(event){
-			// unbind
-			$(document).unbind(event);
-			
-			// remove loader
-			$.mobile.hidePageLoadingMsg();
-			
-			// clean old data
-			$("#postsList").empty();
-			
-			// render
-			renderNewPosts();
-			
-			// refresh list
-			$("#postsList").listview('refresh');
-		});
-		
-		// get posts
-		iLepra.getLastPosts();
-	});
-	
-	// more posts
-	$("#morePostsButton").live('vclick', function(){
-		// show loader
-		$.mobile.showPageLoadingMsg();
-		
-		var scroll = $(window).scrollTop();
-	
-		// on posts data
-		$(document).bind(iLepra.events.ready, function(event){
-			// unbind
-			$(document).unbind(event);
-			
-			// remove loader
-			$.mobile.hidePageLoadingMsg();
-			
-			// clean old data
-			$("#postsList").empty();
-			
-			// render
-			renderNewPosts();
-			
-			// refresh list
-			$("#postsList").listview('refresh');
-			
-			// set position
-			$(window).scrollTop(scroll);
-		});
-		
-		// get posts
-		iLepra.getMorePosts();
-	});
-});
+})();

@@ -1,9 +1,5 @@
-(function( iLepra ) {
-
 iLepra.post = (function() {
-	var post;
-	
-	post = {
+	return {
 		// current post
 		current: null,
 		
@@ -110,8 +106,4 @@ iLepra.post = (function() {
 			$.post(url, data, function(data){});
 		}
 	};
-
-	return post;
 })();
-
-})( iLepra );

@@ -1,9 +1,5 @@
-(function( iLepra ) {
-
 iLepra.gov = (function() {
-	var gov;
-	
-	gov = {
+	return {
 	    president: null,
 	    time: null,
 	    ministers: null,
@@ -23,8 +19,5 @@ iLepra.gov = (function() {
 		    });
 		}
 	};
-
-	return gov;
+	
 })();
-
-})( iLepra );
