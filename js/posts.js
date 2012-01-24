@@ -1,8 +1,12 @@
 (function(){
+    var postIncrement = 10;
+    var postLimit = 10;
+
 	var renderNewPosts = function(){
 	    // render posts
+	    var limit = postLimit > iLepra.latestPosts.length ? iLepra.latestPosts.length : postLimit;
 	    var p = "";
-	    for(var i = 0; i < iLepra.latestPosts.length; i++)
+	    for(var i = 0; i < limit; i++)
             p += _.template(postTemplate, iLepra.latestPosts[i]);
 		$("#postsList").append(p);
 	}
@@ -33,17 +37,10 @@
         
         // more posts
         $("#morePostsButton").bind('vclick', function(){
-            // show loader
-            $.mobile.showPageLoadingMsg();
-            
             var scroll = $(window).scrollTop();
-        
-            // on posts data
-            $(document).bind(iLepra.events.ready, function(event){
-                $(document).unbind(event);
-                
-                // remove loader
-                $.mobile.hidePageLoadingMsg();
+            
+            if( postLimit < iLepra.latestPosts.length){
+                postLimit += postIncrement;
                 
                 // clean old data
                 $("#postsList").empty();
@@ -52,10 +49,29 @@
                 
                 // set position
                 $(window).scrollTop(scroll);
-            });
-            
-            // get posts
-            iLepra.getMorePosts();
+            }else{ // load new data
+                // show loader
+                $.mobile.showPageLoadingMsg();
+                
+                // on posts data
+                $(document).bind(iLepra.events.ready, function(event){
+                    $(document).unbind(event);
+                    
+                    // remove loader
+                    $.mobile.hidePageLoadingMsg();
+                    
+                    // clean old data
+                    $("#postsList").empty();
+                    renderNewPosts();
+                    $("#postsList").listview('refresh');
+                    
+                    // set position
+                    $(window).scrollTop(scroll);
+                });
+                
+                // get posts
+                iLepra.getMorePosts();
+            }
         });
 	});
 
