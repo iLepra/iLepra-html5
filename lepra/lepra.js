@@ -9,8 +9,8 @@ iLepra = (function() {
         var captchaReg = /img alt="captcha" src="(.+?)"/g;
         var loginReg = /<input type="hidden" name="logincode" value="(.+?)"/g;
         
-        this.captchaURL = "http://leprosorium.ru" + captchaReg.exec(source)[1];
-        this.loginCode = loginReg.exec(source)[1];
+        iLepra.captchaURL = "http://leprosorium.ru" + captchaReg.exec(source)[1];
+        iLepra.loginCode = loginReg.exec(source)[1];
     };
 
     /***
