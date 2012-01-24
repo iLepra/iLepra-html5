@@ -6,7 +6,7 @@ var postTemplate = '\
 					<p><strong><%= wrote %></strong></p>\
 					<p><%= when %> <% if(domain_url != ""){ %> / <%= domain_url %> <% } %></p>\
 					<p><%= comments %></i></p>\
-					<% if(rating != undefined && rating.length > 0){ %><p>Рейтинг: <%= rating %></p><% } %>\
+					<% if(rating != undefined && rating.length > 0 && rating != 0){ %><p>Рейтинг: <%= rating %></p><% } %>\
 				</a>\
 			</li>';
 			            
