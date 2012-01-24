@@ -47,7 +47,17 @@ iLepra = (function() {
             var res = imgReg.exec(posts[i].body);
             var img = "";
             if( res != null ){ 
+                // save first image as post image
                 img = "http://src.sencha.io/80/80/"+res[1];
+                
+                posts[i].body = posts[i].body.replace(res[1], "http://src.sencha.io/"+iLepra.config.screenBiggest+"/"+res[1]);
+                // convert all image URIs to compressed ones
+                res = imgReg.exec(posts[i].body);
+                while(res != null){
+                    posts[i].body = posts[i].body.replace(res[1], "http://src.sencha.io/"+iLepra.config.screenBiggest+"/"+res[1]);
+                
+                    res = imgReg.exec(posts[i].body);
+                }
             }else{
                 img = "../css/img/placeholder.png";
             }
@@ -85,7 +95,8 @@ iLepra = (function() {
 		// app config
 		//
 		config: {
-		    loadImages: true
+		    loadImages: true,
+		    screenBiggest: 0
 		}, 
 		
 		// 
@@ -133,6 +144,10 @@ iLepra = (function() {
 		 logged in, gets captcha if not and posts if yes
 		 ***/
 		init: function() {
+		    // detect device properties
+		    this.config.screenBiggest = window.screen.width > window.screen.height ? window.screen.width : window.screen.height;
+		    
+		    // get lepra
 			$.get("http://leprosorium.ru", function(data){
 				if(data.indexOf('<input type="password"') > 0){
 					processCaptcha(data);

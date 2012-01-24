@@ -18,6 +18,15 @@ iLepra.util = (function() {
                     var img = "";
                     if( res != null ){ 
                         img = "http://src.sencha.io/80/80/"+res[1];
+                        
+                        body = body.replace(res[1], "http://src.sencha.io/"+iLepra.config.screenBiggest+"/"+res[1]);
+                        // convert all image URIs to compressed ones
+                        res = imgReg.exec(body);
+                        while(res != null){
+                            body = body.replace(res[1], "http://src.sencha.io/"+iLepra.config.screenBiggest+"/"+res[1]);
+                        
+                            res = imgReg.exec(body);
+                        }
                     }else{
                         img = "../css/img/placeholder.png";
                     }
