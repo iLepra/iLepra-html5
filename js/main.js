@@ -8,7 +8,8 @@ $( document ).bind( "mobileinit", function() {
 
 // fired up when phonegap is ready - this requires a phonegap.js file :|
 //document.addEventListener("deviceready", function(){
-$(document).ready(function(){
+//$(document).ready(function(){
+window.addEventListener('load', function(){
     $.mobile.page.prototype.options.backBtnText = "Назад";
     
     var getLatestPosts = function(fromIndex){
