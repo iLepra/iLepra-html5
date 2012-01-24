@@ -2,11 +2,11 @@ var postTemplate = '\
             <li>\
 				<a href="#" class="postListItem" data-id="<%= id %>">\
 					<% if(iLepra.config.loadImages){ %><img src="<%= image %>" class="postThumb" /><% } %>\
-					<h1><%= text %></h1>\
-					<p><%= wrote %></p>\
+					<h3><%= text %></h3>\
+					<p><strong><%= wrote %></strong></p>\
 					<p><%= when %> <% if(domain_url != ""){ %> / <%= domain_url %> <% } %></p>\
 					<p><%= comments %></i></p>\
-					<% if(rating != undefined && rating.length > 0){ %><p class="ui-li-count"><%= rating %></p><% } %>\
+					<% if(rating != undefined && rating.length > 0){ %><p>Рейтинг: <%= rating %></p><% } %>\
 				</a>\
 			</li>';
 			            
