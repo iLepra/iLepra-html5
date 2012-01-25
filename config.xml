@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <widget xmlns="http://www.w3.org/ns/widgets"
               xmlns:gap="http://phonegap.com/ns/1.0"
-              id="com.phonegap.getting.started"
-              version="0.1.1">
+              id="EA3F6PEEAV.com.yamalight.ilepra"
+              version="0.1.2">
     <name>iLepra</name>
 
 	<description>
@@ -14,6 +14,7 @@
 	</author>
 
 	<gap:platforms>
+		<gap:platform name="ios" />
 		<gap:platform name="android" minVersion="2.1" />
 		<gap:platform name="webos" />
 		<gap:platform name="symbian.wrt" />
