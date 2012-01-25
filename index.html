@@ -2,22 +2,28 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<title>iLepra</title>
-	<!-- jquery mobile style -->
-	<link rel="stylesheet"  href="css/jquery.mobile.min.css" />
-	<!-- <link rel="stylesheet" href="css/ios.css" /> -->
+	<!-- jq.mobi style -->
+	<link rel="stylesheet"  href="css/jq.ui.css" />
 	
 	<!-- app style -->
 	<link rel="stylesheet"  href="css/main.css" />
 	
-	<!-- jquery -->
-	<script src="libs/jquery-1.7.1.min.js"></script>
-	<!-- jquery mobile -->
-	<script src="libs/jquery.mobile.min.js"></script>
+	<!-- jq.mobi + plugins -->
+	<script type="text/javascript" charset="utf-8" src="libs/jq.mobi.js"></script> 
+    <script type="text/javascript" charset="utf-8" src="libs/plugins/jq.swipe.js"></script> 
+    <script type="text/javascript" charset="utf-8" src="libs/plugins/jq.template.js"></script> 
+    <script type="text/javascript" charset="utf-8" src="libs/plugins/jq.carousel.js"></script> 
+    <script type="text/javascript" charset="utf-8" src="libs/plugins/jq.css3animate.js"></script> 
+    <script type="text/javascript" charset="utf-8" src="libs/plugins/jq.drawer.js"></script> 
+    <script type="text/javascript" charset="utf-8" src="libs/plugins/jq.passwordBox.js"></script> 
+    <script type="text/javascript" charset="utf-8" src="libs/plugins/jq.scroller.js"></script> 
+    <script type="text/javascript" charset="utf-8" src="libs/plugins/jq.shake.js"></script> 
+    <script type="text/javascript" charset="utf-8" src="libs/plugins/jq.selectBox.js"></script> 
+    <script type="text/javascript" charset="utf-8" src="libs/jq.ui.js"></script> 
 	
 	<!-- templates -->
-	<script src="libs/underscore-min.js"></script>
 	<script src="js/templates.js"></script>
 	
 	<!-- iLepra library -->
@@ -34,35 +40,79 @@
 	<script src="js/main.js"></script>
 	
 	<!-- mystuff logic -->
-	<script src="js/mystuff.js"></script>
+	<!-- <script src="js/mystuff.js"></script> -->
 	
 	<!-- inbox logic -->
-	<script src="js/inbox.js"></script>
+	<!-- <script src="js/inbox.js"></script> -->
 	
 	<!-- navigation stuff -->
-	<script src="js/navbar.js"></script>
+	<!-- <script src="js/navbar.js"></script> -->
 	
 	<!-- lepra main page layouts stuff -->
-	<script src="js/layout.js"></script>
+	<!-- <script src="js/layout.js"></script> -->
 	
 	<!-- posts stuff -->
-	<script src="js/posts.js"></script>
-	<script src="js/comments.js"></script>
+	<!-- <script src="js/posts.js"></script>
+	<script src="js/comments.js"></script> -->
 	
 	<!-- more stuff -->
-	<script src="js/more.js"></script>
+	<!--<script src="js/more.js"></script>
 	<script src="js/favs.js"></script>
 	<script src="js/profile.js"></script>
 	<script src="js/subs.js"></script>
 	<script src="js/gov.js"></script>
-	<script src="js/chat.js"></script>
+	<script src="js/chat.js"></script>-->
 </head>
 <body>
-<div data-role="page">
-	<div data-role="content">
-		This is splash screen.
-		Here will be some fancy graphics.
-	</div>
+
+<!-- header -->
+<div id="header"></div>
+
+<!-- pages -->
+<div id="content">
+    <!-- splash screen -->
+    <div title='iLepra' id="splashPage" class="panel" selected="true">
+	    <h2>Загружаемся..</h2>
+	    <p>Тут будет карсивый сплеш скрин</p>
+	</div> 
+	
+	<!-- login screen -->
+    <div title='iLepra' id="loginPage" class="panel">
+	    <fieldset>
+				<legend>Вход</legend>
+				
+				<input type="text" id="login" placeholder="Логин" class='jq-ui-forms wideForm'/><br/>
+				<input type="password" id="pass" placeholder="Пароль" class='jq-ui-forms wideForm'/><br/>
+				
+				<div style="text-align: center;">
+				    <img id="captchaImage" />
+				</div>
+				
+				<input type="text" id="captcha" placeholder="Капча" class='jq-ui-forms wideForm'/><br/>
+				
+				<input type="checkbox" value="Запомнить меня" id="rememberme" class="jq-ui-forms" />
+				<label for="rememberme">Запомнить меня</label><br/><br/>
+				
+				<div style="text-align: center;">
+				    <a class="button" style="width:50%;" href="javascript:;" onclick=";">Yarrr!</a>
+				</div>
+	    </fieldset>
+	</div> 
+
+    <!-- posts screen -->
+    <div title='Посты' id="postsPage" class="panel">
+	</div> 
+
 </div>
+
+<!-- navbar -->
+<div id="navbar">
+	<div class="horzRule"></div>
+    <a href="#main" class='navbar_home' ontouchstart="">home</a>
+    <a href="#jqm" class="navbar_js" ontouchstart="">selectors</a>
+    <a href="#jqmui"  class="navbar_ui" ontouchstart="">ui</a>
+	<a href="#jqmweb"  class="navbar_plugins" ontouchstart="">plugins</a>
+</div>
+
 </body>
 </html>
