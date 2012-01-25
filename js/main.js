@@ -57,7 +57,7 @@ window.addEventListener('load', function(){
             pass: $("#pass").val(),
             captcha: $("#captcha").val(),
             logincode: iLepra.loginCode,
-            save: $("#rememberme").is(":checked") ? 1 : 0
+            save: $("#rememberme")[0].checked ? 1 : 0
         };
         
         // on login error
