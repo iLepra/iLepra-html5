@@ -1,9 +1,52 @@
 (function(){
+    // pagination & display stuff 
+	var commentsIncrement = 10;
+    var commentsLimit = 10;
+    var type = "all"; // all || new
+    // current comment
 	var commentId = null;
 	var commentUser = null;
 	
+	var renderNewComments = function(){
+	    // render posts
+	    var p = "";
+	    
+	    if( type == "all" ){
+	        var limit = commentsLimit > iLepra.post.comments.length ? iLepra.post.comments.length : commentsLimit;
+    	    for(var i = 0; i < limit; i++)
+                p += _.template(commentTemplate, iLepra.post.comments[i]);
+        }else if( type == "new" ){
+            var limit = commentsLimit > iLepra.post.newComments.length ? iLepra.post.newComments.length : commentsLimit;
+            for(var i = 0; i < limit; i++)
+                p += _.template(commentTemplate, iLepra.post.newComments[i]);
+        }
+		$("#commentsList").append(p);
+	}
+	
 	// on post comments show
 	$("#postCommentsPage").live('pagecreate', function(){
+	    $("#allComments").bind('vclick', function(){
+	        $(this).addClass("ui-btn-active");
+	        $("#newComments").removeClass("ui-btn-active");
+	        type = "all";
+	        
+	        // redraw
+            $("#commentsList").empty();
+		    renderNewComments();
+            $("#commentsList").listview('refresh');
+	    });
+	    
+	    $("#newComments").bind('vclick', function(){
+    	    $(this).addClass("ui-btn-active");
+	        $("#allComments").removeClass("ui-btn-active");
+	        type = "new";
+	        
+	        // redraw
+            $("#commentsList").empty();
+		    renderNewComments();
+            $("#commentsList").listview('refresh');
+	    });
+	
 	    $("#addCommentButton").bind('vclick', function(){
             commentId = null;
             commentUser = null;
@@ -45,11 +88,30 @@
 		$("#postCommentsTitle").text( iLepra.post.current.body.replace(/(<([^>]+)>)/ig,"").substr(0, 64) );
 		
 		// render comments
-		$("#commentsList").empty();
-		var p = "";
-	    for(var i = 0; i < iLepra.post.comments.length; i++)
-            p += _.template(commentTemplate, iLepra.post.comments[i]);
-		$("#commentsList").append(p);
+		renderNewComments();
+		
+		// hide button if needed
+	    if( commentsLimit >= iLepra.post.comments.length ){
+            $("#moreCommentsButton").hide();
+        }else{
+            // more posts click
+            $("#moreCommentsButton").bind('vclick', function(){
+                var scroll = $(window).scrollTop();
+                
+                commentsLimit += commentsIncrement;
+                if( commentsLimit >= iLepra.post.comments.length ){
+                    $("#moreCommentsButton").hide();
+                }
+                    
+                // clean old data
+                $("#commentsList").empty();
+		        renderNewComments();
+                $("#commentsList").listview('refresh');
+                    
+                // set position
+                $(window).scrollTop(scroll);
+            });
+        }
 	});
 	
 	// show comment menu

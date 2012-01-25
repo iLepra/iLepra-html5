@@ -5,6 +5,7 @@ iLepra.post = (function() {
 		
 		// comments array
 		comments: null,
+		newComments: null,
 		
 		// get post comments
 		getComments: function(id, type){
@@ -24,6 +25,7 @@ iLepra.post = (function() {
 				var doc = $(data);
 				
 				iLepra.post.comments = [];
+				iLepra.post.newComments = [];
 				
 				var voteRes = /wtf_vote = '(.+?)'/gi.exec(data);
 				
@@ -35,19 +37,28 @@ iLepra.post = (function() {
 				$("#js-commentsHolder .post", doc).each(function(index, item){
 					var data = $(item);
 					var add = $(".dd .p", data);
-					
+					var text = $(".dt", data).html();
 					var wrote = add.text().replace(/\s\s+/gi, "").split("|")[0];
 					
+					// replace images with compressed ones
+                    var imgReg = /img src="(.+?)"/g
+                    var res = imgReg.exec(text);
+                    while(res != null){
+                        text = text.replace(res[1], "http://src.sencha.io/"+iLepra.config.screenBiggest+"/"+res[1]);
+                        res = imgReg.exec(text);
+                    }
+                    
 					var post = {
 						id: data.attr('id'),
 						isNew: data.hasClass('new') ? 1 : 0,
-						text: $(".dt", data).html(),
+						text: text,
 						rating: $(".rating", data).text(),
 						user: $( $("a", add)[1] ).text(),
 						wrote: wrote
 					};
 					
 					iLepra.post.comments.push(post);
+					if(post.isNew) iLepra.post.newComments.push(post);
 				});
 				
 				// dispatch event
