@@ -102,16 +102,28 @@
     <!-- posts screen -->
     <div title='Посты' id="postsPage" class="panel">
 	</div> 
+	
+	<!-- mystuff screen -->
+    <div title='Мои вещи' id="mystuffPage" class="panel">
+	</div> 
+	
+	<!-- inbox screen -->
+    <div title='Инбокс' id="inboxPage" class="panel">
+	</div> 
+	
+	<!-- more screen -->
+    <div title='Еще' id="morePage" class="panel">
+	</div> 
 
 </div>
 
 <!-- navbar -->
 <div id="navbar">
 	<div class="horzRule"></div>
-    <a href="#main" class='navbar_home'>Посты</a>
-    <a href="#jqm" class="navbar_js">Мои вещи</a>
-    <a href="#jqmui"  class="navbar_ui">Инбокс</a>
-	<a href="#jqmweb"  class="navbar_plugins">Еще</a>
+    <a href="#postsPage" class='navbar_home' onclick="$.ui.clearHistory();">Посты</a>
+    <a href="#mystuffPage" class="navbar_js" onclick="$.ui.clearHistory();">Мои вещи</a>
+    <a href="#inboxPage"  class="navbar_ui" onclick="$.ui.clearHistory();">Инбокс</a>
+	<a href="#morePage"  class="navbar_plugins" onclick="$.ui.clearHistory();">Еще</a>
 </div>
 
 </body>
