@@ -5,6 +5,9 @@ iLepra.sub = (function() {
 	
 		getList: function(shift){
 		    $.get("http://leprosorium.ru/underground/", function(data){
+		        // replace all img tags to evade image loading while parsing
+                data = data.replace(/<img/ig, '<nonimg');
+		    
 		        var doc = $(data);
 		        
 		        iLepra.sub.list = [];
@@ -16,7 +19,7 @@ iLepra.sub = (function() {
                         name: $("h5", item).text(),
                         creator: $(".jj_creator", item).text(),
                         link: $(".jj_link", item).attr('href'),
-                        logo: $("img", item).attr('src')
+                        logo: $("nonimg", item).attr('src')
                     }
                     iLepra.sub.list.push(sublepra);
 		        });

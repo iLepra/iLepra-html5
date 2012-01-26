@@ -6,9 +6,12 @@ iLepra.profile = (function() {
 		    var url = "http://leprosorium.ru/users/"+username;
 		    
 		    $.get(url, function(data){
+		        // replace all img tags to evade image loading while parsing
+                data = data.replace(/<img/ig, '<nonimg');
+		    
 		        var doc = $(data);
 		        
-		        var userpic = $(".userpic img", doc).attr('src');
+		        var userpic = $(".userpic nonimg", doc).attr('src');
 		        
 		        var regdata = $(".userregisterdate", doc).text().replace(/\./g, "").split(', ');
 		        var num = regdata[0];

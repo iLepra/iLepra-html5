@@ -4,6 +4,9 @@ iLepra.util = (function() {
          Processes given HTML object for latest posts and pushes them to given array
          ***/ 
         processHTMLPosts: function(doc, postArray, type){
+            // replace all img tags to evade image loading while parsing
+            doc = doc.replace(/<img/ig, '<nonimg');
+            // parse
             $(".post", doc).each(function(){
                     var data = this;
                     var add = $(".dd .p", data);
@@ -13,7 +16,7 @@ iLepra.util = (function() {
                     var wroteTime = wroteFull[0].split(', ');
                     var wrote = wroteTime[0].split(' в ')[0];
                     
-                    var imgReg = /img src="(.+?)"/g
+                    var imgReg = /nonimg src="(.+?)"/g
                     var res = imgReg.exec(body);
                     var img = "";
                     if( res != null ){ 

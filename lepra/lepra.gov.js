@@ -7,6 +7,9 @@ iLepra.gov = (function() {
 	
 		getCurrent: function(){
 		    $.get("http://leprosorium.ru/democracy/", function(data){
+		        // replace all img tags to evade image loading while parsing
+                data = data.replace(/<img/ig, '<nonimg');
+                // create doc
 		        var doc = $(data);
 		        
 		        var pr = $("#president", doc);

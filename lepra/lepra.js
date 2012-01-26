@@ -17,6 +17,9 @@ iLepra = (function() {
      Processes given html string for user's data
      ***/
     var processMain = function(data){
+        // replace all img tags to evade image loading while parsing
+        data = data.replace(/<img/ig, '<nonimg');
+    
         // get chat wtf
         iLepra.chat.wtf = /chatHandler.wtf = '(.+?)'/g.exec(data)[1];
         // get username
@@ -30,7 +33,7 @@ iLepra = (function() {
                 name: $("h5", item).text(),
                 creator: $(".creator", item).text(),
                 link: $("a.link", item).attr('href'),
-                logo: $("strong a img", item).attr('src')
+                logo: $("strong a nonimg", item).attr('src')
             }
             iLepra.userSubLepras.push(sublepra);
         });

@@ -22,6 +22,9 @@ iLepra.post = (function() {
 		    }
 		    
 			$.get(url, function(data){
+			    // replace all img tags to evade image loading while parsing
+                data = data.replace(/<img/ig, '<nonimg');
+			    //create doc
 				var doc = $(data);
 				
 				iLepra.post.comments = [];
@@ -41,7 +44,7 @@ iLepra.post = (function() {
 					var wrote = add.text().replace(/\s\s+/gi, "").split("|")[0];
 					
 					// replace images with compressed ones
-                    var imgReg = /img src="(.+?)"/g
+                    var imgReg = /nonimg src="(.+?)"/g
                     var res = imgReg.exec(text);
                     while(res != null){
                         text = text.replace(res[1], "http://src.sencha.io/"+iLepra.config.screenBiggest+"/"+res[1]);
