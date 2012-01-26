@@ -97,8 +97,10 @@
             $("#moreCommentsButton").hide();
         }else{
             // more posts click
-            $("#moreCommentsButton").bind(iLepra.config.defaultTapEvent, function(){
-                var scroll = $(window).scrollTop();
+            $("#moreCommentsButton").bind(iLepra.config.defaultTapEvent, function(event){
+                // stops event to prevent random post opening
+                event.preventDefault();
+                event.stopPropagation();
                 
                 commentsLimit += commentsIncrement;
                 if( commentsLimit >= iLepra.post.comments.length ){
@@ -109,9 +111,6 @@
                 $("#commentsList").empty();
 		        renderNewComments();
                 $("#commentsList").listview('refresh');
-                    
-                // set position
-                $(window).scrollTop(scroll);
             });
         }
 	});

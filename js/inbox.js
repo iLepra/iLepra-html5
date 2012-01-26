@@ -19,8 +19,10 @@
             $("#moreInboxButton").hide();
         }else{
             // more posts click
-            $("#moreInboxButton").bind(iLepra.config.defaultTapEvent, function(){
-                var scroll = $(window).scrollTop();
+            $("#moreInboxButton").bind(iLepra.config.defaultTapEvent, function(event){
+                // stops event to prevent random post opening
+                event.preventDefault();
+                event.stopPropagation();
                 
                 postLimit += postIncrement;
                 if( postLimit >= iLepra.inboxPosts.length ){
@@ -31,9 +33,6 @@
                 $("#inboxList").empty();
                 renderNewPosts();
                 $("#inboxList").listview('refresh');
-                    
-                // set position
-                $(window).scrollTop(scroll);
             });
         }
 	});

@@ -19,8 +19,10 @@
             $("#moreMystuffButton").hide();
         }else{
             // more posts click
-            $("#moreMystuffButton").bind(iLepra.config.defaultTapEvent, function(){
-                var scroll = $(window).scrollTop();
+            $("#moreMystuffButton").bind(iLepra.config.defaultTapEvent, function(event){
+                // stops event to prevent random post opening
+                event.preventDefault();
+                event.stopPropagation();
                 
                 postLimit += postIncrement;
                 if( postLimit >= iLepra.myStuffPosts.length ){
@@ -31,9 +33,6 @@
                 $("#mystuffList").empty();
                 renderNewPosts();
                 $("#mystuffList").listview('refresh');
-                    
-                // set position
-                $(window).scrollTop(scroll);
             });
         }
 	});

@@ -5,9 +5,7 @@
 		
 		// on posts data
 		$(document).bind(iLepra.events.ready, function(event){
-			// unbind
 			$(document).unbind(event);
-			
 			$.mobile.changePage("posts.html");
 		});
 	}

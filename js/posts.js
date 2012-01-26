@@ -36,9 +36,11 @@
         });
         
         // more posts
-        $("#morePostsButton").bind(iLepra.config.defaultTapEvent, function(){
-            var scroll = $(window).scrollTop();
-            
+        $("#morePostsButton").bind(iLepra.config.defaultTapEvent, function(event){
+            // stops event to prevent random post opening
+            event.preventDefault();
+            event.stopPropagation();
+        
             if( postLimit < iLepra.latestPosts.length){
                 postLimit += postIncrement;
                 
@@ -46,9 +48,6 @@
                 $("#postsList").empty();
                 renderNewPosts();
                 $("#postsList").listview('refresh');
-                
-                // set position
-                $(window).scrollTop(scroll);
             }else{ // load new data
                 // show loader
                 $.mobile.showPageLoadingMsg();
@@ -64,9 +63,6 @@
                     $("#postsList").empty();
                     renderNewPosts();
                     $("#postsList").listview('refresh');
-                    
-                    // set position
-                    $(window).scrollTop(scroll);
                 });
                 
                 // get posts
