@@ -13,12 +13,14 @@
 	    
 	    if( type == "all" ){
 	        var limit = commentsLimit > iLepra.post.comments.length ? iLepra.post.comments.length : commentsLimit;
-    	    for(var i = 0; i < limit; i++)
-                p += _.template(commentTemplate, iLepra.post.comments[i]);
-        }else if( type == "new" ){
-            var limit = commentsLimit > iLepra.post.newComments.length ? iLepra.post.newComments.length : commentsLimit;
-            for(var i = 0; i < limit; i++)
-                p += _.template(commentTemplate, iLepra.post.newComments[i]);
+	        for(var i = 0; i < limit; i++){
+	            p += _.template(commentTemplate, iLepra.post.comments[i]);
+	        }
+	    }else if( type == "new" ){
+	        var limit = commentsLimit > iLepra.post.newComments.length ? iLepra.post.newComments.length : commentsLimit;
+	        for(var i = 0; i < limit; i++){
+	            p += _.template(commentTemplate, iLepra.post.newComments[i]);
+	        }
         }
 		$("#commentsList").append(p);
 	}

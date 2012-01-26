@@ -11,6 +11,7 @@ $( document ).bind( "mobileinit", function() {
 //$(document).ready(function(){
 window.addEventListener('load', function(){
     $.mobile.page.prototype.options.backBtnText = "Назад";
+    $.mobile.fixedtoolbar.prototype.options.tapToggle = false;
     
     var getLatestPosts = function(fromIndex){
 	    if( typeof fromIndex == 'undefined' ) fromIndex = false;
