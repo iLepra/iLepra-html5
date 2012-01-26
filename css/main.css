@@ -8,3 +8,40 @@ img {
 .wideForm {
     width: 100% !important;
 }
+
+ul > li {
+    height: auto !important;
+}
+
+.postThumb {
+    float: left;
+    width: 80px;
+    height: 80px;
+}
+
+.postBody {
+    margin-left: 80px;
+    float: left;
+    margin-top: -75px;
+    margin-right: 20px;
+}
+
+.postBody a {
+    text-decoration: none;
+    color: white;
+}
+
+.postInfo {
+    float: left;
+    padding-top: 5px;
+}
+
+.postRating {
+    right: 4px;
+    background-color: white;
+    color: black;
+    -webkit-border-radius: 2px;
+    padding: 1px;
+    position: absolute;
+    top: 40px;
+}

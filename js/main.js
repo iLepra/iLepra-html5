@@ -47,6 +47,7 @@ var getLatestPosts = function(){
         $.ui.loadContent("postsPage");
         $.ui.clearHistory();
         $("#navbar").show();
+        renderNewPosts();
     });
     
     // get posts

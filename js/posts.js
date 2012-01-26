@@ -1,4 +1,4 @@
-(function(){
+
     var postIncrement = 10;
     var postLimit = 10;
 
@@ -7,10 +7,11 @@
 	    var limit = postLimit > iLepra.latestPosts.length ? iLepra.latestPosts.length : postLimit;
 	    var p = "";
 	    for(var i = 0; i < limit; i++)
-            p += _.template(postTemplate, iLepra.latestPosts[i]);
-		$("#postsList").append(p);
+            p += $.template(postTemplate, iLepra.latestPosts[i]);
+		$("#postsList").html(p);
 	}
-
+	
+/*(function(){
 	// render page on creation
 	$("#postsPage").live('pagecreate', function(){
 		renderNewPosts();
@@ -149,4 +150,4 @@
 	});
 	
 	
-})();
+})();*/
