@@ -1,5 +1,5 @@
 (function(){
-	$("#postsBar").live('vclick', function(){
+	$("#postsBar").live(iLepra.config.defaultTapEvent, function(){
 		$.mobile.showPageLoadingMsg();
 		$(document).bind(iLepra.events.ready, function(event){
 			$(document).unbind(event);
@@ -8,7 +8,7 @@
 		iLepra.getLastPosts();
 	});
 	
-	$("#mystuffBar").live('vclick', function(){
+	$("#mystuffBar").live(iLepra.config.defaultTapEvent, function(){
 		$.mobile.showPageLoadingMsg();
 		$(document).bind(iLepra.events.ready, function(event){
 			$(document).unbind(event);
@@ -17,7 +17,7 @@
 		iLepra.getMyStuff();
 	});
 	
-	$("#inboxBar").live('vclick', function(){
+	$("#inboxBar").live(iLepra.config.defaultTapEvent, function(){
 		$.mobile.showPageLoadingMsg();
 		$(document).bind(iLepra.events.ready, function(event){
 			$(document).unbind(event);
@@ -26,7 +26,7 @@
 		iLepra.getInbox();
 	});
 	
-	$("#moreBar").live('vclick', function(){
+	$("#moreBar").live(iLepra.config.defaultTapEvent, function(){
     	$.mobile.changePage("more.html");
 	});
 	

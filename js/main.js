@@ -46,7 +46,7 @@ window.addEventListener('load', function(){
 		$("#captchaImage").attr('src', iLepra.captchaURL);
 		
 		// bind yarr click
-		$("#loginButton").bind('vclick', function(){
+		$("#loginButton").bind(iLepra.config.defaultTapEvent, function(){
             $.mobile.showPageLoadingMsg();
         
             // create auth data structure

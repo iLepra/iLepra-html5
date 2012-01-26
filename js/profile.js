@@ -1,5 +1,5 @@
 (function(){
-    $(".username").live('vclick', function(){
+    $(".username").live(iLepra.config.defaultTapEvent, function(){
         var name = $(this).text();
         
         $.mobile.showPageLoadingMsg();

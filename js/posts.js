@@ -16,7 +16,7 @@
 		renderNewPosts();
 		
 		// refresh
-        $("#refreshPostsButton").bind('vclick', function(){
+        $("#refreshPostsButton").bind(iLepra.config.defaultTapEvent, function(){
             // show loader
             $.mobile.showPageLoadingMsg();
         
@@ -36,7 +36,7 @@
         });
         
         // more posts
-        $("#morePostsButton").bind('vclick', function(){
+        $("#morePostsButton").bind(iLepra.config.defaultTapEvent, function(){
             var scroll = $(window).scrollTop();
             
             if( postLimit < iLepra.latestPosts.length){
@@ -76,7 +76,7 @@
 	});
 
 	// show full post
-	$(".postListItem").live('vclick', function(){
+	$(".postListItem").live(iLepra.config.defaultTapEvent, function(){
 		currentPostId = $(this).data('id');
 		
 		// get selected post
@@ -123,7 +123,7 @@
 	// render full post text
 	$("#fullPostPage").live('pagecreate', function(){
 	    // on comments request
-        $("#postCommentsButton").bind('vclick', function(){
+        $("#postCommentsButton").bind(iLepra.config.defaultTapEvent, function(){
             // show loader
             $.mobile.showPageLoadingMsg();
         

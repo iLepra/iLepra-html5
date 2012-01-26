@@ -11,7 +11,7 @@ $(window).load(function(){
 	});
 	
 	// sub click
-	$(".subListItem").live('vclick', function(){
+	$(".subListItem").live(iLepra.config.defaultTapEvent, function(){
 	    // show loader
 		$.mobile.showPageLoadingMsg();
 	

@@ -13,17 +13,17 @@
 	}
 	
     $("#layoutSwitchPage").live('pagecreate', function(){
-        $("#layoutBL").bind('vclick', function(){
+        $("#layoutBL").bind(iLepra.config.defaultTapEvent, function(){
             prepareReadyEvent();
             iLepra.switchLayout(1);
         });
         
-        $("#layoutAll").bind('vclick', function(){
+        $("#layoutAll").bind(iLepra.config.defaultTapEvent, function(){
             prepareReadyEvent();
             iLepra.switchLayout(0);
         });
         
-        $("#layoutSubL").bind('vclick', function(){
+        $("#layoutSubL").bind(iLepra.config.defaultTapEvent, function(){
             prepareReadyEvent();
             iLepra.switchLayout(2);
         });

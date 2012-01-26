@@ -26,7 +26,7 @@
 
     // render page on creation
 	$("#chatPage").live('pagecreate', function(){
-	    $("#submitChat").bind('vclick', function(){
+	    $("#submitChat").bind(iLepra.config.defaultTapEvent, function(){
             var text = $("#chatInput").val();
             $("#chatInput").val("");
             
@@ -63,7 +63,7 @@
 	    clearInterval( refreshInterval );
 	});
 	
-	$(".chatMessage").live('vclick', function(){
+	$(".chatMessage").live(iLepra.config.defaultTapEvent, function(){
 	    var username = $(this).data('user');
 	    
 	    $("#chatInput").val(username+": ");

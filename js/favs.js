@@ -19,7 +19,7 @@
             $("#moreFavsButton").hide();
         }else{
             // more posts click
-            $("#moreFavsButton").bind('vclick', function(){
+            $("#moreFavsButton").bind(iLepra.config.defaultTapEvent, function(){
                 var scroll = $(window).scrollTop();
                 
                 postLimit += postIncrement;

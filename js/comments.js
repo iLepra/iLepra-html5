@@ -27,7 +27,7 @@
 	
 	// on post comments show
 	$("#postCommentsPage").live('pagecreate', function(){
-	    $("#allComments").bind('vclick', function(){
+	    $("#allComments").bind(iLepra.config.defaultTapEvent, function(){
 	        $(this).addClass("ui-btn-active");
 	        $("#newComments").removeClass("ui-btn-active");
 	        type = "all";
@@ -38,7 +38,7 @@
             $("#commentsList").listview('refresh');
 	    });
 	    
-	    $("#newComments").bind('vclick', function(){
+	    $("#newComments").bind(iLepra.config.defaultTapEvent, function(){
     	    $(this).addClass("ui-btn-active");
 	        $("#allComments").removeClass("ui-btn-active");
 	        type = "new";
@@ -49,7 +49,7 @@
             $("#commentsList").listview('refresh');
 	    });
 	
-	    $("#addCommentButton").bind('vclick', function(){
+	    $("#addCommentButton").bind(iLepra.config.defaultTapEvent, function(){
             commentId = null;
             commentUser = null;
         
@@ -97,7 +97,7 @@
             $("#moreCommentsButton").hide();
         }else{
             // more posts click
-            $("#moreCommentsButton").bind('vclick', function(){
+            $("#moreCommentsButton").bind(iLepra.config.defaultTapEvent, function(){
                 var scroll = $(window).scrollTop();
                 
                 commentsLimit += commentsIncrement;
@@ -117,7 +117,7 @@
 	});
 	
 	// show comment menu
-	$(".postCommentItemMenu").live('vclick', function(e){
+	$(".postCommentItemMenu").live(iLepra.config.defaultTapEvent, function(e){
 		e.preventDefault();
 		
 		var voteMenu = $( $(".ui-selectmenu li")[2] );
@@ -144,7 +144,7 @@
 	// on add comment show
 	$("#addCommentPage").live('pagecreate', function(){
 	    // submit comment
-        $("#submitComment").bind('vclick', function(){
+        $("#submitComment").bind(iLepra.config.defaultTapEvent, function(){
             var commentText = $("#commentTextarea").val();
         
             // show loader
