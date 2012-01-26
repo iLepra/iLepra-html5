@@ -82,6 +82,10 @@ iLepra = (function() {
             }
         }
     };
+    
+    var isMobile = function(){
+            return navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(Android)|(webOS)|(PlayBook)/i) ? true : false;
+    }
 
 	// Define a local copy of iLepra
 	return {
@@ -100,7 +104,7 @@ iLepra = (function() {
 		config: {
 		    loadImages: true,
 		    screenBiggest: 0,
-		    defaultTapEvent: 'vclick' // vclick for test in browser, tap - for build on device
+		    defaultTapEvent: 'tap' // vclick for test in browser, tap - for build on device
 		}, 
 		
 		// 
@@ -150,6 +154,8 @@ iLepra = (function() {
 		init: function() {
 		    // detect device properties
 		    this.config.screenBiggest = window.screen.width > window.screen.height ? window.screen.width : window.screen.height;
+		    // detect platform and set default event
+		    if( isMobile() ) this.config.defaultTapEvent = 'tap';
 		    
 		    // get lepra
 			$.get("http://leprosorium.ru", function(data){
