@@ -20,6 +20,8 @@ iLepra = (function() {
         // replace all img tags to evade image loading while parsing
         data = data.replace(/<img/ig, '<nonimg');
     
+        // get mystuff wtf
+        iLepra.myStuffWTF = /mythingsHandler.wtf = '(.+?)'/g.exec(data)[1];
         // get chat wtf
         iLepra.chat.wtf = /chatHandler.wtf = '(.+?)'/g.exec(data)[1];
         // get username
@@ -138,6 +140,7 @@ iLepra = (function() {
 		
 		// mystuff data
 		myStuffPosts: null,
+		myStuffWTF: null, 
 		// fav data
 		favouritePosts: null,
 		// inbox data
@@ -277,10 +280,19 @@ iLepra = (function() {
 		 Gets my stuff posts
 		 ***/
 		getMyStuff: function(){
-			$.get("http://leprosorium.ru/my/", function(data){
-				iLepra.myStuffPosts = [];
-				iLepra.util.processHTMLPosts(data, iLepra.myStuffPosts, undefined);
-				$(document).trigger(iLepra.events.ready);
+		    // get only my latest stuff for 14 days
+			$.post("http://leprosorium.ru/my/", 
+			    {   
+			        numform:'1',
+			        run:'1',
+                    wtf:iLepra.myStuffWTF,
+                    what2see:'2',
+                    days:'14'
+			    },
+			    function(data){
+				    iLepra.myStuffPosts = [];
+				    iLepra.util.processHTMLPosts(data, iLepra.myStuffPosts, undefined);
+				    $(document).trigger(iLepra.events.ready);
 			});
 		},
 		
