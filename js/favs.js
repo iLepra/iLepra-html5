@@ -12,7 +12,7 @@
 	}
 
 	// render page on creation
-	$("#favsPage").live('pagecreate', function(){
+	$(document).on('pagecreate', "#favsPage", function(){
 		renderNewPosts();
 	    // hide button if needed
 	    if( postLimit >= iLepra.favouritePosts.length ){

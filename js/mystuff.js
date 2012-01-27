@@ -12,7 +12,7 @@
 	}
 
 	// render page on creation
-	$("#mystuffPage").live('pagecreate', function(){
+	$(document).on('pagecreate', "#mystuffPage", function(){
 	    renderNewPosts();
 	    // hide button if needed
 	    if( postLimit >= iLepra.myStuffPosts.length ){

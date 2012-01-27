@@ -12,7 +12,7 @@
 	}
 
 	// render page on creation
-	$("#postsPage").live('pagecreate', function(){
+	$(document).on('pagecreate', "#postsPage", function(){
 		renderNewPosts();
 		
 		// refresh
@@ -72,7 +72,7 @@
 	});
 
 	// show full post
-	$(".postListItem").live(iLepra.config.defaultTapEvent, function(){
+	$(document).on(iLepra.config.defaultTapEvent, "a.postListItem", function(){
 		currentPostId = $(this).data('id');
 		
 		// get selected post
@@ -117,7 +117,7 @@
 	});
 	
 	// render full post text
-	$("#fullPostPage").live('pagecreate', function(){
+	$(document).on('pagecreate', "#fullPostPage", function(){
 	    // on comments request
         $("#postCommentsButton").bind(iLepra.config.defaultTapEvent, function(){
             // show loader

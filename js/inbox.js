@@ -12,7 +12,7 @@
 	}
 
 	// render page on creation
-	$("#inboxPage").live('pagecreate', function(){
+	$(document).on('pagecreate', "#inboxPage", function(){
 		renderNewPosts();
 	    // hide button if needed
 	    if( postLimit >= iLepra.inboxPosts.length ){

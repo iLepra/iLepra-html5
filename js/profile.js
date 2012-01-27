@@ -1,5 +1,5 @@
 (function(){
-    $(".username").live(iLepra.config.defaultTapEvent, function(){
+    $(document).on(iLepra.config.defaultTapEvent, "a.username", function(){
         var name = $(this).text();
         
         $.mobile.showPageLoadingMsg();
@@ -11,7 +11,7 @@
     });
 
 	// render page on creation
-	$("#profilePage").live('pagecreate', function(){
+	$(document).on('pagecreate', "#profilePage", function(){
 	    var data = iLepra.profile.data;
 	    
 	    // set username

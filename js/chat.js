@@ -25,7 +25,7 @@
     }
 
     // render page on creation
-	$("#chatPage").live('pagecreate', function(){
+	$(document).on('pagecreate', "#chatPage", function(){
 	    $("#submitChat").bind(iLepra.config.defaultTapEvent, function(){
             var text = $("#chatInput").val();
             $("#chatInput").val("");
@@ -59,11 +59,11 @@
 		refreshInterval = setInterval ( "requestNewChatData()", 10000 );
 	});
 	
-	$("#chatPage").live("pagehide", function(){
+	$(document).on("pagehide", "#chatPage", function(){
 	    clearInterval( refreshInterval );
 	});
 	
-	$(".chatMessage").live(iLepra.config.defaultTapEvent, function(){
+	$(document).on(iLepra.config.defaultTapEvent, "a.chatMessage", function(){
 	    var username = $(this).data('user');
 	    
 	    $("#chatInput").val(username+": ");

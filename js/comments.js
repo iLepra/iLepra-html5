@@ -26,7 +26,7 @@
 	}
 	
 	// on post comments show
-	$("#postCommentsPage").live('pagecreate', function(){
+	$(document).on('pagecreate', "#postCommentsPage", function(){
 	    $("#allComments").bind(iLepra.config.defaultTapEvent, function(){
 	        $(this).addClass("ui-btn-active");
 	        $("#newComments").removeClass("ui-btn-active");
@@ -116,7 +116,7 @@
 	});
 	
 	// show comment menu
-	$(".postCommentItemMenu").live(iLepra.config.defaultTapEvent, function(e){
+	$(document).on(iLepra.config.defaultTapEvent, "a.postCommentItemMenu", function(e){
 		e.preventDefault();
 		
 		var voteMenu = $( $(".ui-selectmenu li")[2] );
@@ -141,7 +141,7 @@
 	
 	
 	// on add comment show
-	$("#addCommentPage").live('pagecreate', function(){
+	$(document).on('pagecreate', "#addCommentPage", function(){
 	    // submit comment
         $("#submitComment").bind(iLepra.config.defaultTapEvent, function(){
             var commentText = $("#commentTextarea").val();

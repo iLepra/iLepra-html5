@@ -43,7 +43,7 @@ window.addEventListener('load', function(){
 		}
 	});
 	
-	$("#loginPage").live("pagecreate", function(){
+	$(document).on("pagecreate", "#loginPage", function(){
 		// load captcha
 		$("#captchaImage").attr('src', iLepra.captchaURL);
 		

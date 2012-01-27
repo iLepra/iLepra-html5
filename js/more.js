@@ -1,5 +1,5 @@
 (function(){
-    $("#morePage").live('pagecreate', function(){
+    $(document).on('pagecreate', "#morePage", function(){
         $("#favsButton").bind(iLepra.config.defaultTapEvent, function(){
             $.mobile.showPageLoadingMsg();
             $(document).bind(iLepra.events.ready, function(event){

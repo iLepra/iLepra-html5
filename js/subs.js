@@ -2,7 +2,7 @@ $(window).load(function(){
     var subName = null;
 
 	// render page on creation
-	$("#subsPage").live('pagecreate', function(){
+	$(document).on('pagecreate', "#subsPage", function(){
 	    // render posts
 	    var p = "";
 	    for(var i = 0; i < iLepra.sub.list.length; i++)
@@ -11,7 +11,7 @@ $(window).load(function(){
 	});
 	
 	// sub click
-	$(".subListItem").live(iLepra.config.defaultTapEvent, function(){
+	$(document).on(iLepra.config.defaultTapEvent, "a.subListItem", function(){
 	    // show loader
 		$.mobile.showPageLoadingMsg();
 	
@@ -28,7 +28,7 @@ $(window).load(function(){
 		iLepra.sub.getPosts(url);
 	});
 	
-	$("#subpostsPage").live('pagecreate', function(){
+	$(document).on('pagecreate', "#subpostsPage", function(){
 	    // render posts
 	    var p = "";
 	    for(var i = 0; i < iLepra.sub.posts.length; i++)

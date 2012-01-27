@@ -10,7 +10,7 @@
 		});
 	}
 	
-    $("#layoutSwitchPage").live('pagecreate', function(){
+    $(document).on('pagecreate', "#layoutSwitchPage", function(){
         $("#layoutBL").bind(iLepra.config.defaultTapEvent, function(){
             prepareReadyEvent();
             iLepra.switchLayout(1);
