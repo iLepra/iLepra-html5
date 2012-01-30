@@ -1,3 +1,16 @@
+/* don't allow callout opening */
+body { 
+    -webkit-touch-callout: none;
+}
+
+/* undo text selection everywhere but inputs */
+*:not(input):not(textarea):not(select),
+input[type=image],input[type=file],input[type=submit],
+input[type=button],input[type=reset] {
+    -webkit-user-select: none;
+}
+
+/* autosize images but not more than screen size */
 img {
 	max-width: 100% !important;
     max-height: 100% !important;
@@ -5,12 +18,10 @@ img {
     height: auto !important;
 }
 
+/* limit size of thumb in list */
 .postThumb {
-	/*width:100px; 
-	height:100px;*/
 	max-width: 80px !important;
 	max-height: 80px !important;
-	/*clip: rect(0px 80px 80px 0px);*/
 }
 
 .commentText {
