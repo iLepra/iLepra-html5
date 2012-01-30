@@ -10,11 +10,13 @@ $( document ).bind( "mobileinit", function() {
 //document.addEventListener("deviceready", function(){
 //$(document).ready(function(){
 window.addEventListener('load', function(){
+    // jquery mobile stuff
     $.mobile.page.prototype.options.backBtnText = "Назад";
     $.mobile.fixedtoolbar.prototype.options.tapToggle = false;
     $.mobile.defaultPageTransition = 'none';
     $.mobile.defaultDialogTransition = 'none';
     
+    ////////
     var getLatestPosts = function(fromIndex){
 	    if( typeof fromIndex == 'undefined' ) fromIndex = false;
 		// on posts data

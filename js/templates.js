@@ -1,7 +1,9 @@
 var postTemplate = '\
             <li>\
 				<a href="#" class="postListItem" data-id="<%= id %>">\
-					<% if(iLepra.config.loadImages){ %><img src="<%= image %>" class="postThumb" /><% } %>\
+					<% if(iLepra.config.loadImages){ %>\
+					<img src="<%= image %>" class="postThumb" />\
+					<% } %>\
 					<h3><%= text %></h3>\
 					<p><strong><%= wrote %></strong></p>\
 					<p><%= when %> <% if(domain_url != ""){ %> / <%= domain_url %> <% } %></p>\
