@@ -9,26 +9,34 @@ img {
     width: 100% !important;
 }
 
-ul > li {
-    height: auto !important;
+.postItem {
+    width: 100%;
+    height: auto;
+    max-height: 150px;
+    min-height: 100px;
 }
 
 .postThumb {
+    position: relative;
+    max-width: 80px;
+    max-height: 80px;
     float: left;
-    width: 80px;
-    height: 80px;
+    padding-right: 5px;
 }
 
 .postBody {
-    margin-left: 80px;
+    position: relative;
+    width: 85%;
+    height: 100%;
     float: left;
-    margin-top: -75px;
-    margin-right: 20px;
+    margin-left: 2px;
 }
 
 .postBody a {
     text-decoration: none;
     color: white;
+    float: left;
+    width: 65%;
 }
 
 .postInfo {
@@ -37,11 +45,8 @@ ul > li {
 }
 
 .postRating {
-    right: 4px;
-    background-color: white;
-    color: black;
-    -webkit-border-radius: 2px;
-    padding: 1px;
-    position: absolute;
-    top: 40px;
+    position: relative;
+    width: 15%;
+    display: inline;
+    height: 100%;
 }

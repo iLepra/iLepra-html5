@@ -59,7 +59,7 @@ iLepra = (function() {
                     res = imgReg.exec(posts[i].body);
                 }
             }else{
-                img = "../css/img/placeholder.png";
+                img = "";
             }
             var text = posts[i].body.replace(/(<([^>]+)>)/ig," ").substr(0, 128) + "...";
             

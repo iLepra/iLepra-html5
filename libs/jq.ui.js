@@ -1,5 +1,5 @@
 /**
- * $.ui - A User Interface library for creating jQ.Mobi applications
+ * $.ui - A User Interface library for creating jqMobi applications
  * 
  * @copyright 2011 - AppMobi
  */
@@ -251,9 +251,10 @@ $.ui = (function () {
 
             tmp.title = null;
             tmp.id = null;
-            tmp.className = null;
+            $(tmp).removeClass("panel");
             myDiv.appendChild(tmp);
 
+			myDiv.className="panel"
             this.content.appendChild(myDiv);
             this.updateAnchors(tmp);
 
