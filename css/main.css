@@ -85,3 +85,12 @@ img {
     height: 90% !important;
     padding-top: 5px;
 }
+
+.splashScreen {
+    background: #7d7e7d; /* Old browsers */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#7d7e7d), color-stop(100%,#0e0e0e)); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover, #7d7e7d 0%,#0e0e0e 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(center, ellipse cover, #7d7e7d 0%,#0e0e0e 100%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover, #7d7e7d 0%,#0e0e0e 100%); /* IE10+ */
+    background: radial-gradient(center, ellipse cover, #7d7e7d 0%,#0e0e0e 100%); /* W3C */
+}
