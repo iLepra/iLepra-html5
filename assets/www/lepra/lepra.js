@@ -106,7 +106,7 @@ iLepra = (function() {
 		config: {
 		    loadImages: true,
 		    screenBiggest: 0,
-		    defaultTapEvent: 'tap' // vclick for test in browser, tap - for build on device
+		    defaultTapEvent: 'tap'
 		}, 
 		
 		// 
@@ -158,7 +158,7 @@ iLepra = (function() {
 		    // detect device properties
 		    this.config.screenBiggest = window.screen.width > window.screen.height ? window.screen.width : window.screen.height;
 		    // detect platform and set default event
-		    if( isMobile() ) this.config.defaultTapEvent = 'tap';
+		    //if( isMobile() ) this.config.defaultTapEvent = 'tap';
 		    
 		    // get lepra
 			$.get("http://leprosorium.ru", function(data){

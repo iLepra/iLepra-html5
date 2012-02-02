@@ -7,9 +7,9 @@ $( document ).bind( "mobileinit", function() {
 });
 
 // fired up when phonegap is ready - this requires a phonegap.js file :|
-//document.addEventListener("deviceready", function(){
+document.addEventListener("deviceready", function(){
 //$(document).ready(function(){
-window.addEventListener('load', function(){
+//window.addEventListener('load', function(){
     // jquery mobile stuff
     $.mobile.page.prototype.options.backBtnText = "Назад";
     $.mobile.fixedtoolbar.prototype.options.tapToggle = false;
@@ -94,4 +94,4 @@ window.addEventListener('load', function(){
 	
 	// Init iLepra class
 	iLepra.init();
-});
+}, false);
