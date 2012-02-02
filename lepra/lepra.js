@@ -181,6 +181,8 @@ iLepra = (function() {
 		 Tries logging in with given data
 		 ***/
 		tryLogin: function(data){
+            data.logincode = this.loginCode;
+
 			$.post("http://leprosorium.ru/login/", data, function(data){
 				if(data.indexOf('class="error"') > 0){
 					// get error
