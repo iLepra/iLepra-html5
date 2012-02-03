@@ -18,17 +18,7 @@
 		<a href="#" id="postCommentsButton" data-role="button">Комментарии</a>
 	</div>
 	
-	<div data-role="content" id="postCommentsContent" style="display:none; padding-top: 0px;">
-		<!-- popup menu in hidden div -->
-		<div style="display:none;">
-			<select id="commentMenu" data-native-menu="false">
-				<option>Что делать?</option>
-				<option value="reply">Ответить</option>
-				<option value="plus">Мне нравится</option>
-				<option value="minus">Не нравится</option>
-			</select>
-		</div>
-	
+	<div data-role="content" id="postCommentsContent" style="display:none; padding-top: 0px;">	
 	    <!-- new / all selector -->
 	    <div data-role="controlgroup" data-type="horizontal">
             <a href="#" id="allComments" data-role="button" data-theme="a" class="ui-btn-active">Все</a>
@@ -37,7 +27,7 @@
         <br/>
 	    	
 	    <!-- comments list -->
- 		<ul data-role="listview" id="commentsList" data-icon="false" data-divider-theme="a">
+ 		<ul data-role="listview" id="commentsList" data-icon="false" data-split-icon="false" data-divider-theme="a">
 		</ul>
 		
 		<br/>

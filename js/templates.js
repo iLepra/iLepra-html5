@@ -31,8 +31,13 @@ var subsTemplate = '\
             </li>';
 			
 var commentTemplate = '\
-			<li <% if (isNew == 1){ %>data-theme="d"<% } %> >\
+			<li data-id="<%= id %>" data-user="<%= user %>" <% if (isNew == 1){ %>data-theme="d"<% } %> >\
 				<p class="commentText"><%= text %></p>\
+				<div style="display:none;" class="commentsMenu">\
+					<a href="#" class="reply"><img src="../css/img/reply_32.png" /></a>\
+					<a href="#" class="voteup" style="float:right;"><img src="../css/img/voteup_32.png" /></a>\
+					<a href="#" class="votedown" style="float:right;"><img src="../css/img/votedown_32.png" /></a>\
+				</div>\
 			</li>\
 			<li data-role="list-divider" class="postInfo">\
 				<img />\

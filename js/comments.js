@@ -1,4 +1,6 @@
 (function(){
+	// autorender comments
+	var autorender = false;
     // pagination & display stuff 
 	var commentsIncrement = 10;
     var commentsLimit = 10;
@@ -103,54 +105,50 @@
             });
         });
         
-        // on comment option pick
-        $("#commentMenu").bind("change", function(event, ui) {
-            var value = $('#commentMenu').val();
-            
-            // remove selection
-            $( $(".ui-selectmenu-list .ui-btn-active")[0] ).removeClass('ui-btn-active');
-            
-            switch(value){
-                case 'reply':			
-                    $.mobile.changePage("post_addcomment.html", {
-                        role: "dialog", 
-                        transition: "slidedown", 
-                        inline: "true"
-                    });
-                    break;	
-                
-                case 'plus':
-                    iLepra.post.voteComment(commentId, "1");
-                    break;
-                    
-                case 'minus':
-                    iLepra.post.voteComment(commentId, "-1");
-                    break;
-            }
+		if(autorender){
+			$("#postCommentsButton").hide();
+			$("#postCommentsContent").show();	
+			
+			// render comments
+			renderNewComments();
+			
+			autorender = false;
+		}
+	});
+	
+	// on comment option pick
+    $(document).on(iLepra.config.defaultTapEvent, "div.commentsMenu a.reply", function(event) {
+		autorender = true;
+		$.mobile.changePage("post_addcomment.html", {
+            role: "dialog", 
+            transition: "slidedown", 
+            inline: "true"
         });
+	});
+	$(document).on(iLepra.config.defaultTapEvent, "div.commentsMenu a.voteup", function(event) {
+		iLepra.post.voteComment(commentId, "1");
+	});
+	$(document).on(iLepra.config.defaultTapEvent, "div.commentsMenu a.votedown", function(event) {
+		iLepra.post.voteComment(commentId, "-1");
 	});
 	
 	// show comment menu
-	$(document).on(iLepra.config.defaultTapEvent, "a.postCommentItemMenu", function(e){
+	$(document).on(iLepra.config.defaultTapEvent, "#commentsList li", function(e){
 		e.preventDefault();
-		
-		var voteMenu = $( $(".ui-selectmenu li")[2] );
-		
-		if( iLepra.post.current.type == "inbox" && voteMenu.is(':visible') ){
-		    voteMenu.hide().next().hide();
-		}else if( !voteMenu.is(':visible') ){
-    		voteMenu.show().next().show();
-		}
 		
 		commentId = $(this).data('id');
 		commentUser = $(this).data('user');
 		
-		// open menu
-		$('#commentMenu').selectmenu('open');
-		// position menu near click
-		var top = $(this).offset().top + $(".ui-selectmenu").height() / 4;
-		if( top < 50 ) top = 50;
-		$(".ui-selectmenu").css('left', '').css('right', '50px').css('top', top+'px');
+		$(".commentsMenu").hide();
+		var menu = $("div.commentsMenu", this);
+		menu.show();
+		
+		var votes = $(menu.find('a')[1]);
+		if( iLepra.post.current.type == "inbox" && votes.is(':visible') ){
+			votes.hide().next().hide();
+		}else if( !votes.is(':visible') ){
+			votes.show().next().show();
+		}
 	});
 	
 	
@@ -181,7 +179,7 @@
                 $(document).unbind(event);
                 $(document).unbind(iLepra.events.error);
                 // change page
-                $.mobile.changePage("post_comments.html");
+                $.mobile.changePage("post_full.html");
             });
         
             iLepra.post.addComment(commentText, commentId);
