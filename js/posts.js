@@ -139,7 +139,7 @@
 		$("#postTitle").text( iLepra.post.current.body.replace(/(<([^>]+)>)/ig,"").substr(0, 64) );
 		
 		// render additional info
-		$("#postUser").text(iLepra.post.current.username);
+		$("#postUser").text(iLepra.post.current.user);
 		$("#postComments").text(iLepra.post.current.comments);
 		$("#postTime").text(iLepra.post.current.when);
 		$("#postRating").text(iLepra.post.current.rating);
