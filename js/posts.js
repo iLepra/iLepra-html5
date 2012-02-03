@@ -139,9 +139,10 @@
 		$("#postTitle").text( iLepra.post.current.body.replace(/(<([^>]+)>)/ig,"").substr(0, 64) );
 		
 		// render additional info
-		// Написал мелом судьбы NotJust в | 46036 games.leprosorium.ru, 12.01.2012 в 23.28 | 96 комментариев / 96 новых | x
-		var add = iLepra.post.current.wrote + ", " + iLepra.post.current.when + " | " + iLepra.post.current.comments;
-		$("#postAdditional").html( add )
+		$("#postUser").text(iLepra.post.current.username);
+		$("#postComments").text(iLepra.post.current.comments);
+		$("#postTime").text(iLepra.post.current.when);
+		$("#postRating").text(iLepra.post.current.rating);
 	});
 	
 	

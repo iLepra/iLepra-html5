@@ -8,7 +8,7 @@ var postTemplate = '\
 					<p><% if(domain_url != ""){ %><%= domain_url %> <% } %></p>\
 				</a>\
 			</li>\
-			<li data-role="list-divider" style="font-weight: normal; padding: 2px;" data-has-thumb="false">\
+			<li data-role="list-divider" class="postInfo">\
 				<img />\
 				<b><%= user %></b>, \
 				<span style="font-size:80%;"><img src="../css/img/comment_16.png" class="iconImage" /> <%= comments %>,\

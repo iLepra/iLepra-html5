@@ -98,9 +98,14 @@ img {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5c0202', endColorstr='#000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
-/* post icons */
+/* post styling */
 .iconImage {
 	max-width: 12px !important;
 	vertical-align: middle;
+}
+
+.postInfo {
+	font-weight: normal; 
+	padding: 2px;
 }
 
