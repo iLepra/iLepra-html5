@@ -52,10 +52,12 @@ var commentTemplate = '\
 			</li>';
 			
 var chatTemplate = '\
-            <li>\
-                <a href="#" class="chatMessage" data-user="<%= user_login %>">\
-                    <h1 class="commentText"><%= body %></h1>\
-                    <p><%= user_login %></p>\
-                    <p class="ui-li-count"><%= createdate %></p>\
+            <li data-icon="false">\
+                <a href="#" class="chatMessage commentText" data-user="<%= user_login %>">\
+					<%= body %>\
                 </a>\
-            </li>';
+            </li>\
+			<li data-role="list-divider" class="postInfo">\
+				<b><%= user_login %></b>, \
+				<%= createdate %></span>\
+			</li>';
