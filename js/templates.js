@@ -1,19 +1,24 @@
 var postTemplate = '\
             <li data-icon="false">\
 				<a href="#" class="postListItem" data-id="<%= id %>">\
-					<% if(iLepra.config.loadImages){ %>\
+					<% if(iLepra.config.loadImages && image.length > 0){ %>\
 					<img src="<%= image %>" class="postThumb" />\
 					<% } %>\
-					<h3 style="white-space:normal;"><%= text %></h3>\
-					<p>\
-					    <%= user %>, \
-					    <%= when %>\
-					    <% if(rating != undefined && rating.length > 0 && rating != 0){ %>, \
-					        <span style="color: darkblue;"><%= rating %></span>\
-					    <% } %>\
-					</p>\
-					<p><%= comments %><% if(domain_url != ""){ %>, <%= domain_url %> <% } %></p>\
+					<h3 style="white-space:normal; font-weight:normal;"><%= text %></h3>\
+					<p><% if(domain_url != ""){ %><%= domain_url %> <% } %></p>\
 				</a>\
+			</li>\
+			<li data-role="list-divider" style="font-weight: normal; padding: 2px;" data-has-thumb="false">\
+				<img />\
+				<b><%= user %></b>, \
+				<span style="font-size:80%;"><img src="../css/img/comment_16.png" class="iconImage" /> <%= comments %>,\
+				<%= when %></span>\
+				<% if(rating != undefined && rating.length > 0 && rating != 0){ %>, \
+			        <span style="font-weight: bold; color: \
+					<% if( rating >= 0 ){ %>lawngreen<% }else{ %>\
+						white<% } %>\
+					"><%= rating %></span> \
+			    <% } %>\
 			</li>';
 			            
 var subsTemplate = '\

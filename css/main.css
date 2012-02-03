@@ -86,6 +86,7 @@ img {
     padding-top: 5px;
 }
 
+/* splash screen bg */
 .splashScreen {
     background: #5c0202; /* Old browsers */
     background: -moz-radial-gradient(center, ellipse cover, #5c0202 0%, #220000 37%, #000000 100%); /* FF3.6+ */
@@ -96,3 +97,10 @@ img {
     background: radial-gradient(center, ellipse cover, #5c0202 0%,#220000 37%,#000000 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5c0202', endColorstr='#000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
+
+/* post icons */
+.iconImage {
+	max-width: 12px !important;
+	vertical-align: middle;
+}
+

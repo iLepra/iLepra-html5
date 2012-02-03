@@ -63,10 +63,11 @@ iLepra = (function() {
                 
                     res = imgReg.exec(posts[i].body);
                 }
-            }else{
-                img = "../css/img/placeholder.png";
-            }
-            var text = posts[i].body.replace(/(<([^>]+)>)/ig," ").substr(0, 128) + "...";
+            }/*else{
+                img = ''//"../css/img/placeholder.png";
+            }*/
+            var text = posts[i].body.replace(/(<([^>]+)>)/ig," ").substr(0, 140);
+			if(text.length == 140) text += "..";
             
             post.id = posts[i].id;
             post.body = posts[i].body;
@@ -75,7 +76,7 @@ iLepra = (function() {
             post.image = img;
             post.text = text;
             post.user = posts[i].login;
-            post.comments = "Комментарии: " + posts[i].comm_count + " / " + posts[i].unread;
+            post.comments = posts[i].comm_count + " / " + posts[i].unread;
             post.wrote = (posts[i].gender == 1 ? "Написал " : "Написала ") + posts[i].user_rank + " " +posts[i].login;
             post.when = posts[i].textdate + " в " + posts[i].posttime;
         

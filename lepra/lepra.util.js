@@ -30,10 +30,13 @@ iLepra.util = (function() {
                         
                             res = imgReg.exec(body);
                         }
-                    }else{
-                        img = "../css/img/placeholder.png";
-                    }
-                    var text = body.replace(/(<([^>]+)>)/ig," ").substr(0, 128) + "...";
+                    }/*else{
+                        img = '';//"../css/img/placeholder.png";
+                    }*/
+                    var text = body.replace(/(<([^>]+)>)/ig," ").substr(0, 140);
+					if(text.length == 140) text += "..";
+					
+					var comments = wroteFull[1].replace(/комментар.+? /, '').replace(/новы.+?/, '');
                     
                     var post = {
                         id: data.id.replace('p', ''),
@@ -43,7 +46,7 @@ iLepra.util = (function() {
                         domain_url: $(".sub_domain_url", data).text(),
                         wrote: wrote,
                         when: wroteTime[1],
-                        comments: wroteFull[1],
+                        comments: comments,
                         image: img,
                         text: text,
                         type: type

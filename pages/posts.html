@@ -1,5 +1,5 @@
 <div data-role="page" id="postsPage">
-	<div data-role="header" data-position="fixed">
+	<div data-role="header">
 		<a href="#" id="refreshPostsButton" data-role="button" data-icon="refresh" data-iconpos="notext">Refresh</a>
 		<h1>Последние посты</h1>
 		<!-- data-transition="slidedown" -->
@@ -9,8 +9,7 @@
 	</div>
 
 	<div data-role="content">
-		<ul data-role="listview" id="postsList">
-		    <li data-role="divider" class="pull_to_refresh" style="display:none">Pull to refresh</li>
+		<ul data-role="listview" id="postsList" data-divider-theme="a">
 		</ul>
 		<br/>
 		<a href="#" data-role="button" id="morePostsButton">Еще? Еще!</a>
