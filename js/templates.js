@@ -32,12 +32,18 @@ var subsTemplate = '\
 			
 var commentTemplate = '\
 			<li <% if (isNew == 1){ %>data-theme="d"<% } %> >\
-				<a>\
-					<p class="commentText"><%= text %></p>\
-					<p><%= wrote %></p> \
-					<p class="ui-li-count"><%= rating %></p>\
-				</a>\
-				<a href="#" class="postCommentItemMenu" data-id="<%= id %>" data-user="<%= user %>">split</a>\
+				<p class="commentText"><%= text %></p>\
+			</li>\
+			<li data-role="list-divider" class="postInfo">\
+				<img />\
+				<b><%= user %></b>, \
+				<%= when %></span>\
+				<% if(rating != undefined && rating.length > 0 && rating != 0){ %>, \
+			        <span style="font-weight: bold; color: \
+					<% if( rating >= 0 ){ %>lawngreen<% }else{ %>\
+						white<% } %>\
+					"><%= rating %></span> \
+			    <% } %>\
 			</li>';
 			
 var chatTemplate = '\

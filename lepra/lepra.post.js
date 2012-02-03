@@ -41,7 +41,10 @@ iLepra.post = (function() {
 					var data = $(item);
 					var add = $(".dd .p", data);
 					var text = $(".dt", data).html();
-					var wrote = add.text().replace(/\s\s+/gi, "").split("|")[0];
+					//text = text.replace(/<.*?a.+?>/, "");
+					var wroteFull = add.text().replace(/\s\s+/gi, "").split("|")[0];
+					var wrote = wroteFull.split(",")[0];
+					var when = wroteFull.split(",")[1];
 					
 					// replace images with compressed ones
                     var imgReg = /nonimg src="(.+?)"/g
@@ -50,6 +53,11 @@ iLepra.post = (function() {
                         text = text.replace(res[1], "http://src.sencha.io/"+iLepra.config.screenBiggest+"/"+res[1]);
                         res = imgReg.exec(text);
                     }
+					
+					// revert images back
+					text = text.replace(/<p.*?>/gi, '');
+					text = text.replace(/<\/p>/gi, '');
+					text = text.replace(/<nonimg/ig, '<img');
                     
 					var post = {
 						id: data.attr('id'),
@@ -57,7 +65,8 @@ iLepra.post = (function() {
 						text: text,
 						rating: $(".rating", data).text(),
 						user: $( $("a", add)[1] ).text(),
-						wrote: wrote
+						wrote: wrote,
+						when: when
 					};
 					
 					iLepra.post.comments.push(post);
