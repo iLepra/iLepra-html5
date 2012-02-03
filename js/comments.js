@@ -26,7 +26,50 @@
 	}
 	
 	// on post comments show
-	$(document).on('pagecreate', "#postCommentsPage", function(){
+	$(document).on('pagecreate', "#fullPostPage", function(){
+		// on comments request
+        $("#postCommentsButton").bind(iLepra.config.defaultTapEvent, function(){
+            // show loader
+            $.mobile.showPageLoadingMsg();
+        
+            // on posts data
+            $(document).bind(iLepra.events.ready, function(event){
+                $(document).unbind(event);
+                //$.mobile.changePage("post_comments.html");
+				$.mobile.hidePageLoadingMsg();
+				$("#postCommentsButton").hide();
+				$("#postCommentsContent").show();	
+				
+				// render comments
+				renderNewComments();
+				$("#commentsList").listview('refresh');
+
+				// hide button if needed
+			    if( commentsLimit >= iLepra.post.comments.length ){
+		            $("#moreCommentsButton").hide();
+		        }else{
+		            // more posts click
+		            $("#moreCommentsButton").bind(iLepra.config.defaultTapEvent, function(event){
+		                // stops event to prevent random post opening
+		                event.preventDefault();
+		                event.stopPropagation();
+
+		                commentsLimit += commentsIncrement;
+		                if( commentsLimit >= iLepra.post.comments.length ){
+		                    $("#moreCommentsButton").hide();
+		                }
+
+		                // clean old data
+		                $("#commentsList").empty();
+				        renderNewComments();
+		                $("#commentsList").listview('refresh');
+		            });
+		        }	
+            });
+        
+            iLepra.post.getComments();
+        });
+		
 	    $("#allComments").bind(iLepra.config.defaultTapEvent, function(){
 	        $(this).addClass("ui-btn-active");
 	        $("#newComments").removeClass("ui-btn-active");
@@ -85,34 +128,6 @@
                     break;
             }
         });
-	
-		// render title
-		$("#postCommentsTitle").text( iLepra.post.current.body.replace(/(<([^>]+)>)/ig,"").substr(0, 64) );
-		
-		// render comments
-		renderNewComments();
-		
-		// hide button if needed
-	    if( commentsLimit >= iLepra.post.comments.length ){
-            $("#moreCommentsButton").hide();
-        }else{
-            // more posts click
-            $("#moreCommentsButton").bind(iLepra.config.defaultTapEvent, function(event){
-                // stops event to prevent random post opening
-                event.preventDefault();
-                event.stopPropagation();
-                
-                commentsLimit += commentsIncrement;
-                if( commentsLimit >= iLepra.post.comments.length ){
-                    $("#moreCommentsButton").hide();
-                }
-                    
-                // clean old data
-                $("#commentsList").empty();
-		        renderNewComments();
-                $("#commentsList").listview('refresh');
-            });
-        }
 	});
 	
 	// show comment menu

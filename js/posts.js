@@ -118,20 +118,6 @@
 	
 	// render full post text
 	$(document).on('pagecreate', "#fullPostPage", function(){
-	    // on comments request
-        $("#postCommentsButton").bind(iLepra.config.defaultTapEvent, function(){
-            // show loader
-            $.mobile.showPageLoadingMsg();
-        
-            // on posts data
-            $(document).bind(iLepra.events.ready, function(event){
-                $(document).unbind(event);
-                $.mobile.changePage("post_comments.html");
-            });
-        
-            iLepra.post.getComments();
-        });
-	
 		// render html
 		$("#postContent").html(iLepra.post.current.body);
 		
