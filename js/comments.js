@@ -112,6 +112,28 @@
 			// render comments
 			renderNewComments();
 			
+			// hide button if needed
+		    if( commentsLimit >= iLepra.post.comments.length ){
+	            $("#moreCommentsButton").hide();
+	        }else{
+	            // more posts click
+	            $("#moreCommentsButton").bind(iLepra.config.defaultTapEvent, function(event){
+	                // stops event to prevent random post opening
+	                event.preventDefault();
+	                event.stopPropagation();
+
+	                commentsLimit += commentsIncrement;
+	                if( commentsLimit >= iLepra.post.comments.length ){
+	                    $("#moreCommentsButton").hide();
+	                }
+
+	                // clean old data
+	                $("#commentsList").empty();
+			        renderNewComments();
+	                $("#commentsList").listview('refresh');
+	            });
+	        }
+			
 			autorender = false;
 		}
 	});
