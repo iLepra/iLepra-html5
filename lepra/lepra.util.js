@@ -33,8 +33,8 @@ iLepra.util = (function() {
                     }/*else{
                         img = '';//"../css/img/placeholder.png";
                     }*/
-                    var text = body.replace(/(<([^>]+)>)/ig," ").substr(0, 140);
-					if(text.length == 140) text += "..";
+                    var text = body.replace(/(<([^>]+)>)/ig," ").substr(0, 256);
+					if(text.length == 256) text += "..";
 					
 					var comments = wroteFull[1].replace(/комментар.+? /, '').replace(/новы.+?/, '');
                     

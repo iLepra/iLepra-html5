@@ -66,8 +66,8 @@ iLepra = (function() {
             }/*else{
                 img = ''//"../css/img/placeholder.png";
             }*/
-            var text = posts[i].body.replace(/(<([^>]+)>)/ig," ").substr(0, 140);
-			if(text.length == 140) text += "..";
+            var text = posts[i].body.replace(/(<([^>]+)>)/ig," ").substr(0, 256);
+			if(text.length == 256) text += "..";
             
             post.id = posts[i].id;
             post.body = posts[i].body;
