@@ -8,6 +8,10 @@
 
 	<rim:orientation mode="auto"/>
 	
+	<access uri="http://www.leprosorium.ru" subdomains="true">
+	   <feature id="blackberry.app.event" required="true" version="1.0.0"/>
+	</access>
+	
 	<icon src="assets/icon.png"/>
 
 	<content src="index.html"/>
