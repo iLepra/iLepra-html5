@@ -59,6 +59,17 @@ iLepra.post = (function() {
 					text = text.replace(/<p.*?>/gi, '');
 					text = text.replace(/<\/p>/gi, '');
 					text = text.replace(/<nonimg/ig, '<img');
+					
+					var vote = 0;
+					var voted = $(".voted", data);
+					if( typeof voted != 'undefined' ){
+						voted = voted.text();
+						if(voted == "+"){
+							vote = 1;
+						}else if(voted == "-"){
+							vote = -1;
+						}
+					}
                     
 					var post = {
 						id: data.attr('id'),
@@ -67,7 +78,8 @@ iLepra.post = (function() {
 						rating: $(".rating", data).text(),
 						user: $( $("a", add)[1] ).text(),
 						wrote: wrote,
-						when: when
+						when: when,
+						vote: vote
 					};
 					
 					iLepra.post.comments.push(post);

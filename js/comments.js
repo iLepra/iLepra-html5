@@ -148,9 +148,13 @@
         });
 	});
 	$(document).on(iLepra.config.defaultTapEvent, "div.commentsMenu a.voteup", function(event) {
+		$(this).css('opacity', 1);
+		$(this).next().css('opacity', 0.3);
 		iLepra.post.voteComment(commentId, "1");
 	});
 	$(document).on(iLepra.config.defaultTapEvent, "div.commentsMenu a.votedown", function(event) {
+		$(this).prev().css('opacity', 0.3);
+		$(this).css('opacity', 1);
 		iLepra.post.voteComment(commentId, "-1");
 	});
 	
