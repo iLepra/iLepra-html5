@@ -11,7 +11,13 @@ var postTemplate = '\
 			<li data-role="list-divider" class="postInfo" data-user="<%= user %>">\
 				<img />\
 				<b><%= user %></b>, \
-				<span style="font-size:80%;"><img src="../css/img/comment_16.png" class="iconImage" /> <%= comments %>,\
+				<span style="font-size:80%;">\
+				<img src="../css/img/comment_16.png" class="iconImage" />\
+				<% if(comments.indexOf("/") != -1){ %>\
+				<b><%= comments %></b>,\
+				<% }else{ %>\
+				<%= comments %>,\
+				<% } %>\
 				<%= when %></span>\
 				<% if(rating != undefined && rating.length > 0 && rating != 0){ %>, \
 			        <span style="font-weight: bold; color: \
