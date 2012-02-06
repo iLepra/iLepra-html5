@@ -43,8 +43,9 @@ iLepra.post = (function() {
 					var text = $(".dt", data).html();
 					//text = text.replace(/<.*?a.+?>/, "");
 					var wroteFull = add.text().replace(/\s\s+/gi, "").split("|")[0];
-					var wrote = wroteFull.split(",")[0];
-					var when = wroteFull.split(",")[1];
+					wroteFull = wroteFull.split(",");
+					var wrote = wroteFull[wroteFull.length-2];
+					var when = wroteFull[wroteFull.length-1];
 					
 					// replace images with compressed ones
                     var imgReg = /nonimg src="(.+?)"/g

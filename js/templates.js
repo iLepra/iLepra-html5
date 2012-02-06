@@ -8,7 +8,7 @@ var postTemplate = '\
 					<p><% if(domain_url != ""){ %><%= domain_url %> <% } %></p>\
 				</a>\
 			</li>\
-			<li data-role="list-divider" class="postInfo">\
+			<li data-role="list-divider" class="postInfo" data-user="<%= user %>">\
 				<img />\
 				<b><%= user %></b>, \
 				<span style="font-size:80%;"><img src="../css/img/comment_16.png" class="iconImage" /> <%= comments %>,\
@@ -39,7 +39,7 @@ var commentTemplate = '\
 					<a href="#" class="votedown" style="float:right;"><img src="../css/img/votedown_32.png" /></a>\
 				</div>\
 			</li>\
-			<li data-role="list-divider" class="postInfo">\
+			<li data-role="list-divider" class="postInfo" data-user="<%= user %>">\
 				<img />\
 				<b><%= user %></b>, \
 				<%= when %></span>\
