@@ -117,7 +117,7 @@ iLepra.post = (function() {
 				}else{
 					iLepra.post.getComments();
 				}
-			});
+			}).error(function(){ iLepra.post.addComment(comment, inReplyTo); });
 		},
 		
 		// vote for comment
@@ -139,7 +139,7 @@ iLepra.post = (function() {
 			}
 			
 			// post
-			$.post(url, data, function(data){});
+			$.post(url, data, function(data){}).error(function(){ iLepra.post.voteComment(commentId, value); });
 		}
 	};
 })();

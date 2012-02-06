@@ -1,8 +1,8 @@
 // jqm presets
 $( document ).bind( "mobileinit", function() {
-	$.support.cors = true;
-    $.mobile.allowCrossDomainPages = true;
-    $.mobile.pushStateEnabled = false;
+	//$.support.cors = true;
+    //$.mobile.allowCrossDomainPages = true;
+    //$.mobile.pushStateEnabled = false;
     $.loadingMessage = "";
 });
 
@@ -10,6 +10,10 @@ $( document ).bind( "mobileinit", function() {
 //document.addEventListener("deviceready", function(){
 //$(document).ready(function(){
 window.addEventListener('load', function(){
+	$.ajaxSetup({
+	   global: false
+	 });
+	
     // jquery mobile stuff
     $.mobile.page.prototype.options.backBtnText = "Назад";
     $.mobile.fixedtoolbar.prototype.options.tapToggle = false;
@@ -58,7 +62,8 @@ window.addEventListener('load', function(){
                 user: $("#username").val(),
                 pass: $("#pass").val(),
                 captcha: $("#captcha").val().toLowerCase(),
-                save: $("#rememberme").is(":checked") ? 1 : 0
+                save: $("#rememberme").is(":checked") ? "1" : "0",
+				logincode: iLepra.loginCode
             };
             
             // on login error

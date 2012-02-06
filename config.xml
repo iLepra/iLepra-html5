@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <widget xmlns="http://www.w3.org/ns/widgets" 
    xmlns:rim="http://www.blackberry.com/ns/widgets" 
-   version="1.0.0.0" rim:header="iLepra">
+   version="1.0.5" rim:header="iLepra">
 
    <name>iLepra</name>
    <description>Leprosorium.ru client for PlayBook.</description>
 
 	<rim:orientation mode="auto"/>
 	
-	<access uri="http://www.leprosorium.ru" subdomains="true">
-	   <feature id="blackberry.app.event" required="true" version="1.0.0"/>
-	</access>
+	<access uri="*" subdomains="true" />
 	
 	<icon src="assets/icon.png"/>
 

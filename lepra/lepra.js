@@ -157,9 +157,7 @@ iLepra = (function() {
 		 ***/
 		init: function() {
 		    // detect device properties
-		    this.config.screenBiggest = window.screen.width > window.screen.height ? window.screen.width : window.screen.height;
-		    // detect platform and set default event
-		    if( isMobile() ) this.config.defaultTapEvent = 'tap';
+		    this.config.screenBiggest = 1024;
 		    
 		    // get lepra
 			$.get("http://leprosorium.ru", function(data){
@@ -182,8 +180,6 @@ iLepra = (function() {
 		 Tries logging in with given data
 		 ***/
 		tryLogin: function(data){
-            data.logincode = this.loginCode;
-
 			$.post("http://leprosorium.ru/login/", data, function(data){
 				if(data.indexOf('class="error"') > 0){
 					// get error
@@ -202,7 +198,8 @@ iLepra = (function() {
 					// dispatch ready event
 					$(document).trigger(iLepra.events.ready);
 				}
-			});
+				// hack to force webworks send the request
+			}).error(function(){ iLepra.tryLogin(data); });
 		},
 		
 		/***
@@ -244,7 +241,7 @@ iLepra = (function() {
 				processJSONPosts(data.posts);
 				// trigger event
 				$(document).trigger(iLepra.events.ready);
-			});
+			}).error(function(){ iLepra.getLastPosts(); });
 		},
 		
 		/***
@@ -260,7 +257,7 @@ iLepra = (function() {
 				processJSONPosts(data.posts);
 				// trigger event
 				$(document).trigger(iLepra.events.ready);
-			});
+			}).error(function(){ iLepra.getMorePosts(); });
 		},
 		
 		/***
@@ -275,7 +272,7 @@ iLepra = (function() {
 				selected_threshold: "all"
 			}, function(){
 				iLepra.getLastPosts();
-			});
+			}).error(function(){ iLepra.switchLayout(type); });;
 		},
 		
 		
@@ -296,7 +293,7 @@ iLepra = (function() {
 				    iLepra.myStuffPosts = [];
 				    iLepra.util.processHTMLPosts(data, iLepra.myStuffPosts, undefined);
 				    $(document).trigger(iLepra.events.ready);
-			});
+			}).error(function(){ iLepra.getMyStuff(); });
 		},
 		
 		/***

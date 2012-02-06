@@ -36,7 +36,7 @@ iLepra.chat = (function() {
 		        
 		        // dispatch event
 				$(document).trigger(iLepra.events.ready);
-		    });
+		    }).error(function(){ iLepra.chat.getMessages(); });
 		},
 		
 		sendMessage: function(text){
@@ -59,7 +59,7 @@ iLepra.chat = (function() {
 		        
 		        // dispatch event
 				$(document).trigger(iLepra.events.ready);
-		    });
+		    }).error(function(){ iLepra.chat.sendMessage(text); });;
 		}
 	};
 })();
