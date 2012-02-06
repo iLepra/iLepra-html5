@@ -1,6 +1,6 @@
 (function(){
-    $(document).on(iLepra.config.defaultTapEvent, "a.username", function(){
-        var name = $(this).text();
+    $(document).on(iLepra.config.defaultTapEvent, "ul li.postInfo", function(){
+        var name = $(this).data('user');
         
         $.mobile.showPageLoadingMsg();
 		$(document).bind(iLepra.events.ready, function(event){

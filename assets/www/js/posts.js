@@ -10,6 +10,25 @@
             p += _.template(postTemplate, iLepra.latestPosts[i]);
 		$("#postsList").append(p);
 	}
+	
+	////// LAYOUT STUFF
+	var prepareLayoutReadyEvent = function(){
+		// show loader
+		$.mobile.showPageLoadingMsg();
+		
+		$("#layoutButtons a").each(function(){ $(this).removeClass('ui-btn-active'); });
+		
+		// on posts data
+		$(document).bind(iLepra.events.ready, function(event){
+			$(document).unbind(event);
+			$.mobile.hidePageLoadingMsg();
+            
+            // clean old data & render
+            $("#postsList").empty();
+            renderNewPosts();
+            $("#postsList").listview('refresh');
+		});
+	}
 
 	// render page on creation
 	$(document).on('pagecreate', "#postsPage", function(){
@@ -69,6 +88,24 @@
                 iLepra.getMorePosts();
             }
         });
+
+		$("#layoutBL").bind(iLepra.config.defaultTapEvent, function(){
+            prepareLayoutReadyEvent();
+			$(this).addClass('ui-btn-active');
+            iLepra.switchLayout(1);
+        });
+        
+        $("#layoutAll").bind(iLepra.config.defaultTapEvent, function(){
+            prepareLayoutReadyEvent();
+			$(this).addClass('ui-btn-active');
+            iLepra.switchLayout(0);
+        });
+        
+        $("#layoutSubL").bind(iLepra.config.defaultTapEvent, function(){
+            prepareLayoutReadyEvent();
+			$(this).addClass('ui-btn-active');
+            iLepra.switchLayout(2);
+        });
 	});
 
 	// show full post
@@ -118,20 +155,6 @@
 	
 	// render full post text
 	$(document).on('pagecreate', "#fullPostPage", function(){
-	    // on comments request
-        $("#postCommentsButton").bind(iLepra.config.defaultTapEvent, function(){
-            // show loader
-            $.mobile.showPageLoadingMsg();
-        
-            // on posts data
-            $(document).bind(iLepra.events.ready, function(event){
-                $(document).unbind(event);
-                $.mobile.changePage("post_comments.html");
-            });
-        
-            iLepra.post.getComments();
-        });
-	
 		// render html
 		$("#postContent").html(iLepra.post.current.body);
 		
@@ -139,9 +162,10 @@
 		$("#postTitle").text( iLepra.post.current.body.replace(/(<([^>]+)>)/ig,"").substr(0, 64) );
 		
 		// render additional info
-		// Написал мелом судьбы NotJust в | 46036 games.leprosorium.ru, 12.01.2012 в 23.28 | 96 комментариев / 96 новых | x
-		var add = iLepra.post.current.wrote + ", " + iLepra.post.current.when + " | " + iLepra.post.current.comments;
-		$("#postAdditional").html( add )
+		$("#postUser").text(iLepra.post.current.user);
+		$("#postComments").text(iLepra.post.current.comments);
+		$("#postTime").text(iLepra.post.current.when);
+		$("#postRating").text(iLepra.post.current.rating);
 	});
 	
 	

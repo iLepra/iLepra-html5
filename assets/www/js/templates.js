@@ -1,19 +1,30 @@
 var postTemplate = '\
             <li data-icon="false">\
 				<a href="#" class="postListItem" data-id="<%= id %>">\
-					<% if(iLepra.config.loadImages){ %>\
+					<% if(iLepra.config.loadImages && image.length > 0){ %>\
 					<img src="<%= image %>" class="postThumb" />\
 					<% } %>\
-					<h3 style="white-space:normal;"><%= text %></h3>\
-					<p>\
-					    <%= user %>, \
-					    <%= when %>\
-					    <% if(rating != undefined && rating.length > 0 && rating != 0){ %>, \
-					        <span style="color: darkblue;"><%= rating %></span>\
-					    <% } %>\
-					</p>\
-					<p><%= comments %><% if(domain_url != ""){ %>, <%= domain_url %> <% } %></p>\
+					<h3 style="white-space:normal; font-weight:normal;"><%= text %></h3>\
+					<p><% if(domain_url != ""){ %><%= domain_url %> <% } %></p>\
 				</a>\
+			</li>\
+			<li data-role="list-divider" class="postInfo" data-user="<%= user %>">\
+				<img />\
+				<b><%= user %></b>, \
+				<span style="font-size:80%;">\
+				<img src="../css/img/comment_16.png" class="iconImage" />\
+				<% if(comments.indexOf("/") != -1){ %>\
+				<b><%= comments %></b>,\
+				<% }else{ %>\
+				<%= comments %>,\
+				<% } %>\
+				<%= when %></span>\
+				<% if(rating != undefined && rating.length > 0 && rating != 0){ %>, \
+			        <span style="font-weight: bold; color: \
+					<% if( rating >= 0 ){ %>lawngreen<% }else{ %>\
+						white<% } %>\
+					"><%= rating %></span> \
+			    <% } %>\
 			</li>';
 			            
 var subsTemplate = '\
@@ -26,20 +37,37 @@ var subsTemplate = '\
             </li>';
 			
 var commentTemplate = '\
-			<li <% if (isNew == 1){ %>data-theme="d"<% } %> >\
-				<a>\
-					<p class="commentText"><%= text %></p>\
-					<p><%= wrote %></p> \
-					<p class="ui-li-count"><%= rating %></p>\
-				</a>\
-				<a href="#" class="postCommentItemMenu" data-id="<%= id %>" data-user="<%= user %>">split</a>\
+			<li data-id="<%= id %>" data-user="<%= user %>" <% if (isNew == 1){ %>data-theme="d"<% } %> >\
+				<p class="commentText"><%= text %></p>\
+				<div style="display:none;" class="commentsMenu">\
+					<a href="#" class="reply"><img src="../css/img/reply_32.png" /></a>\
+					<a href="#" class="voteup" style="float:right; \
+					<% if(vote == 1){ %>opacity: 1;<% }else{ %> opacity: 0.3; <% } %>\
+					"><img src="../css/img/voteup_32.png" /></a>\
+					<a href="#" class="votedown" style="float:right; \
+					<% if(vote == -1){ %>opacity: 1;<% }else{ %> opacity: 0.3; <% } %>\
+					"><img src="../css/img/votedown_32.png" /></a>\
+				</div>\
+			</li>\
+			<li data-role="list-divider" class="postInfo" data-user="<%= user %>">\
+				<img />\
+				<b><%= user %></b>, \
+				<%= when %></span>\
+				<% if(rating != undefined && rating.length > 0 && rating != 0){ %>, \
+			        <span style="font-weight: bold; color: \
+					<% if( rating >= 0 ){ %>lawngreen<% }else{ %>\
+						white<% } %>\
+					"><%= rating %></span> \
+			    <% } %>\
 			</li>';
 			
 var chatTemplate = '\
-            <li>\
-                <a href="#" class="chatMessage" data-user="<%= user_login %>">\
-                    <h1 class="commentText"><%= body %></h1>\
-                    <p><%= user_login %></p>\
-                    <p class="ui-li-count"><%= createdate %></p>\
+            <li data-icon="false">\
+                <a href="#" class="chatMessage commentText" data-user="<%= user_login %>">\
+					<%= body %>\
                 </a>\
-            </li>';
+            </li>\
+			<li data-role="list-divider" class="postInfo">\
+				<b><%= user_login %></b>, \
+				<%= createdate %></span>\
+			</li>';
