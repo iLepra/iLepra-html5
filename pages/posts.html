@@ -1,11 +1,11 @@
 <div data-role="page" id="postsPage">
 	<div data-role="header">
 		<a href="#" id="refreshPostsButton" data-role="button" data-icon="refresh" data-iconpos="notext">Refresh</a>
-		<h1>Последние посты</h1>
-		<!-- data-transition="slidedown" -->
-		<a data-role="button" data-icon="grid" data-inline="true"
-		href="dialog_layout.html" data-rel="dialog" 
-		data-iconpos="notext" class="ui-btn-right">Layout</a>
+		<div id="layoutButtons" data-role="controlgroup" data-type="horizontal" style="margin-left: 30%;">
+            <a href="#" id="layoutBL" data-role="button" data-theme="a" class="ui-btn-active">Главная</a>
+            <a href="#" id="layoutAll" data-role="button" data-theme="a">Все</a>
+			<a href="#" id="layoutSubL" data-role="button" data-theme="a">Подлепры</a>
+        </div>
 	</div>
 
 	<div data-role="content">

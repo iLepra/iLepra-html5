@@ -8,10 +8,16 @@ var postTemplate = '\
 					<p><% if(domain_url != ""){ %><%= domain_url %> <% } %></p>\
 				</a>\
 			</li>\
-			<li data-role="list-divider" class="postInfo">\
+			<li data-role="list-divider" class="postInfo" data-user="<%= user %>">\
 				<img />\
 				<b><%= user %></b>, \
-				<span style="font-size:80%;"><img src="../css/img/comment_16.png" class="iconImage" /> <%= comments %>,\
+				<span style="font-size:80%;">\
+				<img src="../css/img/comment_16.png" class="iconImage" />\
+				<% if(comments.indexOf("/") != -1){ %>\
+				<b><%= comments %></b>,\
+				<% }else{ %>\
+				<%= comments %>,\
+				<% } %>\
 				<%= when %></span>\
 				<% if(rating != undefined && rating.length > 0 && rating != 0){ %>, \
 			        <span style="font-weight: bold; color: \
@@ -35,11 +41,15 @@ var commentTemplate = '\
 				<p class="commentText"><%= text %></p>\
 				<div style="display:none;" class="commentsMenu">\
 					<a href="#" class="reply"><img src="../css/img/reply_32.png" /></a>\
-					<a href="#" class="voteup" style="float:right;"><img src="../css/img/voteup_32.png" /></a>\
-					<a href="#" class="votedown" style="float:right;"><img src="../css/img/votedown_32.png" /></a>\
+					<a href="#" class="voteup" style="float:right; \
+					<% if(vote == 1){ %>opacity: 1;<% }else{ %> opacity: 0.3; <% } %>\
+					"><img src="../css/img/voteup_32.png" /></a>\
+					<a href="#" class="votedown" style="float:right; \
+					<% if(vote == -1){ %>opacity: 1;<% }else{ %> opacity: 0.3; <% } %>\
+					"><img src="../css/img/votedown_32.png" /></a>\
 				</div>\
 			</li>\
-			<li data-role="list-divider" class="postInfo">\
+			<li data-role="list-divider" class="postInfo" data-user="<%= user %>">\
 				<img />\
 				<b><%= user %></b>, \
 				<%= when %></span>\

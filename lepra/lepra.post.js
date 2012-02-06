@@ -43,8 +43,9 @@ iLepra.post = (function() {
 					var text = $(".dt", data).html();
 					//text = text.replace(/<.*?a.+?>/, "");
 					var wroteFull = add.text().replace(/\s\s+/gi, "").split("|")[0];
-					var wrote = wroteFull.split(",")[0];
-					var when = wroteFull.split(",")[1];
+					wroteFull = wroteFull.split(",");
+					var wrote = wroteFull[wroteFull.length-2];
+					var when = wroteFull[wroteFull.length-1];
 					
 					// replace images with compressed ones
                     var imgReg = /nonimg src="(.+?)"/g
@@ -58,6 +59,17 @@ iLepra.post = (function() {
 					text = text.replace(/<p.*?>/gi, '');
 					text = text.replace(/<\/p>/gi, '');
 					text = text.replace(/<nonimg/ig, '<img');
+					
+					var vote = 0;
+					var voted = $(".voted", data);
+					if( typeof voted != 'undefined' ){
+						voted = voted.text();
+						if(voted == "+"){
+							vote = 1;
+						}else if(voted == "-"){
+							vote = -1;
+						}
+					}
                     
 					var post = {
 						id: data.attr('id'),
@@ -66,7 +78,8 @@ iLepra.post = (function() {
 						rating: $(".rating", data).text(),
 						user: $( $("a", add)[1] ).text(),
 						wrote: wrote,
-						when: when
+						when: when,
+						vote: vote
 					};
 					
 					iLepra.post.comments.push(post);
