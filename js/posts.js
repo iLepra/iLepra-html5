@@ -10,6 +10,25 @@
             p += _.template(postTemplate, iLepra.latestPosts[i]);
 		$("#postsList").append(p);
 	}
+	
+	////// LAYOUT STUFF
+	var prepareLayoutReadyEvent = function(){
+		// show loader
+		$.mobile.showPageLoadingMsg();
+		
+		$("#layoutButtons a").each(function(){ $(this).removeClass('ui-btn-active'); });
+		
+		// on posts data
+		$(document).bind(iLepra.events.ready, function(event){
+			$(document).unbind(event);
+			$.mobile.hidePageLoadingMsg();
+            
+            // clean old data & render
+            $("#postsList").empty();
+            renderNewPosts();
+            $("#postsList").listview('refresh');
+		});
+	}
 
 	// render page on creation
 	$(document).on('pagecreate', "#postsPage", function(){
@@ -68,6 +87,24 @@
                 // get posts
                 iLepra.getMorePosts();
             }
+        });
+
+		$("#layoutBL").bind(iLepra.config.defaultTapEvent, function(){
+            prepareLayoutReadyEvent();
+			$(this).addClass('ui-btn-active');
+            iLepra.switchLayout(1);
+        });
+        
+        $("#layoutAll").bind(iLepra.config.defaultTapEvent, function(){
+            prepareLayoutReadyEvent();
+			$(this).addClass('ui-btn-active');
+            iLepra.switchLayout(0);
+        });
+        
+        $("#layoutSubL").bind(iLepra.config.defaultTapEvent, function(){
+            prepareLayoutReadyEvent();
+			$(this).addClass('ui-btn-active');
+            iLepra.switchLayout(2);
         });
 	});
 
