@@ -1,15 +1,13 @@
 // jqm presets
-$( document ).bind( "mobileinit", function() {
+$(document).bind("mobileinit", function(){
 	$.support.cors = true;
     $.mobile.allowCrossDomainPages = true;
     $.mobile.pushStateEnabled = false;
     $.loadingMessage = "";
 });
 
-// fired up when phonegap is ready - this requires a phonegap.js file :|
+// fired up when phonegap is ready
 document.addEventListener("deviceready", function(){
-//$(document).ready(function(){
-//window.addEventListener('load', function(){
     // jquery mobile stuff
     $.mobile.page.prototype.options.backBtnText = "Назад";
     $.mobile.fixedtoolbar.prototype.options.tapToggle = false;
