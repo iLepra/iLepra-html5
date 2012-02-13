@@ -149,7 +149,7 @@ code								{ font-family: Courier New !important; font-size: 0.85em;}
  *			workaround (b) Solve overflow:hidden problem (if that is the cause)
  */
 
-.comboSprite li a 	.ui-btn-inner							{ display: inline-block; position: static; height: 30px; width: 30px; background-color: none; background: url("images/sprite_combined.png") no-repeat;
+.comboSprite li a 	.ui-btn-inner							{ display: inline-block; position: static; height: 30px; width: 30px; background-color: none; background: url("img/sprite_combined.png") no-repeat;
 																	  background-size: 150px 66px; 
 																   -o-background-size: 150px 66px;
 															  -webkit-background-size: 150px 66px;
