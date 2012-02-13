@@ -17,28 +17,35 @@ iLepra = (function() {
      Processes given html string for user's data
      ***/
     var processMain = function(data){
-        // replace all img tags to evade image loading while parsing
-        data = data.replace(/<img/ig, '<nonimg');
-    
+		// cleanup data
+		data = data.replace(/\n+/g, '');
+		data = data.replace(/\r+/g, '');
+		data = data.replace(/\t+/g, '');
         // get mystuff wtf
         iLepra.myStuffWTF = /mythingsHandler.wtf = '(.+?)'/g.exec(data)[1];
         // get chat wtf
         iLepra.chat.wtf = /chatHandler.wtf = '(.+?)'/g.exec(data)[1];
         // get username
-        iLepra.username = $( $("#greetings a", data)[0] ).text();
+        iLepra.username = /<div id="greetings" class="columns_wrapper">.+?<a href=".+?">(.+?)<\/a>/g.exec(data)[1];
         // get sublepras
         iLepra.userSubLepras = [];
-        var subs = $(".subs_loaded.hidden", data);
-        $(".sub", subs).each(function(index, item){
-            item = $(item);
-            var sublepra = {
-                name: $("h5", item).text(),
-                creator: $(".creator", item).text(),
-                link: $("a.link", item).attr('href'),
-                logo: $("strong a nonimg", item).attr('src')
+		
+		// sub lepra regex
+		var subReg = /<div class="sub"><strong class="logo"><a href="(.+?)" title="(.+?)"><img src="(.+?)" alt=".+?" \/>.+?<div class="creator">.+?<a href=".+?">(.+?)<\/a>/g;
+		
+		// get them all
+		var res = subReg.exec(data);
+		while(res != null){
+			var sublepra = {
+                name: res[2],
+                creator: res[4],
+                link: res[1],
+                logo: res[3]
             }
             iLepra.userSubLepras.push(sublepra);
-        });
+
+			res = subReg.exec(data);
+		}
     };
     
     /***

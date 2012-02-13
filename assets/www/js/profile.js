@@ -24,12 +24,12 @@
 		// basic info
 		$("#fullName").text( data.fullName );
 		$("#userLocation").text( data.location );
-		$("#userRegdate").text( data.regDate );
+		$("#userRegdate").html( data.regDate );
 		$("#userNumber").text( "Номер; "+data.number );
 		$("#userKarma").text( "Карма: "+data.karma );
 		
 		// statistic info
-		$("#userStat").text( $( data.userstat.replace(/<br\/>/g, " ") ).text() );
+		$("#userStat").text( data.userstat );
 		var vote = data.votestat.split("<br>");
 		$("#userVote").html( vote[0] );
 		$("#userVoteCount").html( vote[1] );

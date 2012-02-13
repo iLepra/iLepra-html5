@@ -3,57 +3,58 @@ iLepra.util = (function() {
 		/***
          Processes given HTML object for latest posts and pushes them to given array
          ***/ 
-        processHTMLPosts: function(doc, postArray, type){
-            // replace all img tags to evade image loading while parsing
-            doc = doc.replace(/<img/ig, '<nonimg');
-            // parse
-            $(".post", doc).each(function(){
-                    var data = this;
-                    var add = $(".dd .p", data);
+        processHTMLPosts: function(data, postArray, type){
+            // cleanup data
+			data = data.replace(/\n+/g, '');
+			data = data.replace(/\r+/g, '');
+			data = data.replace(/\t+/g, '');
+			
+			var postReg = /<div class="post.+?id="(.+?)".+?class="dt">(.+?)<\/div><div class="dd"><div class="p">Написал.+?<a href=".+?".*?>(.+?)<\/a>,(.+?)<span>.+?<a href=".*?\/(comments|inbox)\/.+?">(.+?)<\/span>.+?<span class="rating".+?><em>(.+?)<\/em><\/span>/g;
+			var res = postReg.exec(data);
+			
+			while(res != null){	    	
+			    var body = res[2];
+			    
+			    var imgReg = /img src="(.+?)"/g
+                var resImg = imgReg.exec(body);
+                var img = "";
+                if( resImg != null ){ 
+                    img = "http://src.sencha.io/80/80/"+resImg[1];
                     
-                    var body = $(".dt", data).html();
-                    var wroteFull = add.text().replace(/\s\s+/gi, " ").split("|");
-                    var wroteTime = wroteFull[0].split(', ');
-                    var wrote = wroteTime[0].split(' в ')[0];
+                    body = body.replace(resImg[1], "http://src.sencha.io/"+iLepra.config.screenBiggest+"/"+resImg[1]);
+                    // convert all image URIs to compressed ones
+                    resImg = imgReg.exec(body);
+                    while(resImg != null){
+                        body = body.replace(res[1], "http://src.sencha.io/"+iLepra.config.screenBiggest+"/"+resImg[1]);
                     
-                    var imgReg = /nonimg src="(.+?)"/g
-                    var res = imgReg.exec(body);
-                    var img = "";
-                    if( res != null ){ 
-                        img = "http://src.sencha.io/80/80/"+res[1];
-                        
-                        body = body.replace(res[1], "http://src.sencha.io/"+iLepra.config.screenBiggest+"/"+res[1]);
-                        // convert all image URIs to compressed ones
-                        res = imgReg.exec(body);
-                        while(res != null){
-                            body = body.replace(res[1], "http://src.sencha.io/"+iLepra.config.screenBiggest+"/"+res[1]);
-                        
-                            res = imgReg.exec(body);
-                        }
-                    }/*else{
-                        img = '';//"../css/img/placeholder.png";
-                    }*/
-                    var text = body.replace(/(<([^>]+)>)/ig," ").substr(0, 140);
-					if(text.length == 140) text += "..";
-					
-					var comments = wroteFull[1].replace(/комментар.+? /, '').replace(/новы.+?/, '');
-                    
-                    var post = {
-                        id: data.id.replace('p', ''),
-                        body: body,
-                        rating: $(".rating", data).text(),
-                        user: $( $("a", add)[0] ).text(),
-                        domain_url: $(".sub_domain_url", data).text(),
-                        wrote: wrote,
-                        when: wroteTime[1],
-                        comments: comments,
-                        image: img,
-                        text: text,
-                        type: type
-                    };
-                    
-                    postArray.push(post);
-                });
+                        resImg = imgReg.exec(body);
+                    }
+                }
+                
+                var text = body.replace(/(<([^>]+)>)/ig," ").substr(0, 140);
+                if(text.length == 140) text += "..";
+			
+                var userSub = res[3].split('</a> в ');
+                var sub = userSub[1] ? userSub[1].replace(/(<([^>]+)>)/ig, '') : '' ;
+                
+                var post = {
+                    id: res[1].replace('p', ''),
+                    body: body,
+                    rating: res[7],
+                    user: userSub[0],
+                    domain_url: sub,
+                    when: res[4],
+                    comments: res[6].replace(/(<([^>]+)>)/ig, '').replace(/коммента.+?(\s|$)/g, '').replace(/ нов.+/g, ''),
+                    image: img,
+                    text: text,
+                    type: type
+                };
+                
+                
+                postArray.push(post);
+                
+                res = postReg.exec(data);
+    		}
         }
 	};
 })();

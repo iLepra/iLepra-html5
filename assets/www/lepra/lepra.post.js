@@ -22,69 +22,62 @@ iLepra.post = (function() {
 		    }
 		    
 			$.get(url, function(data){
-			    // replace all img tags to evade image loading while parsing
-                data = data.replace(/<img/ig, '<nonimg');
-			    //create doc
-				var doc = $(data);
+			    // cleanup data
+				data = data.replace(/\n+/g, '');
+				data = data.replace(/\r+/g, '');
+				data = data.replace(/\t+/g, '');
 				
 				iLepra.post.comments = [];
 				iLepra.post.newComments = [];
 				
 				var voteRes = /wtf_vote = '(.+?)'/gi.exec(data);
-				
 				iLepra.post.current.wtf = { 
-					comment: $("#comments-form input[name='wtf']", doc).val(),
+					comment: /<input type="hidden" name="wtf" value="(.+?)" \/>/g.exec(data)[1],
 					vote: voteRes != null ? voteRes[1] : null
 				}
 				
-				$("#js-commentsHolder .post", doc).each(function(index, item){
-					var data = $(item);
-					var add = $(".dd .p", data);
-					var text = $(".dt", data).html();
-					//text = text.replace(/<.*?a.+?>/, "");
-					var wroteFull = add.text().replace(/\s\s+/gi, "").split("|")[0];
-					wroteFull = wroteFull.split(",");
-					var wrote = wroteFull[wroteFull.length-2];
-					var when = wroteFull[wroteFull.length-1];
-					
-					// replace images with compressed ones
-                    var imgReg = /nonimg src="(.+?)"/g
-                    var res = imgReg.exec(text);
-                    while(res != null){
-                        text = text.replace(res[1], "http://src.sencha.io/"+iLepra.config.screenBiggest+"/"+res[1]);
-                        res = imgReg.exec(text);
+				var commentReg = /<div id="(.+?)" class="post tree(.+?)"><div class="dt">(.+?)<\/div>.+?Написал.+?<a href="\/users\/.+?">(.+?)<\/a>,(.+?)<span>.+?<div class="vote".+?><em>(.+?)<\/em><\/span><a href="#".+?class="plus(.*?)">.+?<a href="#".+?class="minus(.*?)">/g;
+		    
+	    	    data = data.substr( data.indexOf('id="js-commentsHolder"') );
+				var res = commentReg.exec(data);
+				
+				var vote = 0;
+				if(res[7].length > 0){
+                    vote = 1;
+                }else if(res[8].length > 0){
+                    vote = -1;
+                }
+				
+				while(res != null){
+				    var text = res[3];
+				    
+				    // replace images with compressed ones
+                    var imgReg = /img src="(.+?)"/g
+                    var resImg = imgReg.exec(text);
+                    while(resImg != null){
+                        text = text.replace(resImg[1], "http://src.sencha.io/"+iLepra.config.screenBiggest+"/"+resImg[1]);
+                        resImg = imgReg.exec(text);
                     }
-					
-					// revert images back
-					text = text.replace(/<p.*?>/gi, '');
+                    
+                    text = text.replace(/<p.*?>/gi, '');
 					text = text.replace(/<\/p>/gi, '');
 					text = text.replace(/<nonimg/ig, '<img');
-					
-					var vote = 0;
-					var voted = $(".voted", data);
-					if( typeof voted != 'undefined' ){
-						voted = voted.text();
-						if(voted == "+"){
-							vote = 1;
-						}else if(voted == "-"){
-							vote = -1;
-						}
-					}
-                    
-					var post = {
-						id: data.attr('id'),
-						isNew: data.hasClass('new') ? 1 : 0,
+				
+				    var post = {
+						id: res[1],
+						isNew: res[2].indexOf('new') != -1 ? 1 : 0,
 						text: text,
-						rating: $(".rating", data).text(),
-						user: $( $("a", add)[1] ).text(),
-						wrote: wrote,
-						when: when,
+						rating: res[6],
+						user: res[4],
+						when: res[5],
 						vote: vote
 					};
 					
 					iLepra.post.comments.push(post);
 					if(post.isNew) iLepra.post.newComments.push(post);
-				});
+					
+					res = commentReg.exec(data);
+				}
 				
 				// dispatch event
 				$(document).trigger(iLepra.events.ready);
