@@ -53,5 +53,5 @@
         $("#settingsButton").bind(iLepra.config.defaultTapEvent, function(){
             $.mobile.changePage("more_settings.html");
         });
-	});
+    });
 })();

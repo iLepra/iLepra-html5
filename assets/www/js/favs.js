@@ -3,19 +3,19 @@
     var postLimit = 10;
     
     var renderNewPosts = function(){
-	    // render posts
-	    var limit = postLimit > iLepra.favouritePosts.length ? iLepra.favouritePosts.length : postLimit;
-	    var p = "";
-	    for(var i = 0; i < limit; i++)
+        // render posts
+        var limit = postLimit > iLepra.favouritePosts.length ? iLepra.favouritePosts.length : postLimit;
+        var p = "";
+        for(var i = 0; i < limit; i++)
             p += _.template(postTemplate, iLepra.favouritePosts[i]);
-		$("#favsList").append(p);
-	}
+        $("#favsList").append(p);
+    }
 
-	// render page on creation
-	$(document).on('pagecreate', "#favsPage", function(){
-		renderNewPosts();
-	    // hide button if needed
-	    if( postLimit >= iLepra.favouritePosts.length ){
+    // render page on creation
+    $(document).on('pagecreate', "#favsPage", function(){
+        renderNewPosts();
+        // hide button if needed
+        if( postLimit >= iLepra.favouritePosts.length ){
             $("#moreFavsButton").hide();
         }else{
             // more posts click
@@ -35,5 +35,5 @@
                 $("#favsList").listview('refresh');
             });
         }
-	});
+    });
 })();
