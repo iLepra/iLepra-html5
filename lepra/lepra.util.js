@@ -1,21 +1,21 @@
 iLepra.util = (function() {
-	return {
-		/***
+    return {
+        /***
          Processes given HTML object for latest posts and pushes them to given array
          ***/ 
         processHTMLPosts: function(data, postArray, type){
             // cleanup data
-			data = data.replace(/\n+/g, '');
-			data = data.replace(/\r+/g, '');
-			data = data.replace(/\t+/g, '');
-			
-			var postReg = /<div class="post.+?id="(.+?)".+?class="dt">(.+?)<\/div><div class="dd"><div class="p">Написал.+?<a href=".+?".*?>(.+?)<\/a>,(.+?)<span>.+?<a href=".*?\/(comments|inbox)\/.+?">(.+?)<\/span>.+?<span class="rating".+?><em>(.+?)<\/em><\/span>/g;
-			var res = postReg.exec(data);
-			
-			while(res != null){	    	
-			    var body = res[2];
-			    
-			    var imgReg = /img src="(.+?)"/g
+            data = data.replace(/\n+/g, '');
+            data = data.replace(/\r+/g, '');
+            data = data.replace(/\t+/g, '');
+            
+            var postReg = /<div class="post.+?id="(.+?)".+?class="dt">(.+?)<\/div><div class="dd"><div class="p">Написал.+?<a href=".+?".*?>(.+?)<\/a>,(.+?)<span>.+?<a href=".*?\/(comments|inbox)\/.+?">(.+?)<\/span>.+?<span class="rating".+?><em>(.+?)<\/em><\/span>/g;
+            var res = postReg.exec(data);
+            
+            while(res != null){            
+                var body = res[2];
+                
+                var imgReg = /img src="(.+?)"/g
                 var resImg = imgReg.exec(body);
                 var img = "";
                 if( resImg != null ){ 
@@ -33,7 +33,7 @@ iLepra.util = (function() {
                 
                 var text = body.replace(/(<([^>]+)>)/ig," ").substr(0, 140);
                 if(text.length == 140) text += "..";
-			
+            
                 var userSub = res[3].split('</a> в ');
                 var sub = userSub[1] ? userSub[1].replace(/(<([^>]+)>)/ig, '') : '' ;
                 
@@ -54,7 +54,7 @@ iLepra.util = (function() {
                 postArray.push(post);
                 
                 res = postReg.exec(data);
-    		}
+            }
         }
-	};
+    };
 })();

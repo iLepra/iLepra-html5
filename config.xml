@@ -5,22 +5,22 @@
               version="0.2.0">
     <name>iLepra</name>
 
-	<description>
-		Mobile HTML5 Leprosorium client 
-	</description>
+    <description>
+        Mobile HTML5 Leprosorium client 
+    </description>
 
-	<author href="http://github.com/iLepra" email="mobilepra@googlemail.com">
-		yamalight
-	</author>
+    <author href="http://github.com/iLepra" email="mobilepra@googlemail.com">
+        yamalight
+    </author>
 
-	<gap:platforms>
-		<gap:platform name="android" minVersion="2.1" />
-		<gap:platform name="webos" />
-		<gap:platform name="symbian.wrt" />
-		<gap:platform name="blackberry" project="widgets"/>
-	</gap:platforms>
+    <gap:platforms>
+        <gap:platform name="android" minVersion="2.1" />
+        <gap:platform name="webos" />
+        <gap:platform name="symbian.wrt" />
+        <gap:platform name="blackberry" project="widgets"/>
+    </gap:platforms>
 
-	<!-- <icon src="icon.png" gap:role="default" /> -->
-	
-	<feature name="http://api.phonegap.com/1.0/network"/>
+    <!-- <icon src="icon.png" gap:role="default" /> -->
+    
+    <feature name="http://api.phonegap.com/1.0/network"/>
 </widget>
