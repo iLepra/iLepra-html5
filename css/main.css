@@ -89,14 +89,20 @@ img {
 
 /* splash screen bg */
 .splashScreen {
-    background: #5c0202; /* Old browsers */
-    background: -moz-radial-gradient(center, ellipse cover, #5c0202 0%, #220000 37%, #000000 100%); /* FF3.6+ */
-    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#5c0202), color-stop(37%,#220000), color-stop(100%,#000000)); /* Chrome,Safari4+ */
-    background: -webkit-radial-gradient(center, ellipse cover, #5c0202 0%,#220000 37%,#000000 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-radial-gradient(center, ellipse cover, #5c0202 0%,#220000 37%,#000000 100%); /* Opera 12+ */
-    background: -ms-radial-gradient(center, ellipse cover, #5c0202 0%,#220000 37%,#000000 100%); /* IE10+ */
-    background: radial-gradient(center, ellipse cover, #5c0202 0%,#220000 37%,#000000 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5c0202', endColorstr='#000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    background: #000000; 
+    background-image:url('img/splash-bg.png');
+    background-repeat:no-repeat;
+    background-position:center; 
+}
+.splashText {
+    position: absolute; 
+    top:50%; 
+    height: 40px;
+    margin-top: 114px;
+    text-align: center; 
+    width: 100%; 
+    color:#fff;
+    font-size: 32px;
 }
 
 /* post styling */
