@@ -997,39 +997,6 @@ Device.prototype.getInfo = function(successCallback, errorCallback) {
     PhoneGap.exec(successCallback, errorCallback, "Device", "getDeviceInfo", []);
 };
 
-/*
- * DEPRECATED
- * This is only for Android.
- *
- * You must explicitly override the back button.
- */
-Device.prototype.overrideBackButton = function() {
-	console.log("Device.overrideBackButton() is deprecated.  Use App.overrideBackbutton(true).");
-	navigator.app.overrideBackbutton(true);
-};
-
-/*
- * DEPRECATED
- * This is only for Android.
- *
- * This resets the back button to the default behaviour
- */
-Device.prototype.resetBackButton = function() {
-	console.log("Device.resetBackButton() is deprecated.  Use App.overrideBackbutton(false).");
-	navigator.app.overrideBackbutton(false);
-};
-
-/*
- * DEPRECATED
- * This is only for Android.
- *
- * This terminates the activity!
- */
-Device.prototype.exitApp = function() {
-	console.log("Device.exitApp() is deprecated.  Use App.exitApp().");
-	navigator.app.exitApp();
-};
-
 PhoneGap.addConstructor(function() {
     if (typeof navigator.device === "undefined") {
         navigator.device = window.device = new Device();
@@ -1248,19 +1215,6 @@ App.prototype.clearHistory = function() {
  */
 App.prototype.backHistory = function() {
     PhoneGap.exec(null, null, "App", "backHistory", []);
-};
-
-/**
- * Override the default behavior of the Android back button.
- * If overridden, when the back button is pressed, the "backKeyDown" JavaScript event will be fired.
- *
- * Note: The user should not have to call this method.  Instead, when the user
- *       registers for the "backbutton" event, this is automatically done.
- *
- * @param override		T=override, F=cancel override
- */
-App.prototype.overrideBackbutton = function(override) {
-    PhoneGap.exec(null, null, "App", "overrideBackbutton", [override]);
 };
 
 /**
