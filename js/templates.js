@@ -26,7 +26,7 @@ var postTemplate = '\
                     "><%= rating %></span> \
                 <% } %>\
             </li>';
-                        
+
 var subsTemplate = '\
             <li>\
                 <a href="#" class="subListItem" data-link="<%= link %>">\
@@ -35,7 +35,7 @@ var subsTemplate = '\
                     <p><%= creator %></p>\
                 </a>\
             </li>';
-            
+
 var commentTemplate = '\
             <li data-id="<%= id %>" data-user="<%= user %>" <% if (isNew == 1){ %>data-theme="d"<% } %> >\
                 <p class="commentText"><%= text %></p>\
@@ -60,12 +60,10 @@ var commentTemplate = '\
                     "><%= rating %></span> \
                 <% } %>\
             </li>';
-            
+
 var chatTemplate = '\
-            <li data-icon="false">\
-                <a href="#" class="chatMessage commentText" data-user="<%= user_login %>">\
-                    <%= body %>\
-                </a>\
+            <li data-icon="false"  class="chatMessage commentText" data-user="<%= user_login %>">\
+                <p class="commentText"><%= body %></p>\
             </li>\
             <li data-role="list-divider" class="postInfo">\
                 <b><%= user_login %></b>, \
