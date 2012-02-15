@@ -90,6 +90,12 @@ document.addEventListener("deviceready", function(){
         });
     });
 
+    $(document).on('pageshow', '#splashPage', function(){
+        if( iLepra.isAuthenticated ){
+            $.mobile.changePage("pages/posts.html");
+        }
+    });
+
     // Init iLepra class
     iLepra.init();
 }, false);

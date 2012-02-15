@@ -36,15 +36,15 @@ iLepra.post = (function() {
                     vote: voteRes != null ? voteRes[1] : null
                 }
 
-                var commentReg = /<div id="(.+?)" class="post tree(.+?)"><div class="dt">(.+?)<\/div>.+?Написал.+?<a href=".*?\/users\/.+?">(.+?)<\/a>,(.+?)<span>.+?<div class="vote".+?><em>(.+?)<\/em><\/span><a href="#".+?class="plus(.*?)">.+?<a href="#".+?class="minus(.*?)">/g;
+                var commentReg = /<div id="(.+?)" class="post tree(.+?)"><div class="dt">(.+?)<\/div>.+?Написал.+?<a href=".*?\/users\/.+?">(.+?)<\/a>,(.+?)<span>.+?<div class="vote".+?><em>(.+?)<\/em><\/span>(<a href="#".+?class="plus(.*?)">.+?<a href="#".+?class="minus(.*?)">|<\/div>)/g;
 
                 data = data.substr( data.indexOf('id="js-commentsHolder"') );
                 var res = commentReg.exec(data);
 
                 var vote = 0;
-                if(res[7] != null && res[7].length > 0){
+                if(res[8] != null && res[8].length > 0){
                     vote = 1;
-                }else if(res[8] != null && res[8].length > 0){
+                }else if(res[9] != null && res[9].length > 0){
                     vote = -1;
                 }
 

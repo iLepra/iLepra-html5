@@ -290,16 +290,7 @@ iLepra = (function() {
          Gets my stuff posts
          ***/
         getMyStuff: function(){
-            // get only my latest stuff for 14 days
-            $.post("http://leprosorium.ru/my/",
-                {
-                    numform:'1',
-                    run:'1',
-                    wtf:iLepra.myStuffWTF,
-                    what2see:'2',
-                    days:'14'
-                },
-                function(data){
+            $.get("http://leprosorium.ru/my/", function(data){
                     iLepra.myStuffPosts = [];
                     iLepra.util.processHTMLPosts(data, iLepra.myStuffPosts, undefined);
                     $(document).trigger(iLepra.events.ready);
