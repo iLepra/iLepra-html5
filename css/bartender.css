@@ -166,9 +166,10 @@ code                                { font-family: Courier New !important; font-
                                             
 /*   8. Notification Icons .ui-li-count */ 
 .apple-navbar-ui li a .ui-li-count                                { color: #ffffff; right: 0.5em; font-size: 90%; text-shadow: none; font-weight: bold; font-family: arial; 
+                                                              padding: .2em .5em; display: block; position: absolute; right: 4px; top: 50%;
                                                               -moz-box-shadow: 0 1px 2px #999; -webkit-box-shadow: 0 1px 2px #999; box-shadow: 0 1px 2px #999; padding-bottom: 1px;
                                                               border: 0.15em solid #ffffff; border-radius: 14px; -moz-border-radius: 14px; -webkit-border-radius: 14px; background-color: #72b0d4; 
-                                                              line-height: 16px; display: inline-block; background-position: 0 0 !important; margin-right: 38%; margin-top: -18px;
+                                                              line-height: 16px; display: inline-block; background-position: 0 0 !important; margin-right: 20%; margin-top: -18px;
                                                               
                                                               background-image:                      -webkit-gradient(linear,left top,left bottom, color-stop(0,#72b0d4),color-stop(1,#4b88b6)); 
                                                               background-image:            -webkit-linear-gradient(top, #72b0d4, #4b88b6);

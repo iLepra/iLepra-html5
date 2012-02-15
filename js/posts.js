@@ -32,6 +32,8 @@
 
     // render page on creation
     $(document).on('pagecreate', "#postsPage", function(){
+        initCounters();
+
         renderNewPosts();
 
         // refresh
