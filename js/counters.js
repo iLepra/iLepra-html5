@@ -22,7 +22,7 @@
             }else{
                 inboxString = "";
             }
-            if(inboxString.length > 0){
+            if(inboxString != ""){
                 $(".inboxCounter").text(inboxString);
                 $(".inboxCounter").show();
             }else{
@@ -37,7 +37,7 @@
             }else{
                 mystuffString = "";
             }
-            if(mystuffString.length > 0){
+            if(mystuffString != ""){
                 $(".mystuffCounter").text(mystuffString);
                 $(".mystuffCounter").show();
             }else{
