@@ -7,7 +7,7 @@ var postTemplate = '\
                         </div>\
                     <% }else{ %>\
                         <% if(iLepra.config.loadImages && image.length > 0){ %>\
-                            <img src="<%= image %>" class="postThumb" />\
+                            <img src="<%= image %>" onerror="handleImageError(this);" class="postThumb" />\
                         <% } %>\
                         <h3 style="white-space:normal; font-weight:normal;"><%= text %></h3>\
                         <p><% if(domain_url != ""){ %><%= domain_url %> <% } %></p>\
