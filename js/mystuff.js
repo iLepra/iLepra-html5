@@ -12,6 +12,8 @@
 
     // render page on creation
     $(document).on('pagecreate', "#mystuffPage", function(){
+        updateNewsCounts();
+
         renderNewPosts();
         // hide button if needed
         if( postLimit >= iLepra.myStuffPosts.length ){

@@ -1,5 +1,7 @@
 (function(){
     $(document).on('pagecreate', "#morePage", function(){
+        updateNewsCounts();
+
         $("#favsButton").bind(iLepra.config.defaultTapEvent, function(){
             $.mobile.showPageLoadingMsg();
             $(document).bind(iLepra.events.ready, function(event){
@@ -8,7 +10,7 @@
             });
             iLepra.getFavourites();
         });
-        
+
         $("#myProfileButton").bind(iLepra.config.defaultTapEvent, function(){
             $.mobile.showPageLoadingMsg();
             $(document).bind(iLepra.events.ready, function(event){
@@ -17,12 +19,12 @@
             });
             iLepra.profile.getProfile(iLepra.username);
         });
-        
+
         $("#mySubsButton").bind(iLepra.config.defaultTapEvent, function(){
             iLepra.sub.list = iLepra.userSubLepras;
             $.mobile.changePage("more_subs.html");
         });
-        
+
         $("#allSubsButton").bind(iLepra.config.defaultTapEvent, function(){
             $.mobile.showPageLoadingMsg();
             $(document).bind(iLepra.events.ready, function(event){
@@ -31,7 +33,7 @@
             });
             iLepra.sub.getList();
         });
-        
+
         $("#govButton").bind(iLepra.config.defaultTapEvent, function(){
             $.mobile.showPageLoadingMsg();
             $(document).bind(iLepra.events.ready, function(event){
@@ -40,7 +42,7 @@
             });
             iLepra.gov.getCurrent();
         });
-        
+
         $("#chatButton").bind(iLepra.config.defaultTapEvent, function(){
             $.mobile.showPageLoadingMsg();
             $(document).bind(iLepra.events.ready, function(event){
@@ -49,7 +51,7 @@
             });
             iLepra.chat.getMessages();
         });
-        
+
         $("#settingsButton").bind(iLepra.config.defaultTapEvent, function(){
             $.mobile.changePage("more_settings.html");
         });
