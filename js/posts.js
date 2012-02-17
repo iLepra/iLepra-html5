@@ -160,9 +160,6 @@
         // render html
         $("#postContent").html(iLepra.post.current.body);
 
-        // render title
-        $("#postTitle").text( iLepra.post.current.body.replace(/(<([^>]+)>)/ig,"").substr(0, 64) );
-
         // render additional info
         $("#postUser").text(iLepra.post.current.user);
         $("#postComments").text(iLepra.post.current.comments);

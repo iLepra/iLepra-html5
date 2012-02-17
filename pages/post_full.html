@@ -1,37 +1,37 @@
 <div data-role="page" id="fullPostPage" data-add-back-btn="true">
     <div data-role="header">
-        <h1 id="postTitle">Пост</h1>
+        <h1>&nbsp;</h1>
     </div>
 
     <div data-role="content">
         <div id="postContent"></div>
-        
+
         <div class="ui-footer ui-bar-a" style="padding-left:4px; margin-left: -15px; padding-right: 30px;">
             <b id="postUser">username</b>,
             <span style="font-size:80%;">
-                <img src="../css/img/comment_16.png" class="iconImage"> <span id="postComments">548 / 548</span>, 
+                <img src="../css/img/comment_16.png" class="iconImage"> <span id="postComments">548 / 548</span>,
                 <span id="postTime">сегодня в 11.26</span>
             </span>,
             <span style="font-weight: bold;" id="postRating">462</span>
         </div>
-        
+
         <a href="#" id="postCommentsButton" data-role="button">Комментарии</a>
     </div>
-    
-    <div data-role="content" id="postCommentsContent" style="display:none; padding-top: 0px;">    
+
+    <div data-role="content" id="postCommentsContent" style="display:none; padding-top: 0px;">
         <!-- new / all selector -->
         <div data-role="controlgroup" data-type="horizontal">
             <a href="#" id="allComments" data-role="button" data-theme="a" class="ui-btn-active">Все</a>
             <a href="#" id="newComments" data-role="button" data-theme="a">Новые</a>
         </div>
         <br/>
-            
+
         <!-- comments list -->
          <ul data-role="listview" id="commentsList" data-icon="false" data-split-icon="false" data-divider-theme="a">
         </ul>
-        
+
         <br/>
         <a href="#" data-role="button" id="moreCommentsButton">Еще? Еще!</a>
     </div>
-    
+
 </div>
