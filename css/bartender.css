@@ -43,7 +43,7 @@ code                                { font-family: Courier New !important; font-
  */
  
 /*  1. OVERRIDE SOME JQM CSS */
-.ui-footer                                                    { background: #000000; z-index:1000;}
+.ui-footer-bartender                                                    { background: #000000; z-index:1000;}
 .apple-navbar-ui a:link, .apple-navbar-ui a:visited, .apple-navbar-ui a:hover, .apple-navbar-ui a:active
                                                             { text-decoration:  none;}
 .apple-navbar-ui li                                             { cursor: pointer; height: 44px; margin: 0 auto; width: 20%; text-align: center; vertical-align: middle; text-shadow: none !important; border: 0 none; padding-top:2px; position: relative; }

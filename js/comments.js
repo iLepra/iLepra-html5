@@ -7,6 +7,8 @@
     // current comment
     var commentId = null;
     var commentUser = null;
+    // new comment pos
+    var newPos = -1;
 
     var renderNewComments = function(){
         // render posts
@@ -102,6 +104,17 @@
                 transition: "slidedown",
                 inline: "true"
             });
+        });
+
+        $("#prevnew").bind(iLepra.config.defaultTapEvent, function(){
+            if(--newPos) newPos = 0;
+            $.mobile.silentScroll($($("ul#commentsList li.new")[newPos]).offset().top);
+        });
+
+        $("#nextnew").bind(iLepra.config.defaultTapEvent, function(){
+            var newComs = $("ul#commentsList li.new");
+            if( ++newPos > (newComs.length-1) ) newPos = newComs.length-1;
+            $.mobile.silentScroll($(newComs[newPos]).offset().top);
         });
 
         if(autorender){

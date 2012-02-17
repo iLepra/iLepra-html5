@@ -37,7 +37,7 @@ var subsTemplate = '\
             </li>';
 
 var commentTemplate = '\
-            <li data-id="<%= id %>" data-user="<%= user %>" <% if (isNew == 1){ %>data-theme="d"<% } %> >\
+            <li data-id="<%= id %>" data-user="<%= user %>" <% if (isNew == 1){ %>class="new" data-theme="d"<% } %> >\
                 <p class="commentText"><%= text %></p>\
                 <div style="display:none;" class="commentsMenu">\
                     <a href="#" class="reply"><img src="../css/img/reply_32.png" /></a>\
