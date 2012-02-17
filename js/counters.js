@@ -13,7 +13,7 @@
     }
 
     var getCounts = function(){
-        $(document).bind(iLepra.events.ready, function(event){
+        $(document).bind(iLepra.events.update, function(event){
             $(document).unbind(event);
             updateCounts();
         });

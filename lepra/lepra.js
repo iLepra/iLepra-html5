@@ -105,6 +105,7 @@ iLepra = (function() {
         events: {
             init: "iLepraInit",
             ready: "iLepraReady",
+            update: "iLepraUpdate",
             error: "iLepraError"
         },
 
@@ -231,7 +232,7 @@ iLepra = (function() {
                     iLepra.myNewComments = parseInt(res.myunreadcomms);
                     iLepra.myNewPosts = parseInt(res.myunreadposts);
 
-                    $(document).trigger(iLepra.events.ready);
+                    $(document).trigger(iLepra.events.update);
                 }
             });
         },
