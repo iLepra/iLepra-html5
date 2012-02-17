@@ -114,6 +114,7 @@ iLepra = (function() {
         config: {
             loadImages: true,
             screenBiggest: 0,
+            postIncrement: 20,
             defaultTapEvent: 'vclick' // vclick for test in browser, tap - for build on device
         },
 
