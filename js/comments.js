@@ -108,13 +108,15 @@
 
         $("#prevnew").bind(iLepra.config.defaultTapEvent, function(){
             if(--newPos) newPos = 0;
-            $.mobile.silentScroll($($("ul#commentsList li.new")[newPos]).offset().top);
+            var com = $($("ul#commentsList li.new")[newPos]);
+            if( com != null) $.mobile.silentScroll(com.offset().top);
         });
 
         $("#nextnew").bind(iLepra.config.defaultTapEvent, function(){
             var newComs = $("ul#commentsList li.new");
             if( ++newPos > (newComs.length-1) ) newPos = newComs.length-1;
-            $.mobile.silentScroll($(newComs[newPos]).offset().top);
+            var com = $(newComs[newPos]);
+            if( com != null) $.mobile.silentScroll(com.offset().top);
         });
 
         if(autorender){
