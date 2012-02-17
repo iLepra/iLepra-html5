@@ -9,7 +9,7 @@
                 <option value="sub">Подлепры</option>
             </select>
         </div>
-        <ul data-role="listview" id="postsList" data-divider-theme="a">
+        <ul data-role="listview" id="postsList">
         </ul>
         <br/>
         <a href="#" data-role="button" id="morePostsButton">Еще? Еще!</a>
@@ -19,8 +19,14 @@
         <div data-role="navbar" data-grid="c">
             <ul class="apple-navbar-ui comboSprite">
                 <li><a href="#" class="ui-btn-active" data-icon="posts">Посты</a></li>
-                <li><a href="#" id="mystuffBar" data-icon="mystuff">Мои вещи</a></li>
-                <li><a href="#" id="inboxBar" data-icon="inbox">Инбокс</a></li>
+                <li><a href="#" id="mystuffBar" data-icon="mystuff">
+                    Мои вещи
+                    <span class="mystuffCounter ui-li-count" style="display:none;"></span>
+                </a></li>
+                <li><a href="#" id="inboxBar" data-icon="inbox">
+                    Инбокс
+                    <span class="inboxCounter ui-li-count" style="display:none;"></span>
+                </a></li>
                 <li><a href="#" id="moreBar" data-icon="more">Еще</a></li>
             </ul>
         </div><!-- /navbar -->

@@ -6,26 +6,32 @@
             <li><a href="#" id="favsButton">Избранное</a></li>
             <li><a href="#" id="mySubsButton">Мои подлепры</a></li>
         </ul>
-    
+
         <ul data-role="listview" data-inset="true" data-divider-theme="a">
             <li data-role="list-divider">Лепра</li>
             <li><a href="#" id="chatButton">Чятик</a></li>
             <li><a href="#" id="allSubsButton">Блоги Империи</a></li>
             <li><a href="#" id="govButton">Белый дом</a></li>
         </ul>
-        
+
         <!--<ul data-role="listview" data-inset="true" data-divider-theme="a">
             <li data-role="list-divider">iLepra</li>
             <li><a href="#" id="settingsButton">Настройки</a></li>
         </ul>-->
     </div>
-    
+
     <div data-role="footer" data-position="fixed" data-theme="a" data-id="main-nav">
         <div data-role="navbar" data-grid="c">
             <ul class="apple-navbar-ui comboSprite">
                 <li><a href="#" id="postsBar" data-icon="posts">Посты</a></li>
-                <li><a href="#" id="mystuffBar" data-icon="mystuff">Мои вещи</a></li>
-                <li><a href="#" id="inboxBar" data-icon="inbox">Инбокс</a></li>
+                <li><a href="#" id="mystuffBar" data-icon="mystuff">
+                    Мои вещи
+                    <span class="mystuffCounter ui-li-count" style="display:none;"></span>
+                </a></li>
+                <li><a href="#" id="inboxBar" data-icon="inbox">
+                    Инбокс
+                    <span class="inboxCounter ui-li-count" style="display:none;"></span>
+                </a></li>
                 <li><a href="#" class="ui-btn-active" data-icon="more">Еще</a></li>
             </ul>
         </div><!-- /navbar -->

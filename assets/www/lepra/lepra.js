@@ -214,7 +214,6 @@ iLepra = (function() {
 
         /***
          Gets last posts from JSON interface
-         NOT IMPLEMENTED IN UI YET
          ***/
         getNewsCounters: function(){
             $.ajax({

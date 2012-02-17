@@ -112,8 +112,13 @@ img {
 }
 
 .postInfo {
-    font-weight: normal; 
+    font-weight: normal;
     padding: 2px;
+    background: #EEE;
+    text-shadow: 0 1px 1px #F6F6F6;
+    color: #000;
+    border-top: none;
+    border-bottom: solid 2px black;
 }
 
 /* comments stuff */

@@ -21,8 +21,8 @@ var postTemplate = '\
                 <%= when %></span>\
                 <% if(rating != undefined && rating.length > 0 && rating != 0){ %>, \
                     <span style="font-weight: bold; color: \
-                    <% if( rating >= 0 ){ %>lawngreen<% }else{ %>\
-                        white<% } %>\
+                    <% if( rating >= 0 ){ %>#157B25<% }else{ %>\
+                        #824E48<% } %>\
                     "><%= rating %></span> \
                 <% } %>\
             </li>';
