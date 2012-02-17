@@ -42,9 +42,9 @@ iLepra.post = (function() {
                 var res = commentReg.exec(data);
 
                 var vote = 0;
-                if(res[9] != null && res[8].length > 0){
+                if(res[9] != null && res[9].length > 0){
                     vote = 1;
-                }else if(res[10] != null && res[9].length > 0){
+                }else if(res[10] != null && res[10].length > 0){
                     vote = -1;
                 }
 
