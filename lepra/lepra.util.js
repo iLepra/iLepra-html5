@@ -9,7 +9,8 @@ iLepra.util = (function() {
             data = data.replace(/\r+/g, '');
             data = data.replace(/\t+/g, '');
 
-            var postReg = /<div class="post.+?id="(.+?)".+?class="dt">(.+?)<\/div><div class="dd"><div class="p">Написал.+?<a href=".+?".*?>(.+?)<\/a>,(.+?)<span>.+?<a href=".*?\/(comments|inbox)\/.+?">(.+?)<\/span>.+?<span class="rating".+?><em>(.+?)<\/em><\/span>/g;
+            var postReg = /<div class="post.+?id="(.+?)".+?class="dt">(.+?)<\/div>.+?Написал.+?<a href=".*?\/users\/.+?".*?>(.+?)<\/a>,(.+?)<span>.+?<a href=".*?\/(comments|inbox)\/.+?">(.+?)<\/span>.+?<span class="rating".+?><em>(.+?)<\/em>/g;
+            ///<div class="post.+?id="(.+?)".+?class="dt">(.+?)<\/div><div class="dd"><div class="p">Написал.+?<a href=".+?".*?>(.+?)<\/a>,(.+?)<span>.+?<a href=".*?\/(comments|inbox)\/.+?">(.+?)<\/span>.+?<span class="rating".+?><em>(.+?)<\/em><\/span>/g;
             var res = postReg.exec(data);
 
             while(res != null){
@@ -32,7 +33,7 @@ iLepra.util = (function() {
                 }
 
                 var text = body.replace(/(<([^>]+)>)/ig," ").substr(0, 140);
-                text = text.replace(/\s\s+/g, '').replace(/[\n\r\t]/g, '');
+                //text = text.replace(/\s\s+/g, '').replace(/[\n\r\t]/g, '');
                 if(text.length == 140) text += "..";
 
                 var userSub = res[3].split('</a> в ');
