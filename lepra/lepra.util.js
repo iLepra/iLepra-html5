@@ -32,6 +32,7 @@ iLepra.util = (function() {
                 }
 
                 var text = body.replace(/(<([^>]+)>)/ig," ").substr(0, 140);
+                text = text.replace(/\s\s+/g, '').replace(/[\n\r\t]/g, '');
                 if(text.length == 140) text += "..";
 
                 var userSub = res[3].split('</a> в ');
