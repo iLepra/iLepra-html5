@@ -1,7 +1,6 @@
 (function(){
-    var postIncrement = 10;
-    var postLimit = 10;
-    
+    var postLimit = iLepra.config.postIncrement;
+
     var renderNewPosts = function(){
         // render posts
         var limit = postLimit > iLepra.inboxPosts.length ? iLepra.inboxPosts.length : postLimit;
@@ -13,6 +12,8 @@
 
     // render page on creation
     $(document).on('pagecreate', "#inboxPage", function(){
+        updateNewsCounts();
+
         renderNewPosts();
         // hide button if needed
         if( postLimit >= iLepra.inboxPosts.length ){
@@ -23,12 +24,12 @@
                 // stops event to prevent random post opening
                 event.preventDefault();
                 event.stopPropagation();
-                
-                postLimit += postIncrement;
+
+                postLimit += postLimit;
                 if( postLimit >= iLepra.inboxPosts.length ){
                     $("#moreInboxButton").hide();
                 }
-                    
+
                 // clean old data
                 $("#inboxList").empty();
                 renderNewPosts();

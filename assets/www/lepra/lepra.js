@@ -105,6 +105,7 @@ iLepra = (function() {
         events: {
             init: "iLepraInit",
             ready: "iLepraReady",
+            update: "iLepraUpdate",
             error: "iLepraError"
         },
 
@@ -114,7 +115,8 @@ iLepra = (function() {
         config: {
             loadImages: true,
             screenBiggest: 0,
-            defaultTapEvent: 'tap'
+            postIncrement: 20,
+            defaultTapEvent: 'tap' // vclick for test in browser, tap - for build on device
         },
 
         //
@@ -230,7 +232,7 @@ iLepra = (function() {
                     iLepra.myNewComments = parseInt(res.myunreadcomms);
                     iLepra.myNewPosts = parseInt(res.myunreadposts);
 
-                    $(document).trigger(iLepra.events.ready);
+                    $(document).trigger(iLepra.events.update);
                 }
             });
         },

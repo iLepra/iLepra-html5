@@ -5,7 +5,7 @@ iLepra.ui = (function() {
                 .css({ "top": $(window).scrollTop() + 100 })
                 .appendTo( $.mobile.activePage )
                 .delay( 1200 )
-                .fadeOut( 500, function(){
+                .fadeOut( 800, function(){
                     $(this).remove();
                 });
         },

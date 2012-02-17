@@ -1,11 +1,17 @@
 var postTemplate = '\
             <li data-icon="false">\
                 <a href="#" class="postListItem" data-id="<%= id %>">\
-                    <% if(iLepra.config.loadImages && image.length > 0){ %>\
-                    <img src="<%= image %>" class="postThumb" />\
+                    <% if(text.length < 5 && iLepra.config.loadImages && image.length > 0){ %>\
+                        <div>\
+                            <img src="<%= image.replace("http://src.sencha.io/80/80/", "http://src.sencha.io/"+iLepra.config.screenBiggest+"/") %>" />\
+                        </div>\
+                    <% }else{ %>\
+                        <% if(iLepra.config.loadImages && image.length > 0){ %>\
+                            <img src="<%= image %>" class="postThumb" />\
+                        <% } %>\
+                        <h3 style="white-space:normal; font-weight:normal;"><%= text %></h3>\
+                        <p><% if(domain_url != ""){ %><%= domain_url %> <% } %></p>\
                     <% } %>\
-                    <h3 style="white-space:normal; font-weight:normal;"><%= text %></h3>\
-                    <p><% if(domain_url != ""){ %><%= domain_url %> <% } %></p>\
                 </a>\
             </li>\
             <li data-role="list-divider" class="postInfo" data-user="<%= user %>">\
@@ -37,7 +43,7 @@ var subsTemplate = '\
             </li>';
 
 var commentTemplate = '\
-            <li data-id="<%= id %>" data-user="<%= user %>" <% if (isNew == 1){ %>data-theme="d"<% } %> >\
+            <li data-id="<%= id %>" data-user="<%= user %>" <% if (isNew == 1){ %>class="new" data-theme="d"<% } %> >\
                 <p class="commentText"><%= text %></p>\
                 <div style="display:none;" class="commentsMenu">\
                     <a href="#" class="reply"><img src="../css/img/reply_32.png" /></a>\

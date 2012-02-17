@@ -1,6 +1,5 @@
 (function(){
-    var postIncrement = 10;
-    var postLimit = 10;
+    var postLimit = iLepra.config.postIncrement;
 
     var renderNewPosts = function(){
         // render posts
@@ -63,7 +62,7 @@
             event.stopPropagation();
 
             if( postLimit < iLepra.latestPosts.length){
-                postLimit += postIncrement;
+                postLimit += postLimit;
 
                 // clean old data
                 $("#postsList").empty();
@@ -159,9 +158,6 @@
     $(document).on('pagecreate', "#fullPostPage", function(){
         // render html
         $("#postContent").html(iLepra.post.current.body);
-
-        // render title
-        $("#postTitle").text( iLepra.post.current.body.replace(/(<([^>]+)>)/ig,"").substr(0, 64) );
 
         // render additional info
         $("#postUser").text(iLepra.post.current.user);
