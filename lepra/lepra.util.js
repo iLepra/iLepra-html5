@@ -9,8 +9,8 @@ iLepra.util = (function() {
             data = data.replace(/\r+/g, '');
             data = data.replace(/\t+/g, '');
 
-            var postReg = /<div class="post.+?id="(.+?)".+?class="dt">(.+?)<\/div>.+?Написал.+?<a href=".*?\/users\/.+?".*?>(.+?)<\/a>,(.+?)<span>.+?<a href=".*?\/(comments|inbox)\/.+?">(.+?)<\/span>.+?<span class="rating".+?><em>(.+?)<\/em>/g;
-            ///<div class="post.+?id="(.+?)".+?class="dt">(.+?)<\/div><div class="dd"><div class="p">Написал.+?<a href=".+?".*?>(.+?)<\/a>,(.+?)<span>.+?<a href=".*?\/(comments|inbox)\/.+?">(.+?)<\/span>.+?<span class="rating".+?><em>(.+?)<\/em><\/span>/g;
+            var postReg = /<div class="post.+?id="(.+?)".+?class="dt">(.+?)<\/div>.+?<a href=".*?\/users\/.+?".*?>(.+?)<\/a>,(.+?)<span>.+?<a href=".*?\/(comments|inbox)\/.+?">(.+?)<\/span>.+?<em>(.+?)<\/em>/g;
+            ///<div class="post.+?id="(.+?)".+?class="dt">(.+?)<\/div>.+?Написал.+?<a href=".*?\/users\/.+?".*?>(.+?)<\/a>,(.+?)<span>.+?<a href=".*?\/(comments|inbox)\/.+?">(.+?)<\/span>.+?<span class="rating".+?><em>(.+?)<\/em>/g;
             var res = postReg.exec(data);
 
             while(res != null){
