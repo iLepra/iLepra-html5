@@ -23,12 +23,7 @@
         });
 
         $("#govButton").bind(iLepra.config.defaultTapEvent, function(){
-            $.mobile.showPageLoadingMsg();
-            $(document).bind(iLepra.events.ready, function(event){
-                $(document).unbind(event);
-                $.mobile.changePage("more_gov.html");
-            });
-            iLepra.gov.getCurrent();
+            $.mobile.changePage("more_gov.html");
         });
 
         $("#chatButton").bind(iLepra.config.defaultTapEvent, function(){
