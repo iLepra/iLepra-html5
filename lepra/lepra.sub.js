@@ -2,6 +2,7 @@ iLepra.sub = (function() {
     return {
         list: null,
         posts: null,
+        fetch: true,
 
         getList: function(shift){
             $.get("http://leprosorium.ru/underground/", function(data){

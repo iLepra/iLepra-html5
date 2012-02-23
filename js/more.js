@@ -13,16 +13,13 @@
 
         $("#mySubsButton").bind(iLepra.config.defaultTapEvent, function(){
             iLepra.sub.list = iLepra.userSubLepras;
+            iLepra.sub.fetch = false;
             $.mobile.changePage("more_subs.html");
         });
 
         $("#allSubsButton").bind(iLepra.config.defaultTapEvent, function(){
-            $.mobile.showPageLoadingMsg();
-            $(document).bind(iLepra.events.ready, function(event){
-                $(document).unbind(event);
-                $.mobile.changePage("more_subs.html");
-            });
-            iLepra.sub.getList();
+            iLepra.sub.fetch = true;
+            $.mobile.changePage("more_subs.html");
         });
 
         $("#govButton").bind(iLepra.config.defaultTapEvent, function(){
