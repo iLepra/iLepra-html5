@@ -3,12 +3,7 @@
         updateNewsCounts();
 
         $("#favsButton").bind(iLepra.config.defaultTapEvent, function(){
-            $.mobile.showPageLoadingMsg();
-            $(document).bind(iLepra.events.ready, function(event){
-                $(document).unbind(event);
-                $.mobile.changePage("more_favs.html");
-            });
-            iLepra.getFavourites();
+            $.mobile.changePage("more_favs.html");
         });
 
         $("#myProfileButton").bind(iLepra.config.defaultTapEvent, function(){
