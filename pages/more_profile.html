@@ -3,11 +3,11 @@
         <h1 id="profileUsername"></h1>
     </div>
 
-    <div data-role="content">
+    <div data-role="content" id="profileContent" style="display:none;">
         <div style="text-align: center;">
             <img id="userImage" />
         </div>
-    
+
         <ul data-role="listview" data-inset="true" data-divider-theme="a">
             <li data-role="list-divider" id="fullName"></li>
             <li id="userRegdate"></li>
@@ -15,21 +15,23 @@
             <li id="userNumber"></li>
             <li id="userKarma"></li>
         </ul>
-        
+
         <ul data-role="listview" data-inset="true" data-divider-theme="a">
             <li data-role="list-divider">Статистика</li>
             <li id="userStat"></li>
             <li id="userVote"></li>
             <li id="userVoteCount"></li>
         </ul>
-        
+
         <ul data-role="listview" id="contactsList" data-inset="true" data-divider-theme="a">
             <li data-role="list-divider">Контакты</li>
         </ul>
-        
+
         <div data-role="collapsible" data-collapsed="false">
             <h3>Дополнительно</h3>
             <p id="userDescription"></p>
         </div>
     </div>
+
+    <div class="loadingText">Загружаемся..</div>
 </div>
