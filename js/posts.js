@@ -31,9 +31,20 @@
 
     // render page on creation
     $(document).on('pagecreate', "#postsPage", function(){
-        initCounters();
+        $.mobile.showPageLoadingMsg();
+        $(document).bind(iLepra.events.ready, function(event){
+            $(document).unbind(event);
 
-        renderNewPosts();
+            $(".loadingText").remove();
+
+            $("#morePostsButton").show();
+
+            renderNewPosts();
+            $("#postsList").listview('refresh');
+        });
+        iLepra.getLastPosts();
+
+        initCounters();
 
         // refresh
         $("#refreshPostsButton").bind(iLepra.config.defaultTapEvent, function(){
