@@ -12,27 +12,35 @@
 
     // render page on creation
     $(document).on('pagecreate', "#favsPage", function(){
-        renderNewPosts();
-        // hide button if needed
-        if( postLimit >= iLepra.favouritePosts.length ){
-            $("#moreFavsButton").hide();
-        }else{
-            // more posts click
-            $("#moreFavsButton").bind(iLepra.config.defaultTapEvent, function(event){
-                // stops event to prevent random post opening
-                event.preventDefault();
-                event.stopPropagation();
+        $(document).bind(iLepra.events.ready, function(event){
+            $(document).unbind(event);
 
-                postLimit += postLimit;
-                if( postLimit >= iLepra.favouritePosts.length ){
-                    $("#moreFavsButton").hide();
-                }
+            $(".loadingText").remove();
 
-                // clean old data
-                $("#favsList").empty();
-                renderNewPosts();
-                $("#favsList").listview('refresh');
-            });
-        }
+            renderNewPosts();
+            $("#favsList").listview('refresh');
+
+            // hide button if needed
+            if( postLimit < iLepra.favouritePosts.length ){
+                $("#moreFavsButton").show();
+                // more posts click
+                $("#moreFavsButton").bind(iLepra.config.defaultTapEvent, function(event){
+                    // stops event to prevent random post opening
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                    postLimit += postLimit;
+                    if( postLimit >= iLepra.favouritePosts.length ){
+                        $("#moreFavsButton").hide();
+                    }
+
+                    // clean old data
+                    $("#favsList").empty();
+                    renderNewPosts();
+                    $("#favsList").listview('refresh');
+                });
+            }
+        });
+        iLepra.getFavourites();
     });
 })();

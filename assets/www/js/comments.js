@@ -26,6 +26,12 @@
             }
         }
         $("#commentsList").append(p);
+
+        if( $(".new").length > 0 ){
+            $("#commentsNav").show();
+        }else{
+            $("#commentsNav").hide();
+        }
     }
 
     // on post comments show

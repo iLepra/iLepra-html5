@@ -12,29 +12,37 @@
 
     // render page on creation
     $(document).on('pagecreate', "#mystuffPage", function(){
+        $(document).bind(iLepra.events.ready, function(event){
+            $(document).unbind(event);
+
+            $(".loadingText").remove();
+
+            renderNewPosts();
+            $("#mystuffList").listview('refresh');
+
+            // hide button if needed
+            if( postLimit < iLepra.myStuffPosts.length ){
+                $("#moreMystuffButton").show();
+                // more posts click
+                $("#moreMystuffButton").bind(iLepra.config.defaultTapEvent, function(event){
+                    // stops event to prevent random post opening
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                    postLimit += postLimit;
+                    if( postLimit >= iLepra.myStuffPosts.length ){
+                        $("#moreMystuffButton").hide();
+                    }
+
+                    // clean old data
+                    $("#mystuffList").empty();
+                    renderNewPosts();
+                    $("#mystuffList").listview('refresh');
+                });
+            }
+        });
+        iLepra.getMyStuff();
+
         updateNewsCounts();
-
-        renderNewPosts();
-        // hide button if needed
-        if( postLimit >= iLepra.myStuffPosts.length ){
-            $("#moreMystuffButton").hide();
-        }else{
-            // more posts click
-            $("#moreMystuffButton").bind(iLepra.config.defaultTapEvent, function(event){
-                // stops event to prevent random post opening
-                event.preventDefault();
-                event.stopPropagation();
-
-                postLimit += postLimit;
-                if( postLimit >= iLepra.myStuffPosts.length ){
-                    $("#moreMystuffButton").hide();
-                }
-
-                // clean old data
-                $("#mystuffList").empty();
-                renderNewPosts();
-                $("#mystuffList").listview('refresh');
-            });
-        }
     });
 })();

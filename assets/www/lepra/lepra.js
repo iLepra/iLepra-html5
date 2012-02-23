@@ -31,7 +31,7 @@ iLepra = (function() {
         iLepra.userSubLepras = [];
 
         // sub lepra regex
-        var subReg = /<div class="sub"><strong class="logo"><a href="(.+?)" title="(.+?)"><img src="(.+?)" alt=".+?" \/>.+?<div class="creator">.+?<a href=".+?">(.+?)<\/a>/g;
+        var subReg = /<div class="sub"><strong class="logo"><a href="(.+?)" title="(.*?)"><img src="(.+?)" alt=".+?" \/>.+?<div class="creator">.+?<a href=".*?\/users\/.+?">(.+?)<\/a>/g;
 
         // get them all
         var res = subReg.exec(data);
