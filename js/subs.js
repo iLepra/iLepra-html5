@@ -1,5 +1,6 @@
 $(window).load(function(){
     var subName = null;
+    var subUrl = null;
 
     var rendreNew = function(){
         // render posts
@@ -28,28 +29,29 @@ $(window).load(function(){
 
     // sub click
     $(document).on(iLepra.config.defaultTapEvent, "a.subListItem", function(){
-        // show loader
-        $.mobile.showPageLoadingMsg();
-
-        // on posts data
-        $(document).bind(iLepra.events.ready, function(event){
-            $(document).unbind(event);
-            $.mobile.changePage("more_subposts.html");
-        });
-
         subName = $(this).children('h1').text();
+        subUrl = $(this).data('link');
 
-        // get posts
-        var url = $(this).data('link');
-        iLepra.sub.getPosts(url);
+        $.mobile.changePage("more_subposts.html");
     });
 
     $(document).on('pagecreate', "#subpostsPage", function(){
-        // render posts
-        var p = "";
-        for(var i = 0; i < iLepra.sub.posts.length; i++)
-            p += _.template(postTemplate, iLepra.sub.posts[i]);
-        $("#subpostsList").append(p);
+        // on posts data
+        $(document).bind(iLepra.events.ready, function(event){
+            $(document).unbind(event);
+
+            $(".loadingText").remove();
+
+            // render posts
+            var p = "";
+            for(var i = 0; i < iLepra.sub.posts.length; i++)
+                p += _.template(postTemplate, iLepra.sub.posts[i]);
+            $("#subpostsList").append(p);
+            $("#subpostsList").listview('refresh');
+        });
+
+        // get posts
+        iLepra.sub.getPosts(subUrl);
 
         // title
         $("#subpostsTitle").text(subName);
