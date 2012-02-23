@@ -14,12 +14,15 @@
         $("#chatList").listview('refresh');
     }
 
-    requestNewChatData = function(){
+    requestNewChatData = function(isInit){
         $(document).bind(iLepra.events.ready, function(event){
             $(document).unbind(event);
             data = iLepra.chat.messages.slice(0);
             data.sort(function(a,b){ return a.id > b.id ? -1 : 1});
             refreshMessages();
+            if( typeof isInit != 'undefined' && isInit ){
+                $(".loadingText").remove();
+            }
         });
         iLepra.chat.getMessages();
     }
@@ -48,13 +51,7 @@
             iLepra.chat.sendMessage(text);
         });
 
-        data = iLepra.chat.messages.slice(0);
-        data.sort(function(a,b){ return a.id > b.id ? -1 : 1});
-        // render posts
-        var p = "";
-        for(var i = 0; i < data.length; i++)
-            p += _.template(chatTemplate, data[i]);
-        $("#chatList").append(p);
+        requestNewChatData(true);
         // set refresh interval
         refreshInterval = setInterval ( "requestNewChatData()", 10000 );
     });

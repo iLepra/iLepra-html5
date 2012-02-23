@@ -27,12 +27,7 @@
         });
 
         $("#chatButton").bind(iLepra.config.defaultTapEvent, function(){
-            $.mobile.showPageLoadingMsg();
-            $(document).bind(iLepra.events.ready, function(event){
-                $(document).unbind(event);
-                $.mobile.changePage("more_chat.html");
-            });
-            iLepra.chat.getMessages();
+            $.mobile.changePage("more_chat.html");
         });
 
         $("#settingsButton").bind(iLepra.config.defaultTapEvent, function(){
