@@ -12,12 +12,6 @@
         });
 
         $("#myProfileButton").bind(iLepra.config.defaultTapEvent, function(){
-            //$.mobile.showPageLoadingMsg();
-            //$(document).bind(iLepra.events.ready, function(event){
-            //    $(document).unbind(event);
-            //    $.mobile.changePage("more_profile.html");
-            //});
-            //iLepra.profile.getProfile(iLepra.username);
             profileName = iLepra.username;
             $.mobile.changePage("more_profile.html");
         });
