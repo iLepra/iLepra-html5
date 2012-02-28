@@ -46,6 +46,11 @@ window.addEventListener('load', function(){
     });
 
     $(document).on("pagecreate", "#loginPage", function(){
+        if( iLepra.isAuthenticated ){
+            $.mobile.changePage("pages/posts.html");
+            return;
+        }
+
         // load captcha
         $("#captchaImage").attr('src', iLepra.captchaURL);
 
