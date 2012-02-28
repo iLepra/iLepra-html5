@@ -315,7 +315,7 @@ iLepra = (function() {
 
             var time = new Date().getTime();
             // check if there's new posts
-            if( (iLepra.myNewComments < 1 && iLepra.myNewPosts < 1 ) || ( iLepra.myNewComments == myStuffOldNew.c && iLepra.myNewPosts == myStuffOldNew.p )
+            if( ( iLepra.myNewComments == myStuffOldNew.c && iLepra.myNewPosts == myStuffOldNew.p )
                 && ( myStuffFetchTime != null && Math.abs( time - myStuffFetchTime ) < cacheTime )
                 && iLepra.myStuffPosts.length > 0 && !forceRefresh ){
                 // dispatch ready and die
@@ -364,7 +364,7 @@ iLepra = (function() {
 
             var time = new Date().getTime();
             // check if there's new posts
-            if( ( iLepra.inboxNewComments < 1 && iLepra.inboxNewPosts < 1 ) || ( iLepra.inboxNewComments == inboxOldNew.c && iLepra.inboxNewPosts == inboxOldNew.p )
+            if( ( iLepra.inboxNewComments == inboxOldNew.c && iLepra.inboxNewPosts == inboxOldNew.p )
                 && ( inboxFetchTime != null && Math.abs( time - inboxFetchTime ) < cacheTime )
                 && iLepra.inboxPosts.length > 0 && !forceRefresh ){
                 // dispatch ready and die
