@@ -2,6 +2,8 @@
  ** Main iLepra class that handles all the logic
  */
 iLepra = (function() {
+    var lastPostFetchTime = null;
+
     /***
      Processes given html string for captcha data
      ***/
@@ -240,10 +242,22 @@ iLepra = (function() {
         /***
          Gets last posts from JSON interface
          ***/
-        getLastPosts: function(){
-            iLepra.postCount = 0;
+        getLastPosts: function(forceRefresh){
+            if( forceRefresh == null || typeof forceRefresh == 'undefined' ) forceRefresh = false;
 
+            var time = new Date().getTime();
+            // check if posts was loaded earlier than 1 min ago
+            if( lastPostFetchTime != null && Math.abs( time - lastPostFetchTime ) < 60000 && iLepra.latestPosts.length > 0 && !forceRefresh ){
+                // dispatch ready and die
+                $(document).trigger(iLepra.events.ready);
+                return;
+            }
+
+            // get data
+            iLepra.postCount = 0;
             $.post("http://leprosorium.ru/idxctl/", {from:iLepra.postCount}, function(data){
+                lastPostFetchTime = new Date().getTime();
+
                 // convert string to object
                 data = $.parseJSON(data);
                 // init posts array
