@@ -375,7 +375,7 @@ iLepra = (function() {
             // get data
             $.get("http://leprosorium.ru/my/inbox/", function(data){
                 inboxOldNew = {
-                    p:  iLepra.inboxNewPosts,
+                    p: iLepra.inboxNewPosts,
                     c: iLepra.inboxNewComments
                 }
                 inboxFetchTime = new Date().getTime();
