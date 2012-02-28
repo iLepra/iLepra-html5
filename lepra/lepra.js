@@ -2,7 +2,11 @@
  ** Main iLepra class that handles all the logic
  */
 iLepra = (function() {
+    // last fetch times for stuff
+    var cacheTime = 60000;
     var lastPostFetchTime = null;
+    var myStuffFetchTime = null;
+    var inboxFetchTime = null;
 
     /***
      Processes given html string for captcha data
@@ -247,7 +251,7 @@ iLepra = (function() {
 
             var time = new Date().getTime();
             // check if posts was loaded earlier than 1 min ago
-            if( lastPostFetchTime != null && Math.abs( time - lastPostFetchTime ) < 60000 && iLepra.latestPosts.length > 0 && !forceRefresh ){
+            if( lastPostFetchTime != null && Math.abs( time - lastPostFetchTime ) < cacheTime && iLepra.latestPosts.length > 0 && !forceRefresh ){
                 // dispatch ready and die
                 $(document).trigger(iLepra.events.ready);
                 return;
@@ -304,11 +308,24 @@ iLepra = (function() {
         /***
          Gets my stuff posts
          ***/
-        getMyStuff: function(){
+        getMyStuff: function(forceRefresh){
+            if( forceRefresh == null || typeof forceRefresh == 'undefined' ) forceRefresh = false;
+
+            var time = new Date().getTime();
+            // check if posts was loaded earlier than 1 min ago
+            if( myStuffFetchTime != null && Math.abs( time - myStuffFetchTime ) < cacheTime && iLepra.myStuffPosts.length > 0 && !forceRefresh ){
+                // dispatch ready and die
+                $(document).trigger(iLepra.events.ready);
+                return;
+            }
+
+            // get data
             $.get("http://leprosorium.ru/my/", function(data){
-                    iLepra.myStuffPosts = [];
-                    iLepra.util.processHTMLPosts(data, iLepra.myStuffPosts, undefined);
-                    $(document).trigger(iLepra.events.ready);
+                myStuffFetchTime = new Date().getTime();
+
+                iLepra.myStuffPosts = [];
+                iLepra.util.processHTMLPosts(data, iLepra.myStuffPosts, undefined);
+                $(document).trigger(iLepra.events.ready);
             });
         },
 
@@ -316,6 +333,14 @@ iLepra = (function() {
          Gets favourite posts
          ***/
         getFavourites: function(){
+            // check if posts was loaded earlier
+            if( iLepra.favouritePosts != null && iLepra.favouritePosts.length > 0 ){
+                // dispatch ready and die
+                $(document).trigger(iLepra.events.ready);
+                return;
+            }
+
+            // get data
             $.get("http://leprosorium.ru/my/favourites/", function(data){
                 iLepra.favouritePosts = [];
                 iLepra.util.processHTMLPosts(data, iLepra.favouritePosts, 'fav');
@@ -326,8 +351,21 @@ iLepra = (function() {
         /***
          Gets inboxes stuff
          ***/
-        getInbox: function(){
+        getInbox: function(forceRefresh){
+            if( forceRefresh == null || typeof forceRefresh == 'undefined' ) forceRefresh = false;
+
+            var time = new Date().getTime();
+            // check if posts was loaded earlier than 1 min ago
+            if( inboxFetchTime != null && Math.abs( time - inboxFetchTime ) < cacheTime && iLepra.inboxPosts.length > 0 && !forceRefresh ){
+                // dispatch ready and die
+                $(document).trigger(iLepra.events.ready);
+                return;
+            }
+
+            // get data
             $.get("http://leprosorium.ru/my/inbox/", function(data){
+                inboxFetchTime = new Date().getTime();
+
                 iLepra.inboxPosts = [];
                 iLepra.util.processHTMLPosts(data, iLepra.inboxPosts, 'inbox');
                 $(document).trigger(iLepra.events.ready);

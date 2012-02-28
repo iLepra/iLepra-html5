@@ -18,7 +18,9 @@
             $(".loadingText").remove();
 
             renderNewPosts();
-            $("#mystuffList").listview('refresh');
+            try{
+                $("#mystuffList").listview('refresh');
+            }catch(e){}
 
             // hide button if needed
             if( postLimit < iLepra.myStuffPosts.length ){
