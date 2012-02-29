@@ -2,6 +2,14 @@
  ** Main iLepra class that handles all the logic
  */
 iLepra = (function() {
+    // last fetch times for stuff
+    var cacheTime = 5 * 60000;
+    var lastPostFetchTime = null;
+    var myStuffFetchTime = null;
+    var inboxFetchTime = null;
+    var myStuffOldNew = {c:null, p:null};
+    var inboxOldNew = {c:null, p:null};
+
     /***
      Processes given html string for captcha data
      ***/
@@ -240,10 +248,22 @@ iLepra = (function() {
         /***
          Gets last posts from JSON interface
          ***/
-        getLastPosts: function(){
-            iLepra.postCount = 0;
+        getLastPosts: function(forceRefresh){
+            if( forceRefresh == null || typeof forceRefresh == 'undefined' ) forceRefresh = false;
 
+            var time = new Date().getTime();
+            // check if posts was loaded earlier than 1 min ago
+            if( lastPostFetchTime != null && Math.abs( time - lastPostFetchTime ) < cacheTime && iLepra.latestPosts.length > 0 && !forceRefresh ){
+                // dispatch ready and die
+                $(document).trigger(iLepra.events.ready);
+                return;
+            }
+
+            // get data
+            iLepra.postCount = 0;
             $.post("http://leprosorium.ru/idxctl/", {from:iLepra.postCount}, function(data){
+                lastPostFetchTime = new Date().getTime();
+
                 // convert string to object
                 data = $.parseJSON(data);
                 // init posts array
@@ -290,11 +310,30 @@ iLepra = (function() {
         /***
          Gets my stuff posts
          ***/
-        getMyStuff: function(){
+        getMyStuff: function(forceRefresh){
+            if( forceRefresh == null || typeof forceRefresh == 'undefined' ) forceRefresh = false;
+
+            var time = new Date().getTime();
+            // check if there's new posts
+            if( ( iLepra.myNewComments == myStuffOldNew.c && iLepra.myNewPosts == myStuffOldNew.p )
+                && ( myStuffFetchTime != null && Math.abs( time - myStuffFetchTime ) < cacheTime )
+                && iLepra.myStuffPosts.length > 0 && !forceRefresh ){
+                // dispatch ready and die
+                $(document).trigger(iLepra.events.ready);
+                return;
+            }
+
+            // get data
             $.get("http://leprosorium.ru/my/", function(data){
-                    iLepra.myStuffPosts = [];
-                    iLepra.util.processHTMLPosts(data, iLepra.myStuffPosts, undefined);
-                    $(document).trigger(iLepra.events.ready);
+                myStuffOldNew = {
+                    p: iLepra.myNewPosts,
+                    c: iLepra.myNewComments
+                }
+                myStuffFetchTime = new Date().getTime();
+
+                iLepra.myStuffPosts = [];
+                iLepra.util.processHTMLPosts(data, iLepra.myStuffPosts, undefined);
+                $(document).trigger(iLepra.events.ready);
             });
         },
 
@@ -302,6 +341,14 @@ iLepra = (function() {
          Gets favourite posts
          ***/
         getFavourites: function(){
+            // check if posts was loaded earlier
+            if( iLepra.favouritePosts != null && iLepra.favouritePosts.length > 0 ){
+                // dispatch ready and die
+                $(document).trigger(iLepra.events.ready);
+                return;
+            }
+
+            // get data
             $.get("http://leprosorium.ru/my/favourites/", function(data){
                 iLepra.favouritePosts = [];
                 iLepra.util.processHTMLPosts(data, iLepra.favouritePosts, 'fav');
@@ -312,8 +359,27 @@ iLepra = (function() {
         /***
          Gets inboxes stuff
          ***/
-        getInbox: function(){
+        getInbox: function(forceRefresh){
+            if( forceRefresh == null || typeof forceRefresh == 'undefined' ) forceRefresh = false;
+
+            var time = new Date().getTime();
+            // check if there's new posts
+            if( ( iLepra.inboxNewComments == inboxOldNew.c && iLepra.inboxNewPosts == inboxOldNew.p )
+                && ( inboxFetchTime != null && Math.abs( time - inboxFetchTime ) < cacheTime )
+                && iLepra.inboxPosts.length > 0 && !forceRefresh ){
+                // dispatch ready and die
+                $(document).trigger(iLepra.events.ready);
+                return;
+            }
+
+            // get data
             $.get("http://leprosorium.ru/my/inbox/", function(data){
+                inboxOldNew = {
+                    p: iLepra.inboxNewPosts,
+                    c: iLepra.inboxNewComments
+                }
+                inboxFetchTime = new Date().getTime();
+
                 iLepra.inboxPosts = [];
                 iLepra.util.processHTMLPosts(data, iLepra.inboxPosts, 'inbox');
                 $(document).trigger(iLepra.events.ready);

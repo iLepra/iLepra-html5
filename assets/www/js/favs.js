@@ -18,7 +18,9 @@
             $(".loadingText").remove();
 
             renderNewPosts();
-            $("#favsList").listview('refresh');
+            try{
+                $("#favsList").listview('refresh');
+            }catch(e){}
 
             // hide button if needed
             if( postLimit < iLepra.favouritePosts.length ){

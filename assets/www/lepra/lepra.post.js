@@ -32,7 +32,7 @@ iLepra.post = (function() {
 
                 var voteRes = /wtf_vote = '(.+?)'/gi.exec(data);
                 iLepra.post.current.wtf = {
-                    comment: /<input type="hidden" name="wtf" value="(.+?)" \/>/g.exec(data)[1],
+                    comment: /commentsHandler.wtf = '(.+?)'/g.exec(data)[1],
                     vote: voteRes != null ? voteRes[1] : null
                 }
 
