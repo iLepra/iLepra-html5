@@ -1,4 +1,6 @@
 (function(){
+    // comments loading indicator
+    var commentsLoading = false;
     // autorender comments
     var autorender = false;
     // pagination & display stuff
@@ -72,8 +74,11 @@
 
         // on comments request
         $("#postCommentsButton").bind(iLepra.config.defaultTapEvent, function(){
+            if(commentsLoading) return;
+
             // show loader
             $.mobile.showPageLoadingMsg();
+            commentsLoading = true;
 
             // on posts data
             $(document).bind(iLepra.events.ready, function(event){
@@ -93,6 +98,8 @@
                 }else{
                     prepareCommentsButtons();
                 }
+
+                commentsLoading = false;
             });
 
             iLepra.post.getComments();
