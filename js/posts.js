@@ -30,12 +30,14 @@
     }
 
     // render page on creation
-    $(document).on('pagecreate', "#postsPage", function(event){
+    $(document).on('pageshow', "#postsPage", function(event){
         $.mobile.showPageLoadingMsg();
+
         $(document).bind(iLepra.events.ready, function(event){
             $(document).unbind(event);
 
-            $(".loadingText").remove();
+            // hide loading msg
+            $.mobile.hidePageLoadingMsg()
 
             $("#morePostsButton").show();
 

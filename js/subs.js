@@ -11,12 +11,15 @@ $(window).load(function(){
     }
 
     // render page on creation
-    $(document).on('pagecreate', "#subsPage", function(){
+    $(document).on('pageshow', "#subsPage", function(){
         if( iLepra.sub.fetch ){
+            $.mobile.showPageLoadingMsg();
+
             $(document).bind(iLepra.events.ready, function(event){
                 $(document).unbind(event);
 
-                $(".loadingText").remove();
+                // hide loading msg
+                $.mobile.hidePageLoadingMsg();
 
                 rendreNew();
                 $("#subsList").listview('refresh');
@@ -24,6 +27,7 @@ $(window).load(function(){
             iLepra.sub.getList();
         }else{
             rendreNew();
+            $("#subsList").listview('refresh');
         }
     });
 
@@ -35,12 +39,15 @@ $(window).load(function(){
         $.mobile.changePage("more_subposts.html");
     });
 
-    $(document).on('pagecreate', "#subpostsPage", function(){
+    $(document).on('pageshow', "#subpostsPage", function(){
+        $.mobile.showPageLoadingMsg();
+
         // on posts data
         $(document).bind(iLepra.events.ready, function(event){
             $(document).unbind(event);
 
-            $(".loadingText").remove();
+            // hide loading msg
+            $.mobile.hidePageLoadingMsg()
 
             // render posts
             var p = "";

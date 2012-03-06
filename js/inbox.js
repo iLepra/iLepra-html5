@@ -11,11 +11,14 @@
     }
 
     // render page on creation
-    $(document).on('pagecreate', "#inboxPage", function(){
+    $(document).on('pageshow', "#inboxPage", function(){
+        $.mobile.showPageLoadingMsg()
+
         $(document).bind(iLepra.events.ready, function(event){
             $(document).unbind(event);
 
-            $(".loadingText").remove();
+            // hide loading msg
+            $.mobile.hidePageLoadingMsg()
 
             renderNewPosts();
             try{

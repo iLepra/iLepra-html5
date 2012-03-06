@@ -1,15 +1,14 @@
-// jqm presets
-$( document ).bind( "mobileinit", function() {
-    $.support.cors = true;
-    $.mobile.allowCrossDomainPages = true;
-    $.mobile.pushStateEnabled = false;
-    $.loadingMessage = "";
-});
-
 // fired up when phonegap is ready - this requires a phonegap.js file :|
 //document.addEventListener("deviceready", function(){
 //$(document).ready(function(){
 window.addEventListener('load', function(){
+    // jqm presets
+        $.support.cors = true;
+        $.mobile.allowCrossDomainPages = true;
+        $.mobile.pushStateEnabled = false;
+        $.mobile.loadingMessageTextVisible = true;
+        $.mobile.loadingMessage = "Загружаемся ...";
+
     // jquery mobile stuff
     $.mobile.page.prototype.options.backBtnText = "Назад";
     $.mobile.fixedtoolbar.prototype.options.tapToggle = false;
