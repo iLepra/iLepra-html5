@@ -2,14 +2,12 @@
 //document.addEventListener("deviceready", function(){
 //$(document).ready(function(){
 window.addEventListener('load', function(){
-    // jqm presets
-        $.support.cors = true;
-        $.mobile.allowCrossDomainPages = true;
-        $.mobile.pushStateEnabled = false;
-        $.mobile.loadingMessageTextVisible = true;
-        $.mobile.loadingMessage = "Загружаемся ...";
-
     // jquery mobile stuff
+    $.support.cors = true;
+    $.mobile.allowCrossDomainPages = true;
+    $.mobile.pushStateEnabled = false;
+    $.mobile.loadingMessageTextVisible = true;
+    $.mobile.loadingMessage = "Загружаемся ...";
     $.mobile.page.prototype.options.backBtnText = "Назад";
     $.mobile.fixedtoolbar.prototype.options.tapToggle = false;
     $.mobile.defaultPageTransition = 'none';
