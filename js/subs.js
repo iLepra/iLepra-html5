@@ -1,6 +1,7 @@
 $(window).load(function(){
     var subName = null;
     var subUrl = null;
+    var postLimit = iLepra.config.postIncrement;
 
     var rendreNew = function(){
         // render posts
@@ -39,6 +40,16 @@ $(window).load(function(){
         $.mobile.changePage("more_subposts.html");
     });
 
+    // render posts
+    var renderNewPosts = function(){
+        var limit = postLimit > iLepra.sub.posts.length ? iLepra.sub.posts.length : postLimit;
+        var p = "";
+        for(var i = 0; i < limit; i++)
+            p += _.template(postTemplate, iLepra.sub.posts[i]);
+        $("#subpostsList").append(p);
+        $("#subpostsList").listview('refresh');
+    }
+
     $(document).on('pageshow', "#subpostsPage", function(){
         $.mobile.showPageLoadingMsg();
 
@@ -47,14 +58,11 @@ $(window).load(function(){
             $(document).unbind(event);
 
             // hide loading msg
-            $.mobile.hidePageLoadingMsg()
+            $.mobile.hidePageLoadingMsg();
 
-            // render posts
-            var p = "";
-            for(var i = 0; i < iLepra.sub.posts.length; i++)
-                p += _.template(postTemplate, iLepra.sub.posts[i]);
-            $("#subpostsList").append(p);
-            $("#subpostsList").listview('refresh');
+            $("#moreSubpostsButton").show();
+
+            renderNewPosts();
         });
 
         // get posts
@@ -62,5 +70,38 @@ $(window).load(function(){
 
         // title
         $("#subpostsTitle").text(subName);
+
+        // more btn
+        $("#moreSubpostsButton").bind(iLepra.config.defaultTapEvent, function(event){
+            // stops event to prevent random post opening
+            event.preventDefault();
+            event.stopPropagation();
+
+            if( postLimit < iLepra.sub.posts.length){
+                postLimit += postLimit;
+
+                // clean old data
+                $("#subpostsList").empty();
+                renderNewPosts();
+            }else{ // load new data
+                // show loader
+                $.mobile.showPageLoadingMsg();
+
+                // on posts data
+                $(document).bind(iLepra.events.ready, function(event){
+                    $(document).unbind(event);
+
+                    // remove loader
+                    $.mobile.hidePageLoadingMsg();
+
+                    // clean old data
+                    $("#subpostsList").empty();
+                    renderNewPosts();
+                });
+
+                // get posts
+                iLepra.sub.getMorePosts(subUrl);
+            }
+        });
     });
 });
