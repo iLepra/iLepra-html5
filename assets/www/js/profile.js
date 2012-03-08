@@ -8,11 +8,14 @@ var profileName;
     });
 
     // render page on creation
-    $(document).on('pagecreate', "#profilePage", function(){
+    $(document).on('pageshow', "#profilePage", function(){
+        $.mobile.showPageLoadingMsg()
+
         $(document).bind(iLepra.events.ready, function(event){
             $(document).unbind(event);
 
-            $(".loadingText").remove();
+            // hide loading msg
+            $.mobile.hidePageLoadingMsg()
             $("#profileContent").show();
 
             var data = iLepra.profile.data;

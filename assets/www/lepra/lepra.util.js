@@ -56,6 +56,51 @@ iLepra.util = (function() {
 
                 res = postReg.exec(data);
             }
+        },
+
+        /***
+         Processes given JSON object for latest posts
+         ***/
+        processJSONPosts: function(posts, postArray){
+            for(var i in posts){
+                var post = {};
+                // get img and short text
+                var imgReg = /img src="(.+?)"/g
+                var res = imgReg.exec(posts[i].body);
+                var img = "";
+                if( res != null ){
+                    // save first image as post image
+                    img = "http://src.sencha.io/80/80/"+res[1];
+
+                    posts[i].body = posts[i].body.replace(res[1], "http://src.sencha.io/"+iLepra.config.screenBiggest+"/"+res[1]);
+                    // convert all image URIs to compressed ones
+                    res = imgReg.exec(posts[i].body);
+                    while(res != null){
+                        posts[i].body = posts[i].body.replace(res[1], "http://src.sencha.io/"+iLepra.config.screenBiggest+"/"+res[1]);
+
+                        res = imgReg.exec(posts[i].body);
+                    }
+                }/*else{
+                    img = ''//"../css/img/placeholder.png";
+                }*/
+                var text = posts[i].body.replace(/(<([^>]+)>)/ig," ").substr(0, 140);
+                if(text.length == 140) text += "..";
+
+                post.id = posts[i].id;
+                post.body = posts[i].body;
+                post.rating = posts[i].rating;
+                post.domain_url = posts[i].domain_url;
+                post.image = img;
+                post.text = text;
+                post.user = posts[i].login;
+                post.comments = posts[i].comm_count + " / " + posts[i].unread;
+                post.wrote = (posts[i].gender == 1 ? "Написал " : "Написала ") + posts[i].user_rank + " " +posts[i].login;
+                post.when = posts[i].textdate + " в " + posts[i].posttime;
+
+                if( postArray.indexOf(post) == -1 ){
+                    postArray.push(post);
+                }
+            }
         }
     };
 })();

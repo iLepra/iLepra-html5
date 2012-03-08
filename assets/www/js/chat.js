@@ -21,14 +21,15 @@
             data.sort(function(a,b){ return a.id > b.id ? -1 : 1});
             refreshMessages();
             if( typeof isInit != 'undefined' && isInit ){
-                $(".loadingText").remove();
+                // hide loading msg
+                $.mobile.hidePageLoadingMsg()
             }
         });
         iLepra.chat.getMessages();
     }
 
     // render page on creation
-    $(document).on('pagecreate', "#chatPage", function(){
+    $(document).on('pageshow', "#chatPage", function(){
         $("#submitChat").bind(iLepra.config.defaultTapEvent, function(){
             var text = $("#chatInput").val();
             $("#chatInput").val("");
@@ -51,6 +52,7 @@
             iLepra.chat.sendMessage(text);
         });
 
+        $.mobile.showPageLoadingMsg()
         requestNewChatData(true);
         // set refresh interval
         refreshInterval = setInterval ( "requestNewChatData()", 10000 );

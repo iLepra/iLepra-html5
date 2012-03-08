@@ -1,10 +1,13 @@
 (function(){
     // render page on creation
-    $(document).on('pagecreate', "#govPage", function(){
+    $(document).on('pageshow', "#govPage", function(){
+        $.mobile.showPageLoadingMsg()
+
         $(document).bind(iLepra.events.ready, function(event){
             $(document).unbind(event);
 
-            $(".loadingText").remove();
+            // hide loading msg
+            $.mobile.hidePageLoadingMsg()
 
             // render posts
             $("#president").html(

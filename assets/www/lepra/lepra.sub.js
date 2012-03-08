@@ -3,6 +3,7 @@ iLepra.sub = (function() {
         list: null,
         posts: null,
         fetch: true,
+        postCount: 0,
 
         getList: function(shift){
             $.get("http://leprosorium.ru/underground/", function(data){
@@ -36,9 +37,29 @@ iLepra.sub = (function() {
         },
 
         getPosts: function(url){
-            $.get(url, function(data){
+            // get data
+            iLepra.sub.postCount = 0;
+            $.post(url+"/idxctl/", {from:iLepra.sub.postCount}, function(data){
+                // convert string to object
+                data = $.parseJSON(data);
+                // init posts array
                 iLepra.sub.posts = [];
-                iLepra.util.processHTMLPosts(data, iLepra.sub.posts, undefined);
+                // parse
+                iLepra.util.processJSONPosts(data.posts, iLepra.sub.posts);
+                // trigger event
+                $(document).trigger(iLepra.events.ready);
+            });
+        },
+
+        getMorePosts: function(url){
+            iLepra.sub.postCount += 42;
+
+            $.post(url+"/idxctl/", {from:iLepra.sub.postCount}, function(data){
+                // convert string to object
+                data = $.parseJSON(data);
+                // parse
+                iLepra.util.processJSONPosts(data.posts, iLepra.sub.posts);
+                // trigger event
                 $(document).trigger(iLepra.events.ready);
             });
         }

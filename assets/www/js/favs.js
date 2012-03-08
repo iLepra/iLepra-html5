@@ -11,11 +11,14 @@
     }
 
     // render page on creation
-    $(document).on('pagecreate', "#favsPage", function(){
+    $(document).on('pageshow', "#favsPage", function(){
+        $.mobile.showPageLoadingMsg()
+
         $(document).bind(iLepra.events.ready, function(event){
             $(document).unbind(event);
 
-            $(".loadingText").remove();
+            // hide loading msg
+            $.mobile.hidePageLoadingMsg()
 
             renderNewPosts();
             try{
