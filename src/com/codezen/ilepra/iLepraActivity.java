@@ -1,6 +1,6 @@
 package com.codezen.ilepra;
 
-import com.phonegap.DroidGap;
+import org.apache.cordova.DroidGap;
 
 import android.os.Bundle;
 
