@@ -127,7 +127,7 @@
             $("#commentsList").listview('refresh');
         });
 
-        $("#addCommentButton").bind(iLepra.config.defaultTapEvent, function(){
+        $("#replyPost").bind(iLepra.config.defaultTapEvent, function(){
             commentId = null;
             commentUser = null;
 
@@ -150,6 +150,23 @@
             var com = $(newComs[newPos]);
             if( com != null) $.mobile.silentScroll(com.offset().top);
         });
+
+        $("#postVoteup").bind(iLepra.config.defaultTapEvent, function(){
+            $(this).css('opacity', 1);
+            $(this).next().css('opacity', 0.3);
+            iLepra.post.votePost("p"+iLepra.post.current.id, "1");
+        });
+        $("#postVotedown").bind(iLepra.config.defaultTapEvent, function(){
+            $(this).prev().css('opacity', 0.3);
+            $(this).css('opacity', 1);
+            iLepra.post.votePost("p"+iLepra.post.current.id, "-1");
+        });
+
+        if(iLepra.post.current.vote == 1){
+            $("#postVoteup").css("opacity", 1);
+        }else if(iLepra.post.current.vote == -1){
+            $("#postVotedown").css("opacity", 1);
+        }
 
         if(autorender){
             $("#postCommentsButton").hide();
