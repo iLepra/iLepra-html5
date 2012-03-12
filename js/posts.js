@@ -15,8 +15,6 @@
         // show loader
         $.mobile.showPageLoadingMsg();
 
-        $("#layoutButtons a").each(function(){ $(this).removeClass('ui-btn-active'); });
-
         // on posts data
         $(document).bind(iLepra.events.ready, function(event){
             $(document).unbind(event);

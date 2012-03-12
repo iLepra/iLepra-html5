@@ -260,7 +260,7 @@ iLepra = (function() {
                 showonindex: type,
                 selected_threshold: "all"
             }, function(){
-                iLepra.getLastPosts();
+                iLepra.getLastPosts(true);
             });
         },
 
