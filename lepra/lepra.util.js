@@ -71,7 +71,6 @@ iLepra.util = (function() {
          Processes given JSON object for latest posts
          ***/
         processJSONPosts: function(posts, postArray){
-            console.log(posts);
             for(var i in posts){
                 var post = {};
                 // get img and short text

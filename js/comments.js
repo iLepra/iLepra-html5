@@ -87,6 +87,7 @@
                 $.mobile.hidePageLoadingMsg();
                 $("#postCommentsButton").hide();
                 $("#postCommentsContent").show();
+                $("#replyPost").show();
 
                 // render comments
                 renderNewComments();
