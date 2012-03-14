@@ -9,7 +9,8 @@ iLepra.util = (function() {
             data = data.replace(/\r+/g, '');
             data = data.replace(/\t+/g, '');
 
-            var postReg = /<div class="post.+?id="(.+?)".+?class="dt">(.+?)<\/div>.+?<a href=".*?\/users\/.+?".*?>(.+?)<\/a>,(.+?)<span>.+?<a href=".*?\/(comments|inbox)\/.+?">(.+?)<\/span>.+?<em>(.+?)<\/em>/g;
+            var postReg =/<div class="post.+?id="(.+?)".+?class="dt">(.+?)<\/div>.+?<a href=".*?\/users\/.+?".*?>(.+?)<\/a>,(.+?)<span>.+?<a href=".*?\/(comments|inbox)\/.+?">(.+?)<\/span>.+?.+?(<div class="vote".+?><em>(.+?)<\/em><\/span>|<\/div>)(<a href="#".+?class="plus(.*?)">.+?<a href="#".+?class="minus(.*?)">|<\/div>)/g;
+            // /<div class="post.+?id="(.+?)".+?class="dt">(.+?)<\/div>.+?<a href=".*?\/users\/.+?".*?>(.+?)<\/a>,(.+?)<span>.+?<a href=".*?\/(comments|inbox)\/.+?">(.+?)<\/span>.+?<em>(.+?)<\/em>/g;
             var res = postReg.exec(data);
 
             while(res != null){
@@ -38,17 +39,25 @@ iLepra.util = (function() {
                 var userSub = res[3].split('</a> в ');
                 var sub = userSub[1] ? userSub[1].replace(/(<([^>]+)>)/ig, '') : '' ;
 
+                var vote = 0;
+                if(res[9] != null && res[9].length > 0){
+                    vote = 1;
+                }else if(res[10] != null && res[10].length > 0){
+                    vote = -1;
+                }
+
                 var post = {
                     id: res[1].replace('p', ''),
                     body: body,
-                    rating: res[7],
+                    rating: res[8],
                     user: userSub[0],
                     domain_url: sub,
                     when: res[4],
                     comments: res[6].replace(/(<([^>]+)>)/ig, '').replace(/коммента.+?(\s|$)/g, '').replace(/ нов.+/g, ''),
                     image: img,
                     text: text,
-                    type: type
+                    type: type,
+                    vote: vote
                 };
 
 
@@ -96,6 +105,7 @@ iLepra.util = (function() {
                 post.comments = posts[i].comm_count + " / " + posts[i].unread;
                 post.wrote = (posts[i].gender == 1 ? "Написал " : "Написала ") + posts[i].user_rank + " " +posts[i].login;
                 post.when = posts[i].textdate + " в " + posts[i].posttime;
+                post.vote = parseInt( posts[i].user_vote );
 
                 if( postArray.indexOf(post) == -1 ){
                     postArray.push(post);

@@ -114,7 +114,7 @@ iLepra.post = (function() {
         },
 
         // vote for comment
-        voteComment: function(commentId, value){
+        voteComment: function(id, value){
             var url = "http://";
             if( iLepra.post.current.domain_url != "" ){
                 url += iLepra.post.current.domain_url;
@@ -127,7 +127,28 @@ iLepra.post = (function() {
                 type: 0,
                 wtf: iLepra.post.current.wtf.vote,
                 post_id: iLepra.post.current.id,
-                id: commentId,
+                id: id,
+                value: value // 1 || -1
+            }
+
+            // post
+            $.post(url, data, function(data){});
+        },
+
+        // vote for post
+        votePost: function(id, value){
+            var url = "http://";
+            if( iLepra.post.current.domain_url != "" ){
+                url += iLepra.post.current.domain_url;
+            }else{
+                url += "leprosorium.ru";
+            }
+            url += "/rate/";
+
+            var data = {
+                type: 1,
+                wtf: iLepra.postVoteWTF,
+                id: id,
                 value: value // 1 || -1
             }
 

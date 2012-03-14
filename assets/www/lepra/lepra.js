@@ -29,6 +29,8 @@ iLepra = (function() {
         data = data.replace(/\n+/g, '');
         data = data.replace(/\r+/g, '');
         data = data.replace(/\t+/g, '');
+        // get post vote wtf
+        iLepra.postVoteWTF = /wtf_vote = '(.+?)'/g.exec(data)[1];
         // get mystuff wtf
         iLepra.myStuffWTF = /mythingsHandler.wtf = '(.+?)'/g.exec(data)[1];
         // get chat wtf
@@ -110,6 +112,7 @@ iLepra = (function() {
         // posts data
         latestPosts: null,
         postCount: null,
+        postVoteWTF: null,
 
         // mystuff data
         myStuffPosts: null,
@@ -257,7 +260,7 @@ iLepra = (function() {
                 showonindex: type,
                 selected_threshold: "all"
             }, function(){
-                iLepra.getLastPosts();
+                iLepra.getLastPosts(true);
             });
         },
 
