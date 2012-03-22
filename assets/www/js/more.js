@@ -11,7 +11,10 @@
             $.mobile.changePage("more_profile.html");
         });
 
-        $("#mySubsButton").bind(iLepra.config.defaultTapEvent, function(){
+        $("#mySubsButton").bind(iLepra.config.defaultTapEvent, function(e){
+            e.preventDefault();
+            e.stopPropagation();
+
             iLepra.sub.list = iLepra.userSubLepras;
             iLepra.sub.fetch = false;
             $.mobile.changePage("more_subs.html");

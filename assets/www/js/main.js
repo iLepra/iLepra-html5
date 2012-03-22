@@ -98,6 +98,19 @@ document.addEventListener("deviceready", function(){
         }
     });
 
-    // Init iLepra class
-    iLepra.init();
+    var tryInit = function(){
+        if( !window.isOnline() ){
+            navigator.notification.alert(
+                'Для работы требуется подключение к интернету! Подключитесь и нажмите OK.',  // message
+                tryInit,         // callback
+                'Внимание!',            // title
+                'ОК'                  // buttonName
+            );
+        }else{
+            // Init iLepra class
+            iLepra.init();
+        }
+    };
+
+    tryInit();
 }, false);
