@@ -1,6 +1,6 @@
 iLepra.chat = (function() {
-	var getLastId = function(){
-	    var last = "";
+    var getLastId = function(){
+        var last = "";
         if( iLepra.chat.messages.length > 0 ){
             var biggestId = 0;
             for( var i in iLepra.chat.messages ){

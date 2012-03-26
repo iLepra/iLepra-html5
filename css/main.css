@@ -12,7 +12,7 @@ input[type=button],input[type=reset] {
 
 /* autosize images but not more than screen size */
 img {
-	max-width: 100% !important;
+    max-width: 100% !important;
     max-height: 100% !important;
     width: auto !important;
     height: auto !important;
@@ -20,63 +20,63 @@ img {
 
 /* limit size of thumb in list */
 .postThumb {
-	max-width: 80px !important;
-	max-height: 80px !important;
+    max-width: 80px !important;
+    max-height: 80px !important;
 }
 
 .commentText {
-	white-space: normal;
-	padding-top: 10px;
-	padding-bottom: 5px;
-	font-size: 16px;
-	font-weight: normal;
+    white-space: normal;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    font-size: 16px;
+    font-weight: normal;
 }
 
 .errorMessage {
-	display: block;
-	opacity: 0.96;
-	top: 100px;
-	position: absolute;
-	left: 50%;
-	margin-left: -125px;
-	font-size: 20px;
-	width: 250px;
-	padding: 5px 5px 5px 10px;
+    display: block;
+    opacity: 0.96;
+    top: 100px;
+    position: absolute;
+    left: 50%;
+    margin-left: -125px;
+    font-size: 20px;
+    width: 250px;
+    padding: 5px 5px 5px 10px;
 }
 
 .nav-toolbar .ui-btn .ui-btn-inner { 
-	padding-top: 40px !important;
+    padding-top: 40px !important;
 }
 
 .nav-toolbar .ui-btn .ui-icon { 
-	width: 30px!important; 
-	height: 30px!important; 
-	margin-left: -15px !important; 
-	box-shadow: none!important; 
-	-moz-box-shadow: none!important; 
-	-webkit-box-shadow: none!important; 
-	-webkit-border-radius: 0 !important;
-	 border-radius: 0 !important; 
+    width: 30px!important; 
+    height: 30px!important; 
+    margin-left: -15px !important; 
+    box-shadow: none!important; 
+    -moz-box-shadow: none!important; 
+    -webkit-box-shadow: none!important; 
+    -webkit-border-radius: 0 !important;
+     border-radius: 0 !important; 
 }
 
 .ui-icon-posts {
-	background: url("img/home.png") 50% 50% no-repeat;
-	background-size: 24px 24px;
+    background: url("img/home.png") 50% 50% no-repeat;
+    background-size: 24px 24px;
 }
 
 .ui-icon-mystuff {
-	background: url("img/mystuff.png") 50% 50% no-repeat;
-	background-size: 24px 24px;
+    background: url("img/mystuff.png") 50% 50% no-repeat;
+    background-size: 24px 24px;
 }
 
 .ui-icon-inbox {
-	background: url("img/inbox.png") 50% 50% no-repeat;
-	background-size: 24px 24px;
+    background: url("img/inbox.png") 50% 50% no-repeat;
+    background-size: 24px 24px;
 }
 
 .ui-icon-more {
-	background: url("img/more.png") 50% 50% no-repeat;
-	background-size: 24px 24px;
+    background: url("img/more.png") 50% 50% no-repeat;
+    background-size: 24px 24px;
 }
 
 .maxedFootButton {
@@ -89,37 +89,53 @@ img {
 
 /* splash screen bg */
 .splashScreen {
-    background: #5c0202; /* Old browsers */
-    background: -moz-radial-gradient(center, ellipse cover, #5c0202 0%, #220000 37%, #000000 100%); /* FF3.6+ */
-    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#5c0202), color-stop(37%,#220000), color-stop(100%,#000000)); /* Chrome,Safari4+ */
-    background: -webkit-radial-gradient(center, ellipse cover, #5c0202 0%,#220000 37%,#000000 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-radial-gradient(center, ellipse cover, #5c0202 0%,#220000 37%,#000000 100%); /* Opera 12+ */
-    background: -ms-radial-gradient(center, ellipse cover, #5c0202 0%,#220000 37%,#000000 100%); /* IE10+ */
-    background: radial-gradient(center, ellipse cover, #5c0202 0%,#220000 37%,#000000 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5c0202', endColorstr='#000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    background: #000000; 
+    background-image:url('img/splash-bg.png');
+    background-repeat:no-repeat;
+    background-position:center; 
+}
+.splashText {
+    position: absolute; 
+    top:50%; 
+    height: 40px;
+    margin-top: 114px;
+    text-align: center; 
+    width: 100%; 
+    color:#fff;
+    font-size: 32px;
 }
 
 /* post styling */
 .iconImage {
-	max-width: 12px !important;
-	vertical-align: middle;
+    max-width: 12px !important;
+    vertical-align: middle;
 }
 
 .postInfo {
-	font-weight: normal; 
-	padding: 2px;
+    font-weight: normal;
+    padding: 2px;
+    background: #EEE;
+    text-shadow: 0 1px 1px #F6F6F6;
+    color: #000;
+    border-top: none;
+    border-bottom: solid 2px black;
 }
 
 /* comments stuff */
 .commentsMenu {
-	background: #eeeeee; /* Old browsers */
-	background: -moz-linear-gradient(top, #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top, #eeeeee 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top, #eeeeee 0%,#cccccc 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top, #eeeeee 0%,#cccccc 100%); /* IE10+ */
-	background: linear-gradient(top, #eeeeee 0%,#cccccc 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
-	border-radius: 10px;
-	padding-left: 5px;
+    background: #eeeeee; /* Old browsers */
+    background: -moz-linear-gradient(top, #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #eeeeee 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #eeeeee 0%,#cccccc 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #eeeeee 0%,#cccccc 100%); /* IE10+ */
+    background: linear-gradient(top, #eeeeee 0%,#cccccc 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
+    margin-left: -15px;
+    margin-right: -15px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
+
+/* COMMENTS LEVELS */
+level_13
