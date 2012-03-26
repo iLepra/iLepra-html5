@@ -92,13 +92,12 @@ img {
     background: #000000; 
     background-image:url('img/splash-bg.png');
     background-repeat:no-repeat;
-    background-position:center; 
+    background-position:center;
+    background-size: 80%;
 }
 .splashText {
     position: absolute; 
-    top:50%; 
-    height: 40px;
-    margin-top: 114px;
+    bottom:10%;
     text-align: center; 
     width: 100%; 
     color:#fff;
