@@ -93,19 +93,20 @@ img {
     background-image:url('img/splash-bg.png');
     background-repeat:no-repeat;
     background-position:center;
+    background-size: 80%;
 }
 
 /* iPhone */
 @media only screen and (max-device-width: 480px) {
-    .splashScreen{ background-size: 80%; }
+    .splashScreen{ background-size: 80% !important; }
 }
 /* iPad */
 @media only screen and (min-device-width: 768px) and not (-webkit-min-device-pixel-ratio: 2) {
-    .splashScreen{ background-size: 69%; }
+    .splashScreen{ background-size: 69% !important; }
 }
 /* iPad retina */
 @media only screen and (min-device-width: 768px) and (-webkit-min-device-pixel-ratio: 2) {
-    .splashScreen{ background-size: 37%; }
+    .splashScreen{ background-size: 37% !important; }
 }
 
 .splashText {
