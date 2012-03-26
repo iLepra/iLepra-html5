@@ -93,8 +93,21 @@ img {
     background-image:url('img/splash-bg.png');
     background-repeat:no-repeat;
     background-position:center;
-    background-size: 80%;
 }
+
+/* iPhone */
+@media only screen and (max-device-width: 480px) {
+    .splashScreen{ background-size: 80%; }
+}
+/* iPad */
+@media only screen and (min-device-width: 768px) and not (-webkit-min-device-pixel-ratio: 2) {
+    .splashScreen{ background-size: 69%; }
+}
+/* iPad retina */
+@media only screen and (min-device-width: 768px) and (-webkit-min-device-pixel-ratio: 2) {
+    .splashScreen{ background-size: 37%; }
+}
+
 .splashText {
     position: absolute; 
     bottom:10%;
