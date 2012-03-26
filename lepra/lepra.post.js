@@ -41,13 +41,6 @@ iLepra.post = (function() {
                 data = data.substr( data.indexOf('id="js-commentsHolder"') );
                 var res = commentReg.exec(data);
 
-                var vote = 0;
-                if(res[9] != null && res[9].length > 0){
-                    vote = 1;
-                }else if(res[10] != null && res[10].length > 0){
-                    vote = -1;
-                }
-
                 while(res != null){
                     var text = res[3];
 
@@ -59,6 +52,18 @@ iLepra.post = (function() {
                         resImg = imgReg.exec(text);
                     }
 
+                    var vote = 0;
+                    if(res[9] != null && res[9].length > 0){
+                        vote = 1;
+                    }else if(res[10] != null && res[10].length > 0){
+                        vote = -1;
+                    }
+
+                    var indent = 0;
+                    resImg = /indent_(.+?) /.exec(res[2]);
+                    if(resImg != null) indent = resImg[1];
+                    if(indent > 15) indent = 15;
+
                     text = text.replace(/<p.*?>/gi, '');
                     text = text.replace(/<\/p>/gi, '');
                     text = text.replace(/<nonimg/ig, '<img');
@@ -66,6 +71,7 @@ iLepra.post = (function() {
                     var post = {
                         id: res[1],
                         isNew: res[2].indexOf('new') != -1 ? 1 : 0,
+                        indent: indent,
                         text: text,
                         rating: res[7],
                         user: res[4],
