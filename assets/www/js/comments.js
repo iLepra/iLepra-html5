@@ -129,6 +129,8 @@
         });
 
         $("#replyPost").bind(iLepra.config.defaultTapEvent, function(){
+            autorender = true;
+
             commentId = null;
             commentUser = null;
 
