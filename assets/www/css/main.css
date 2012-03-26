@@ -92,13 +92,26 @@ img {
     background: #000000; 
     background-image:url('img/splash-bg.png');
     background-repeat:no-repeat;
-    background-position:center; 
+    background-position:center;
+    background-size: 80%;
 }
+
+/* iPhone */
+@media only screen and (max-device-width: 480px) {
+    .splashScreen{ background-size: 80% !important; }
+}
+/* iPad */
+@media only screen and (min-device-width: 768px) and not (-webkit-min-device-pixel-ratio: 2) {
+    .splashScreen{ background-size: 69% !important; }
+}
+/* iPad retina */
+@media only screen and (min-device-width: 768px) and (-webkit-min-device-pixel-ratio: 2) {
+    .splashScreen{ background-size: 37% !important; }
+}
+
 .splashText {
     position: absolute; 
-    top:50%; 
-    height: 40px;
-    margin-top: 114px;
+    bottom:10%;
     text-align: center; 
     width: 100%; 
     color:#fff;
