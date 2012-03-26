@@ -47,11 +47,15 @@
 							// Normalize proper object for scroll event
 							( ( $( document ).scrollTop() === 0 ) ? $( window ) : $( document ) )
 								.bind( "scrollstart.fixedtoolbarpolyfill", function(){
-									visible = toolbar.not( ".ui-fixed-hidden" ).fixedtoolbar( "hide", true );
+                                    try{
+									    visible = toolbar.not( ".ui-fixed-hidden" ).fixedtoolbar( "hide", true );
+                                    }catch(e){}
 								})
 								.bind( "scrollstop.fixedtoolbarpolyfill", function(){
-									resetPos();
-									visible.fixedtoolbar( "show" );
+                                    try{
+								    	resetPos();
+									    visible.fixedtoolbar( "show" );
+                                    }catch(e){}
 								});
 
 							// on resize, reset positioning
