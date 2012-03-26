@@ -29,7 +29,10 @@
             $.mobile.changePage("more_gov.html");
         });
 
-        $("#chatButton").bind(iLepra.config.defaultTapEvent, function(){
+        $("#chatButton").bind(iLepra.config.defaultTapEvent, function(e){
+            e.preventDefault();
+            e.stopPropagation();
+
             $.mobile.changePage("more_chat.html");
         });
 
