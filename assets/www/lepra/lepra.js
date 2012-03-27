@@ -3,12 +3,12 @@
  */
 iLepra = (function() {
     // last fetch times for stuff
-    var cacheTime = 5 * 60000;
-    var lastPostFetchTime = null;
-    var myStuffFetchTime = null;
-    var inboxFetchTime = null;
-    var myStuffOldNew = {c:null, p:null};
-    var inboxOldNew = {c:null, p:null};
+    var cacheTime = 5 * 60000,
+        lastPostFetchTime = null,
+        myStuffFetchTime = null,
+        inboxFetchTime = null,
+        myStuffOldNew = {c:null, p:null},
+        inboxOldNew = {c:null, p:null};
 
     /***
      Processes given html string for captcha data

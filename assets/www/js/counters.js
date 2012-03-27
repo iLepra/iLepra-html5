@@ -23,7 +23,10 @@
     }
 
     var updateCounts = function(){
-        var inboxString = "";
+        var inboxCounter = $(".inboxCounter"),
+            mystuffCounter = $(".mystuffCounter"),
+            inboxString = "";
+
         if( iLepra.inboxNewPosts > 0 ){
             inboxString += iLepra.inboxNewPosts+"/"+iLepra.inboxNewComments;
         }else if(iLepra.inboxNewComments > 0){
@@ -32,10 +35,10 @@
             inboxString = "";
         }
         if(inboxString != ""){
-            $(".inboxCounter").text(inboxString);
-            $(".inboxCounter").show();
+            inboxCounter.text(inboxString);
+            inboxCounter.show();
         }else{
-            $(".inboxCounter").hide();
+            inboxCounter.hide();
         }
 
         var mystuffString = "";
@@ -47,10 +50,10 @@
             mystuffString = "";
         }
         if(mystuffString != ""){
-            $(".mystuffCounter").text(mystuffString);
-            $(".mystuffCounter").show();
+            mystuffCounter.text(mystuffString);
+            mystuffCounter.show();
         }else{
-            $(".mystuffCounter").hide();
+            mystuffCounter.hide();
         }
     }
 

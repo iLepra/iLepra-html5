@@ -1,5 +1,7 @@
 (function(){
-    var postLimit = iLepra.config.postIncrement;
+    var postLimit = iLepra.config.postIncrement,
+        mystuffList = null,
+        mystuffMoreBtn = null;
 
     var renderNewPosts = function(){
         // render posts
@@ -7,12 +9,20 @@
         var p = "";
         for(var i = 0; i < limit; i++)
             p += _.template(postTemplate, iLepra.myStuffPosts[i]);
-        $("#mystuffList").append(p);
+
+        mystuffList.empty();
+        mystuffList.append(p);
+        try{
+            mystuffList.listview('refresh');
+        }catch(e){}
     }
 
     // render page on creation
     $(document).on('pageshow', "#mystuffPage", function(){
-        $.mobile.showPageLoadingMsg()
+        mystuffList = $("#mystuffList");
+        mystuffMoreBtn = $("#moreMystuffButton");
+
+        $.mobile.showPageLoadingMsg();
 
         $(document).bind(iLepra.events.ready, function(event){
             $(document).unbind(event);
@@ -21,28 +31,23 @@
             $.mobile.hidePageLoadingMsg()
 
             renderNewPosts();
-            try{
-                $("#mystuffList").listview('refresh');
-            }catch(e){}
 
             // hide button if needed
             if( postLimit < iLepra.myStuffPosts.length ){
-                $("#moreMystuffButton").show();
+                mystuffMoreBtn.show();
                 // more posts click
-                $("#moreMystuffButton").bind(iLepra.config.defaultTapEvent, function(event){
+                mystuffMoreBtn.bind(iLepra.config.defaultTapEvent, function(event){
                     // stops event to prevent random post opening
                     event.preventDefault();
                     event.stopPropagation();
 
                     postLimit += postLimit;
                     if( postLimit >= iLepra.myStuffPosts.length ){
-                        $("#moreMystuffButton").hide();
+                        mystuffMoreBtn.hide();
                     }
 
                     // clean old data
-                    $("#mystuffList").empty();
                     renderNewPosts();
-                    $("#mystuffList").listview('refresh');
                 });
             }
         });

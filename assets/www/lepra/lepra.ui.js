@@ -8,6 +8,6 @@ iLepra.ui = (function() {
                 .fadeOut( 800, function(){
                     $(this).remove();
                 });
-        },
+        }
     };
 })();

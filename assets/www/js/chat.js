@@ -1,20 +1,25 @@
 (function(){
-    var data = null;
-    var refreshInterval = null;
+    var data = null,
+        refreshInterval = null,
+
+        // dom
+        chatList = null,
+        chatInput = null;
 
     var refreshMessages = function(){
         // clean old
-        $("#chatList").empty();
+        chatList.empty();
         // render posts
-        var p = "";
-        for(var i = 0; i < data.length; i++)
+        var p = "",
+            i, max = data.length;
+        for(i = 0; i < max; i++)
             p += _.template(chatTemplate, data[i]);
-        $("#chatList").append(p);
+        chatList.append(p);
         // redraw styles
-        $("#chatList").listview('refresh');
+        chatList.listview('refresh');
     }
 
-    requestNewChatData = function(isInit){
+    var requestNewChatData = function(isInit){
         $(document).bind(iLepra.events.ready, function(event){
             $(document).unbind(event);
             data = iLepra.chat.messages.slice(0);
@@ -30,9 +35,12 @@
 
     // render page on creation
     $(document).on('pageshow', "#chatPage", function(){
+        chatList = $("#chatList");
+        chatInput = $("#chatInput");
+
         $("#submitChat").bind(iLepra.config.defaultTapEvent, function(){
-            var text = $("#chatInput").val();
-            $("#chatInput").val("");
+            var text = chatInput.val();
+            chatInput.val("");
 
             // clear interval to evade overlap
             clearInterval( refreshInterval );
@@ -65,6 +73,6 @@
     $(document).on(iLepra.config.defaultTapEvent, "li.chatMessage", function(){
         var username = $(this).data('user');
 
-        $("#chatInput").val(username+": ");
+        chatInput.val(username+": ");
     });
 })();
