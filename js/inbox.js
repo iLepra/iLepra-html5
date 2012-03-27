@@ -1,5 +1,7 @@
 (function(){
-    var postLimit = iLepra.config.postIncrement;
+    var postLimit = iLepra.config.postIncrement,
+        inboxList = null,
+        moreInboxBtn = null;
 
     var renderNewPosts = function(){
         // render posts
@@ -7,42 +9,45 @@
         var p = "";
         for(var i = 0; i < limit; i++)
             p += _.template(postTemplate, iLepra.inboxPosts[i]);
-        $("#inboxList").append(p);
+
+        inboxList.empty();
+        inboxList.append(p);
+        try{
+            inboxList.listview('refresh');
+        }catch(e){}
     }
 
     // render page on creation
     $(document).on('pageshow', "#inboxPage", function(){
-        $.mobile.showPageLoadingMsg()
+        inboxList = $("#inboxList");
+        moreInboxBtn = $("#moreInboxButton");
+
+        $.mobile.showPageLoadingMsg();
 
         $(document).bind(iLepra.events.ready, function(event){
             $(document).unbind(event);
 
             // hide loading msg
-            $.mobile.hidePageLoadingMsg()
+            $.mobile.hidePageLoadingMsg();
 
             renderNewPosts();
-            try{
-                $("#inboxList").listview('refresh');
-            }catch(e){}
 
             // hide button if needed
             if( postLimit < iLepra.inboxPosts.length ){
-                $("#moreInboxButton").show();
+                moreInboxBtn.show();
                 // more posts click
-                $("#moreInboxButton").bind(iLepra.config.defaultTapEvent, function(event){
+                moreInboxBtn.bind(iLepra.config.defaultTapEvent, function(event){
                     // stops event to prevent random post opening
                     event.preventDefault();
                     event.stopPropagation();
 
                     postLimit += postLimit;
                     if( postLimit >= iLepra.inboxPosts.length ){
-                        $("#moreInboxButton").hide();
+                        moreInboxBtn.hide();
                     }
 
                     // clean old data
-                    $("#inboxList").empty();
                     renderNewPosts();
-                    $("#inboxList").listview('refresh');
                 });
             }
         });

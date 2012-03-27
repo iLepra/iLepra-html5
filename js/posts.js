@@ -1,5 +1,7 @@
 (function(){
-    var postLimit = iLepra.config.postIncrement;
+    var postLimit = iLepra.config.postIncrement,
+        postsList = null,
+        morePostsBtn = null;
 
     var renderNewPosts = function(){
         // render posts
@@ -7,7 +9,12 @@
         var p = "";
         for(var i = 0; i < limit; i++)
             p += _.template(postTemplate, iLepra.latestPosts[i]);
-        $("#postsList").append(p);
+
+        postsList.empty();
+        postsList.append(p);
+        try{
+            postsList.listview('refresh');
+        }catch(e){}
     }
 
     ////// LAYOUT STUFF
@@ -21,14 +28,16 @@
             $.mobile.hidePageLoadingMsg();
 
             // clean old data & render
-            $("#postsList").empty();
             renderNewPosts();
-            $("#postsList").listview('refresh');
+
         });
     }
 
     // render page on creation
     $(document).on('pageshow', "#postsPage", function(event){
+        postsList = $("#postsList");
+        morePostsBtn = $("#morePostsButton");
+
         $.mobile.showPageLoadingMsg();
 
         $(document).bind(iLepra.events.ready, function(event){
@@ -37,12 +46,9 @@
             // hide loading msg
             $.mobile.hidePageLoadingMsg()
 
-            $("#morePostsButton").show();
+            morePostsBtn.show();
 
             renderNewPosts();
-            try{
-                $("#postsList").listview('refresh');
-            }catch(e){}
         });
         iLepra.getLastPosts();
 
@@ -59,9 +65,7 @@
                 $.mobile.hidePageLoadingMsg();
 
                 // clean old data & render
-                $("#postsList").empty();
                 renderNewPosts();
-                $("#postsList").listview('refresh');
             });
 
             // get posts
@@ -69,7 +73,7 @@
         });
 
         // more posts
-        $("#morePostsButton").bind(iLepra.config.defaultTapEvent, function(event){
+        morePostsBtn.bind(iLepra.config.defaultTapEvent, function(event){
             // stops event to prevent random post opening
             event.preventDefault();
             event.stopPropagation();
@@ -78,9 +82,7 @@
                 postLimit += postLimit;
 
                 // clean old data
-                $("#postsList").empty();
                 renderNewPosts();
-                $("#postsList").listview('refresh');
             }else{ // load new data
                 // show loader
                 $.mobile.showPageLoadingMsg();
@@ -93,9 +95,7 @@
                     $.mobile.hidePageLoadingMsg();
 
                     // clean old data
-                    $("#postsList").empty();
                     renderNewPosts();
-                    $("#postsList").listview('refresh');
                 });
 
                 // get posts

@@ -1,16 +1,18 @@
 (function(){
     // comments loading indicator
-    var commentsLoading = false;
-    // autorender comments
-    var autorender = false;
-    // pagination & display stuff
-    var commentsLimit = iLepra.config.postIncrement;
-    var type = "all"; // all || new
-    // current comment
-    var commentId = null;
-    var commentUser = null;
-    // new comment pos
-    var newPos = -1;
+    var commentsLoading = false,
+        autorender = false, // autorender comments
+        commentsLimit = iLepra.config.postIncrement, // pagination & display stuff
+        type = "all", // all || new
+        // current comment
+        commentId = null,
+        commentUser = null,
+        // new comment pos
+        newPos = -1,
+
+        // dom
+        commentsList = null,
+        commentsNav = null;
 
     var renderNewComments = function(){
         // render posts
@@ -27,12 +29,16 @@
                 p += _.template(commentTemplate, iLepra.post.newComments[i]);
             }
         }
-        $("#commentsList").append(p);
+        commentsList.empty();
+        commentsList.append(p);
+        try{
+            commentsList.listview('refresh');
+        }catch(e){}
 
         if( $(".new").length > 0 ){
-            $("#commentsNav").show();
+            commentsNav.show();
         }else{
-            $("#commentsNav").hide();
+            commentsNav.hide();
         }
     }
 
@@ -49,9 +55,9 @@
             }
 
             // clean old data
-            $("#commentsList").empty();
+            commentsList.empty();
             renderNewComments();
-            $("#commentsList").listview('refresh');
+            commentsList.listview('refresh');
         });
         $("#allCommentsButton").bind(iLepra.config.defaultTapEvent, function(event){
             // stops event to prevent random post opening
@@ -62,15 +68,16 @@
             $("#commentsButtons").hide();
 
             // clean old data
-            $("#commentsList").empty();
             renderNewComments();
-            $("#commentsList").listview('refresh');
         });
     }
 
     // on post comments show
     $(document).on('pagecreate', "#fullPostPage", function(){
         commentsLimit = iLepra.config.postIncrement;
+
+        commentsList = $("#commentsList");
+        commentsNav = $("#commentsNav");
 
         // on comments request
         $("#postCommentsButton").bind(iLepra.config.defaultTapEvent, function(){
@@ -91,7 +98,6 @@
 
                 // render comments
                 renderNewComments();
-                $("#commentsList").listview('refresh');
 
                 // hide button if needed
                 if( commentsLimit >= iLepra.post.comments.length ){
@@ -112,9 +118,7 @@
             type = "all";
 
             // redraw
-            $("#commentsList").empty();
             renderNewComments();
-            $("#commentsList").listview('refresh');
         });
 
         $("#newComments").bind(iLepra.config.defaultTapEvent, function(){
@@ -123,9 +127,7 @@
             type = "new";
 
             // redraw
-            $("#commentsList").empty();
             renderNewComments();
-            $("#commentsList").listview('refresh');
         });
 
         $("#replyPost").bind(iLepra.config.defaultTapEvent, function(){

@@ -14,9 +14,9 @@ var borderColors = [
     "#999999",
     "#cccccc",
     "#333333"
-];
+],
 
-var postTemplate = '\
+postTemplate = '\
             <li data-icon="false">\
                 <a href="#" class="postListItem" data-id="<%= id %>">\
                     <% if(text.length < 5 && iLepra.config.loadImages && image.length > 0){ %>\
@@ -49,18 +49,18 @@ var postTemplate = '\
                         #824E48<% } %>\
                     "><%= rating %></span> \
                 <% } %>\
-            </li>';
+            </li>',
 
-var subsTemplate = '\
+subsTemplate = '\
             <li>\
                 <a href="#" class="subListItem" data-link="<%= link %>">\
                     <% if(iLepra.config.loadImages){ %><img src="<%= logo %>" class="postThumb" /><% } %>\
                     <h1><%= name %></h1>\
                     <p><%= creator %></p>\
                 </a>\
-            </li>';
+            </li>',
 
-var commentTemplate = '\
+commentTemplate = '\
             <li data-id="<%= id %>" data-user="<%= user %>" <% if (isNew == 1){ %>class="new" data-theme="d"<% } %> \
             style="margin-left: <%= (5*indent) %>px; border-left: 3px solid <%= borderColors[indent] %>;"\
             >\
@@ -87,9 +87,9 @@ var commentTemplate = '\
                         #824E48<% } %>\
                     "><%= rating %></span> \
                 <% } %>\
-            </li>';
+            </li>',
 
-var chatTemplate = '\
+chatTemplate = '\
             <li data-icon="false"  class="chatMessage commentText" data-user="<%= user_login %>">\
                 <p class="commentText"><%= body %></p>\
             </li>\
