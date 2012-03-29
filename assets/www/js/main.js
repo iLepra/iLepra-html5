@@ -8,8 +8,8 @@ document.addEventListener("deviceready", function(){
     $.mobile.loadingMessage = "Загружаемся ...";
     $.mobile.page.prototype.options.backBtnText = "Назад";
     $.mobile.fixedtoolbar.prototype.options.tapToggle = false;
-    $.mobile.defaultPageTransition = 'none';
-    $.mobile.defaultDialogTransition = 'none';
+    //$.mobile.defaultPageTransition = 'none';
+    //$.mobile.defaultDialogTransition = 'none';
 
     ////////
     var getLatestPosts = function(fromIndex){
