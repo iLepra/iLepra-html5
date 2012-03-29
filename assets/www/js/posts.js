@@ -123,7 +123,10 @@
     });
 
     // show full post
-    $(document).on(iLepra.config.defaultTapEvent, "a.postListItem", function(){
+    $(document).on(iLepra.config.defaultTapEvent, "a.postListItem", function(e){
+        e.preventDefault();
+        e.stopPropagation();
+
         currentPostId = $(this).data('id');
 
         // get selected post
