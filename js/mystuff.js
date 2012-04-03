@@ -36,10 +36,10 @@
             if( postLimit < iLepra.myStuffPosts.length ){
                 mystuffMoreBtn.show();
                 // more posts click
-                mystuffMoreBtn.bind(iLepra.config.defaultTapEvent, function(event){
+                mystuffMoreBtn.bind(iLepra.config.defaultTapEvent, function(e){
                     // stops event to prevent random post opening
-                    event.preventDefault();
-                    event.stopPropagation();
+                    e.preventDefault();
+                    e.stopPropagation();
 
                     postLimit += postLimit;
                     if( postLimit >= iLepra.myStuffPosts.length ){

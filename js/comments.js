@@ -44,10 +44,10 @@
 
     var prepareCommentsButtons = function(){
         // more posts click
-        $("#moreCommentsButton").bind(iLepra.config.defaultTapEvent, function(event){
+        $("#moreCommentsButton").bind(iLepra.config.defaultTapEvent, function(e){
             // stops event to prevent random post opening
-            event.preventDefault();
-            event.stopPropagation();
+            e.preventDefault();
+            e.stopPropagation();
 
             commentsLimit += commentsLimit;
             if( commentsLimit >= iLepra.post.comments.length ){
@@ -59,10 +59,10 @@
             renderNewComments();
             commentsList.listview('refresh');
         });
-        $("#allCommentsButton").bind(iLepra.config.defaultTapEvent, function(event){
+        $("#allCommentsButton").bind(iLepra.config.defaultTapEvent, function(e){
             // stops event to prevent random post opening
-            event.preventDefault();
-            event.stopPropagation();
+            e.preventDefault();
+            e.stopPropagation();
 
             commentsLimit = iLepra.post.comments.length;
             $("#commentsButtons").hide();
@@ -80,7 +80,10 @@
         commentsNav = $("#commentsNav");
 
         // on comments request
-        $("#postCommentsButton").bind(iLepra.config.defaultTapEvent, function(){
+        $("#postCommentsButton").bind(iLepra.config.defaultTapEvent, function(e){
+            e.preventDefault();
+            e.stopImmediatePropagation();
+
             if(commentsLoading) return;
 
             // show loader
@@ -112,7 +115,10 @@
             iLepra.post.getComments();
         });
 
-        $("#allComments").bind(iLepra.config.defaultTapEvent, function(){
+        $("#allComments").bind(iLepra.config.defaultTapEvent, function(e){
+            e.preventDefault();
+            e.stopImmediatePropagation();
+
             $(this).addClass("ui-btn-active");
             $("#newComments").removeClass("ui-btn-active");
             type = "all";
@@ -121,7 +127,10 @@
             renderNewComments();
         });
 
-        $("#newComments").bind(iLepra.config.defaultTapEvent, function(){
+        $("#newComments").bind(iLepra.config.defaultTapEvent, function(e){
+            e.preventDefault();
+            e.stopImmediatePropagation();
+
             $(this).addClass("ui-btn-active");
             $("#allComments").removeClass("ui-btn-active");
             type = "new";
@@ -130,7 +139,10 @@
             renderNewComments();
         });
 
-        $("#replyPost").bind(iLepra.config.defaultTapEvent, function(){
+        $("#replyPost").bind(iLepra.config.defaultTapEvent, function(e){
+            e.preventDefault();
+            e.stopImmediatePropagation();
+
             autorender = true;
 
             commentId = null;
@@ -143,25 +155,37 @@
             });
         });
 
-        $("#prevnew").bind(iLepra.config.defaultTapEvent, function(){
+        $("#prevnew").bind(iLepra.config.defaultTapEvent, function(e){
+            e.preventDefault();
+            e.stopImmediatePropagation();
+
             if(--newPos) newPos = 0;
             var com = $($("ul#commentsList li.new")[newPos]);
             if( com != null) $.mobile.silentScroll(com.offset().top);
         });
 
-        $("#nextnew").bind(iLepra.config.defaultTapEvent, function(){
+        $("#nextnew").bind(iLepra.config.defaultTapEvent, function(e){
+            e.preventDefault();
+            e.stopImmediatePropagation();
+
             var newComs = $("ul#commentsList li.new");
             if( ++newPos > (newComs.length-1) ) newPos = newComs.length-1;
             var com = $(newComs[newPos]);
             if( com != null) $.mobile.silentScroll(com.offset().top);
         });
 
-        $("#postVoteup").bind(iLepra.config.defaultTapEvent, function(){
+        $("#postVoteup").bind(iLepra.config.defaultTapEvent, function(e){
+            e.preventDefault();
+            e.stopImmediatePropagation();
+
             $(this).css('opacity', 1);
             $(this).next().css('opacity', 0.3);
             iLepra.post.votePost("p"+iLepra.post.current.id, "1");
         });
-        $("#postVotedown").bind(iLepra.config.defaultTapEvent, function(){
+        $("#postVotedown").bind(iLepra.config.defaultTapEvent, function(e){
+            e.preventDefault();
+            e.stopImmediatePropagation();
+
             $(this).prev().css('opacity', 0.3);
             $(this).css('opacity', 1);
             iLepra.post.votePost("p"+iLepra.post.current.id, "-1");
@@ -192,7 +216,10 @@
     });
 
     // on comment option pick
-    $(document).on(iLepra.config.defaultTapEvent, "div.commentsMenu a.reply", function(event) {
+    $(document).on(iLepra.config.defaultTapEvent, "div.commentsMenu a.reply", function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
         autorender = true;
         $.mobile.changePage("post_addcomment.html", {
             role: "dialog",
@@ -200,12 +227,18 @@
             inline: "true"
         });
     });
-    $(document).on(iLepra.config.defaultTapEvent, "div.commentsMenu a.voteup", function(event) {
+    $(document).on(iLepra.config.defaultTapEvent, "div.commentsMenu a.voteup", function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
         $(this).css('opacity', 1);
         $(this).next().css('opacity', 0.3);
         iLepra.post.voteComment(commentId, "1");
     });
-    $(document).on(iLepra.config.defaultTapEvent, "div.commentsMenu a.votedown", function(event) {
+    $(document).on(iLepra.config.defaultTapEvent, "div.commentsMenu a.votedown", function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
         $(this).prev().css('opacity', 0.3);
         $(this).css('opacity', 1);
         iLepra.post.voteComment(commentId, "-1");
@@ -214,6 +247,7 @@
     // show comment menu
     $(document).on(iLepra.config.defaultTapEvent, "#commentsList li", function(e){
         e.preventDefault();
+        e.stopImmediatePropagation();
 
         commentId = $(this).data('id');
         commentUser = $(this).data('user');
@@ -235,7 +269,10 @@
     // on add comment show
     $(document).on('pagecreate', "#addCommentPage", function(){
         // submit comment
-        $("#submitComment").bind(iLepra.config.defaultTapEvent, function(){
+        $("#submitComment").bind(iLepra.config.defaultTapEvent, function(e){
+            e.preventDefault();
+            e.stopImmediatePropagation();
+
             var commentText = $("#commentTextarea").val();
 
             // show loader

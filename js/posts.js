@@ -55,7 +55,10 @@
         initCounters();
 
         // refresh
-        $("#refreshPostsButton").bind(iLepra.config.defaultTapEvent, function(){
+        $("#refreshPostsButton").bind(iLepra.config.defaultTapEvent, function(e){
+            e.preventDefault();
+            e.stopImmediatePropagation();
+
             // show loader
             $.mobile.showPageLoadingMsg();
 
@@ -73,10 +76,10 @@
         });
 
         // more posts
-        morePostsBtn.bind(iLepra.config.defaultTapEvent, function(event){
+        morePostsBtn.bind(iLepra.config.defaultTapEvent, function(e){
             // stops event to prevent random post opening
-            event.preventDefault();
-            event.stopPropagation();
+            e.preventDefault();
+            e.stopPropagation();
 
             if( postLimit < iLepra.latestPosts.length){
                 postLimit += postLimit;
@@ -123,7 +126,10 @@
     });
 
     // show full post
-    $(document).on(iLepra.config.defaultTapEvent, "a.postListItem", function(){
+    $(document).on(iLepra.config.defaultTapEvent, "a.postListItem", function(e){
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
         currentPostId = $(this).data('id');
 
         // get selected post
