@@ -12,7 +12,10 @@
 
         // dom
         commentsList = null,
-        commentsNav = null;
+        commentsNav = null,
+        commentsNavBtns = null,
+        commentsInputBar = null,
+        commentsInput = null;
 
     var renderNewComments = function(){
         // render posts
@@ -77,7 +80,10 @@
         commentsLimit = iLepra.config.postIncrement;
 
         commentsList = $("#commentsList");
-        commentsNav = $("#commentsNav");
+        commentsNav = $("#commentsNavBar");
+        commentsNavBtns = $("#commentsNavButtons");
+        commentsInputBar = $("#commentsInputBar");
+        commentsInput = $("#commentInput");
 
         // on comments request
         $("#postCommentsButton").bind(iLepra.config.defaultTapEvent, function(e){
@@ -148,11 +154,7 @@
             commentId = null;
             commentUser = null;
 
-            $.mobile.changePage("post_addcomment.html", {
-                role: "dialog",
-                transition: "slidedown",
-                inline: "true"
-            });
+            showCommentAdd();
         });
 
         $("#prevnew").bind(iLepra.config.defaultTapEvent, function(e){
@@ -191,6 +193,45 @@
             iLepra.post.votePost("p"+iLepra.post.current.id, "-1");
         });
 
+        // submit comment
+        $("#submitComment").bind(iLepra.config.defaultTapEvent, function(e){
+            e.preventDefault();
+            e.stopImmediatePropagation();
+
+            var commentText = commentsInput.val();
+
+            // show loader
+            $.mobile.showPageLoadingMsg();
+
+            // on comment error
+            $(document).bind(iLepra.events.error, function(event){
+                // unbind
+                $(document).unbind(event);
+                $(document).unbind(iLepra.events.ready);
+                // hide
+                $.mobile.hidePageLoadingMsg();
+                // show error
+                iLepra.ui.showError("Ошибка добавлени комментария! Попробуйте еще раз?");
+            });
+
+            // on successful comment
+            $(document).bind(iLepra.events.ready, function(event){
+                // unbind
+                $(document).unbind(event);
+                $(document).unbind(iLepra.events.error);
+                // remove loader
+                $.mobile.hidePageLoadingMsg();
+                // clear up
+                commentsInput.val('');
+                commentsNavBtns.show();
+                commentsInputBar.hide();
+                // redraw comments
+                renderNewComments();
+            });
+
+            iLepra.post.addComment(commentText, commentId);
+        });
+
         if(iLepra.post.current.vote == 1){
             $("#postVoteup").css("opacity", 1);
         }else if(iLepra.post.current.vote == -1){
@@ -221,11 +262,7 @@
         e.stopImmediatePropagation();
 
         autorender = true;
-        $.mobile.changePage("post_addcomment.html", {
-            role: "dialog",
-            transition: "slidedown",
-            inline: "true"
-        });
+        showCommentAdd();
     });
     $(document).on(iLepra.config.defaultTapEvent, "div.commentsMenu a.voteup", function(e) {
         e.preventDefault();
@@ -267,44 +304,15 @@
 
 
     // on add comment show
-    $(document).on('pagecreate', "#addCommentPage", function(){
-        // submit comment
-        $("#submitComment").bind(iLepra.config.defaultTapEvent, function(e){
-            e.preventDefault();
-            e.stopImmediatePropagation();
-
-            var commentText = $("#commentTextarea").val();
-
-            // show loader
-            $.mobile.showPageLoadingMsg();
-
-            // on comment error
-            $(document).bind(iLepra.events.error, function(event){
-                // unbind
-                $(document).unbind(event);
-                $(document).unbind(iLepra.events.ready);
-                // hide
-                $.mobile.hidePageLoadingMsg();
-                // show error
-                iLepra.ui.showError("Ошибка добавлени комментария! Попробуйте еще раз?");
-            });
-
-            // on successful comment
-            $(document).bind(iLepra.events.ready, function(event){
-                // unbind
-                $(document).unbind(event);
-                $(document).unbind(iLepra.events.error);
-                // change page
-                $.mobile.changePage("post_full.html");
-            });
-
-            iLepra.post.addComment(commentText, commentId);
-        });
+    var showCommentAdd = function(){
+        commentsNav.show();
+        commentsNavBtns.hide();
+        commentsInputBar.show();
 
         if( commentUser != null ){
-            $("#commentTextarea").val(commentUser+": ");
+            commentsInput.val(commentUser+": ");
         }else{
-            $("#commentTextarea").val("");
+            commentsInput.val("");
         }
-    });
+    }
 })();

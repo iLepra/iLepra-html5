@@ -114,7 +114,40 @@ iLepra.post = (function() {
                 if( data.status == "ERR" ){
                     $(document).trigger(iLepra.events.error);
                 }else{
-                    iLepra.post.getComments();
+                    if(typeof inReplyTo == 'undefined' || inReplyTo == null){
+                        iLepra.post.comments.push({
+                            id: data.new_comment.comment_id,
+                            isNew: 1,
+                            indent: 0,
+                            text: comment,
+                            rating: 0,
+                            user: data.new_comment.user_login,
+                            when: data.new_comment.date + " в " + data.new_comment.time,
+                            vote: 0
+                        });
+                    }else{
+                        var i,
+                            cm,
+                            max = iLepra.post.comments.length;
+                        for(i = 0; i < max; i++){
+                            cm = iLepra.post.comments[i];
+                            if(cm.id == data.new_comment.replyto_id){
+                                iLepra.post.comments.splice(i+1, 0, {
+                                    id: data.new_comment.comment_id,
+                                    isNew: 1,
+                                    indent: (parseInt(cm.indent)+1).toString(),
+                                    text: comment,
+                                    rating: 0,
+                                    user: data.new_comment.user_login,
+                                    when: data.new_comment.date + " в " + data.new_comment.time,
+                                    vote: 0
+                                });
+                                break;
+                            }
+                        }
+                    }
+
+                    $(document).trigger(iLepra.events.ready);
                 }
             });
         },

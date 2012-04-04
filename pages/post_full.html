@@ -47,8 +47,18 @@
         </div>
     </div>
 
-    <div data-role="footer" data-position="fixed" data-theme="c" style="display:none; min-height: 40px;" id="commentsNav">
-        <a href="#" id="prevnew" style="float:left;"><img src="../css/img/voteup_16.png" /></a>
-        <a href="#" id="nextnew" style="float:right;"><img src="../css/img/votedown_16.png" /></a>
+    <div data-role="footer" data-position="fixed" data-theme="c" style="display:none; min-height: 40px;" id="commentsNavBar">
+        <div class="postToolbarElement" id="commentsNavButtons">
+            <a href="#" id="prevnew" style="float:left;"><img src="../css/img/voteup_32.png" /></a>
+            <a href="#" id="nextnew" style="float:right;"><img src="../css/img/votedown_32.png" /></a>
+        </div>
+        <dir class="postToolbarElement" style="display: none;" id="commentsInputBar">
+            <div class="ui-block-a" style="width:79%">
+                <input type="text" id="commentInput" value="" placeholder="Написать комментарий" data-mini='true'  />
+            </div>
+            <div class="ui-block-b" style="width:19%">
+                <a href="#" id="submitComment" data-role="button" data-mini='true' class="maxedFootButton">OK</a>
+            </div>
+        </dir>
     </div>
 </div>

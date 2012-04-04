@@ -79,6 +79,13 @@ img {
     background-size: 24px 24px;
 }
 
+.postToolbarElement {
+    position: absolute;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
 .maxedFootButton {
     max-width: 90% !important;
     max-height: 90% !important;
