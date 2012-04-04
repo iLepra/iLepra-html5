@@ -8,7 +8,6 @@ document.addEventListener("deviceready", function(){
     $.mobile.loadingMessage = "Загружаемся ...";
     $.mobile.page.prototype.options.backBtnText = "Назад";
     $.mobile.fixedtoolbar.prototype.options.tapToggle = false;
-
     if( window.isOldAndroid() ){
         $.mobile.defaultPageTransition = 'none';
         $.mobile.defaultDialogTransition = 'none';
