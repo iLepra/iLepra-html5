@@ -74,7 +74,7 @@ iLepra.util = (function() {
             for(var i in posts){
                 var post = {};
                 // get img and short text
-                var imgReg = /img src="(.+?)"/g
+                var imgReg = /img src="(.+?)"/gi;
                 var res = imgReg.exec(posts[i].body);
                 var img = "";
                 if( res != null ){
@@ -85,14 +85,16 @@ iLepra.util = (function() {
                     // convert all image URIs to compressed ones
                     res = imgReg.exec(posts[i].body);
                     while(res != null){
-                        posts[i].body = posts[i].body.replace(res[1], "http://src.sencha.io/"+iLepra.config.screenBiggest+"/"+res[1]);
+                        if( res[1].indexOf('http://') != -1){
+                            posts[i].body = posts[i].body.replace(res[1], "http://src.sencha.io/"+iLepra.config.screenBiggest+"/"+res[1]);
+                        }
 
                         res = imgReg.exec(posts[i].body);
                     }
                 }/*else{
                     img = ''//"../css/img/placeholder.png";
                 }*/
-                var text = posts[i].body.replace(/(<([^>]+)>)/ig," ").substr(0, 140);
+                var text = posts[i].body.replace(/(<([^>]+)>)/g," ").substr(0, 140);
                 if(text.length == 140) text += "..";
 
                 post.id = posts[i].id;
