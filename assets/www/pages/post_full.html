@@ -1,15 +1,14 @@
-<div data-role="page" id="fullPostPage">
+<div data-role="page" id="fullPostPage" data-add-back-btn="true">
     <div data-role="content">
         <div id="postContent"></div>
 
         <div class="postMenu">
             <a href="#" id="replyPost" style="display: none;"><img src="../css/img/reply_32.png" /></a>
-            <a href="#" id="postVoteup" style="float:right; opacity: 0.3;">
-                <img src="../css/img/voteup_32.png" />
-            </a>
-            <a href="#" id="postVotedown" style="float:right; opacity: 0.3;">
-                <img src="../css/img/votedown_32.png" />
-            </a>
+
+            <div data-role="controlgroup" data-type="horizontal" data-mini="true" style="float:right;">
+                <a href="#" id="postVoteup" data-role="button" style="opacity: 0.6;" data-theme="a">+</a>
+                <a href="#" id="postVotedown" data-role="button" style="opacity: 0.6;" data-theme="a">-</a>
+            </div>
         </div>
 
         <div class="ui-footer ui-bar-a" style="padding-left:4px; margin-left: -15px; margin-right: -15px;">
@@ -25,11 +24,17 @@
     </div>
 
     <div data-role="content" id="postCommentsContent" style="display:none; padding-top: 0px;">
-        <!-- new / all selector -->
-        <div data-role="controlgroup" data-type="horizontal" data-mini="true">
-            <a href="#" id="allComments" data-role="button" data-theme="a" class="ui-btn-active">Все</a>
-            <a href="#" id="newComments" data-role="button" data-theme="a">Новые</a>
+        <div style="width:100%; min-height: 30px;">
+            <!-- new / all selector -->
+            <div data-role="controlgroup" data-type="horizontal" data-mini="true" style="float:left;margin-top: 1px;">
+                <a href="#" id="allComments" data-role="button" data-theme="a" class="ui-btn-active">Все</a>
+                <a href="#" id="newComments" data-role="button" data-theme="a">Новые</a>
+            </div>
+
+            <a href="#" id="refreshComments" data-role="button" data-icon="refresh" data-mini="true"
+               data-iconpos="notext" style="float:right;" data-theme="a"></a>
         </div>
+
         <br/>
 
         <!-- comments list -->
@@ -43,8 +48,18 @@
         </div>
     </div>
 
-    <div data-role="footer" data-position="fixed" data-theme="c" style="display:none; min-height: 40px;" id="commentsNav">
-        <a href="#" id="prevnew" style="float:left;"><img src="../css/img/voteup_16.png" /></a>
-        <a href="#" id="nextnew" style="float:right;"><img src="../css/img/votedown_16.png" /></a>
+    <div data-role="footer" data-position="fixed" data-theme="c" style="display:none; min-height: 40px;" id="commentsNavBar">
+        <div class="postToolbarElement" id="commentsNavButtons">
+            <a href="#" id="prevnew" style="float:left;"><img src="../css/img/voteup_32.png" /></a>
+            <a href="#" id="nextnew" style="float:right;"><img src="../css/img/votedown_32.png" /></a>
+        </div>
+        <dir class="postToolbarElement" style="display: none;" id="commentsInputBar">
+            <div class="ui-block-a" style="width:79%">
+                <input type="text" id="commentInput" value="" placeholder="Написать комментарий" data-mini='true'  />
+            </div>
+            <div class="ui-block-b" style="width:19%">
+                <a href="#" id="submitComment" data-role="button" data-mini='true' class="maxedFootButton">OK</a>
+            </div>
+        </dir>
     </div>
 </div>

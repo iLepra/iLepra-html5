@@ -1,7 +1,10 @@
 var profileName;
 
 (function(){
-    $(document).on(iLepra.config.defaultTapEvent, "ul li.postInfo", function(){
+    $(document).on(iLepra.config.defaultTapEvent, "ul li.postInfo", function(e){
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
         profileName = $(this).data('user');
 
         $.mobile.changePage("more_profile.html");

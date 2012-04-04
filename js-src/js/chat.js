@@ -4,14 +4,15 @@
 
         // dom
         chatList = null,
-        chatInput = null;
+        chatInput = null,
+        chatLimit = 64;
 
     var refreshMessages = function(){
         // clean old
         chatList.empty();
         // render posts
         var p = "",
-            i, max = data.length;
+            i, max = data.length > chatLimit ? chatLimit : data.length;
         for(i = 0; i < max; i++)
             p += _.template(chatTemplate, data[i]);
         chatList.append(p);
@@ -38,7 +39,10 @@
         chatList = $("#chatList");
         chatInput = $("#chatInput");
 
-        $("#submitChat").bind(iLepra.config.defaultTapEvent, function(){
+        $("#submitChat").bind(iLepra.config.defaultTapEvent, function(e){
+            e.preventDefault();
+            e.stopImmediatePropagation();
+
             var text = chatInput.val();
             chatInput.val("");
 
@@ -70,7 +74,10 @@
         clearInterval( refreshInterval );
     });
 
-    $(document).on(iLepra.config.defaultTapEvent, "li.chatMessage", function(){
+    $(document).on(iLepra.config.defaultTapEvent, "li.chatMessage", function(e){
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
         var username = $(this).data('user');
 
         chatInput.val(username+": ");

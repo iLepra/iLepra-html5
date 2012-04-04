@@ -42,7 +42,10 @@ $(window).load(function(){
     });
 
     // sub click
-    $(document).on(iLepra.config.defaultTapEvent, "a.subListItem", function(){
+    $(document).on(iLepra.config.defaultTapEvent, "a.subListItem", function(e){
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
         subName = $(this).children('h1').text();
         subUrl = $(this).data('link');
 
@@ -88,10 +91,10 @@ $(window).load(function(){
         $("#subpostsTitle").text(subName);
 
         // more btn
-        moreSubpostsBtn.bind(iLepra.config.defaultTapEvent, function(event){
+        moreSubpostsBtn.bind(iLepra.config.defaultTapEvent, function(e){
             // stops event to prevent random post opening
-            event.preventDefault();
-            event.stopPropagation();
+            e.preventDefault();
+            e.stopPropagation();
 
             if( postLimit < iLepra.sub.posts.length){
                 postLimit += postLimit;

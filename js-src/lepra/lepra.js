@@ -3,7 +3,7 @@
  */
 iLepra = (function() {
     // last fetch times for stuff
-    var cacheTime = 5 * 60000,
+    var cacheTime = 30 * 60000,
         lastPostFetchTime = null,
         myStuffFetchTime = null,
         inboxFetchTime = null,
@@ -37,6 +37,8 @@ iLepra = (function() {
         iLepra.chat.wtf = /chatHandler.wtf = '(.+?)'/g.exec(data)[1];
         // get username
         iLepra.username = /<div id="greetings" class="columns_wrapper">.+?<a href=".+?">(.+?)<\/a>/g.exec(data)[1];
+        // logout wtf
+        iLepra.logoutWTF = /name="wtf" value="(.+?)"/g.exec(data)[1];
         // get sublepras
         iLepra.userSubLepras = [];
 
@@ -121,6 +123,8 @@ iLepra = (function() {
         favouritePosts: null,
         // inbox data
         inboxPosts: null,
+        // logoyt wtf
+        logoutWTF: null,
 
         //
         // functions
@@ -342,6 +346,14 @@ iLepra = (function() {
                 iLepra.util.processHTMLPosts(data, iLepra.inboxPosts, 'inbox');
                 $(document).trigger(iLepra.events.ready);
             });
+        },
+
+        doLogout: function(){
+            $.post("http://leprosorium.ru/logout/", {wtf:iLepra.logoutWTF}, function(){
+                $(document).trigger(iLepra.events.ready);
+            }).error(function(){
+                $(document).trigger(iLepra.events.ready);
+            })
         }
     }
 })();

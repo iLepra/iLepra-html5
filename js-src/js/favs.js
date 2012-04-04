@@ -29,7 +29,7 @@
             $(document).unbind(event);
 
             // hide loading msg
-            $.mobile.hidePageLoadingMsg().
+            $.mobile.hidePageLoadingMsg();
 
             renderNewPosts();
 

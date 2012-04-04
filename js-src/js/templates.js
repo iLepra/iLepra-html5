@@ -61,9 +61,7 @@ subsTemplate = '\
             </li>',
 
 commentTemplate = '\
-            <li data-id="<%= id %>" data-user="<%= user %>" <% if (isNew == 1){ %>class="new" data-theme="d"<% } %> \
-            style="margin-left: <%= (5*indent) %>px; border-left: 3px solid <%= borderColors[indent] %>;"\
-            >\
+            <li data-id="<%= id %>" data-user="<%= user %>" class="<%= newClass %>" <%= style %>>\
                 <p class="commentText"><%= text %></p>\
                 <div style="display:none;" class="commentsMenu">\
                     <a href="#" class="reply"><img src="../css/img/reply_32.png" /></a>\
@@ -75,9 +73,7 @@ commentTemplate = '\
                     "><img src="../css/img/votedown_32.png" /></a>\
                 </div>\
             </li>\
-            <li data-role="list-divider" class="postInfo" data-user="<%= user %>"\
-            style="margin-left: <%= (5*indent) %>px; border-left: 3px solid <%= borderColors[indent] %>;"\
-            >\
+            <li data-role="list-divider" class="postInfo" data-user="<%= user %>" <%= style %>>\
                 <img />\
                 <b><%= user %></b>, \
                 <%= when %></span>\
