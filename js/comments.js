@@ -1,7 +1,6 @@
 (function(){
     // comments loading indicator
     var commentsLoading = false,
-        autorender = false, // autorender comments
         commentsLimit = iLepra.config.postIncrement, // pagination & display stuff
         type = "all", // all || new
         // current comment
@@ -149,8 +148,6 @@
             e.preventDefault();
             e.stopImmediatePropagation();
 
-            autorender = true;
-
             commentId = null;
             commentUser = null;
 
@@ -237,23 +234,6 @@
         }else if(iLepra.post.current.vote == -1){
             $("#postVotedown").css("opacity", 1);
         }
-
-        if(autorender){
-            $("#postCommentsButton").hide();
-            $("#postCommentsContent").show();
-
-            // render comments
-            renderNewComments();
-
-            // hide button if needed
-            if( commentsLimit >= iLepra.post.comments.length ){
-                $("#commentsButtons").hide();
-            }else{
-                prepareCommentsButtons();
-            }
-
-            autorender = false;
-        }
     });
 
     // on comment option pick
@@ -261,7 +241,6 @@
         e.preventDefault();
         e.stopImmediatePropagation();
 
-        autorender = true;
         showCommentAdd();
     });
     $(document).on(iLepra.config.defaultTapEvent, "div.commentsMenu a.voteup", function(e) {
