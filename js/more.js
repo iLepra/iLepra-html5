@@ -54,5 +54,16 @@
 
             $.mobile.changePage("more_settings.html");
         });
+
+        $("#logoutButton").bind(iLepra.config.defaultTapEvent, function(e){
+            e.preventDefault();
+            e.stopImmediatePropagation();
+
+            $.mobile.showPageLoadingMsg();
+            $(document).bind(iLepra.events.ready, function(){
+               $.mobile.changePage("login.html");
+            });
+            iLepra.doLogout();
+        })
     });
 })();

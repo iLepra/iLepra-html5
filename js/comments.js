@@ -178,14 +178,14 @@
             e.stopImmediatePropagation();
 
             $(this).css('opacity', 1);
-            $(this).next().css('opacity', 0.3);
+            $(this).next().css('opacity', 0.6);
             iLepra.post.votePost("p"+iLepra.post.current.id, "1");
         });
         $("#postVotedown").bind(iLepra.config.defaultTapEvent, function(e){
             e.preventDefault();
             e.stopImmediatePropagation();
 
-            $(this).prev().css('opacity', 0.3);
+            $(this).prev().css('opacity', 0.6);
             $(this).css('opacity', 1);
             iLepra.post.votePost("p"+iLepra.post.current.id, "-1");
         });
