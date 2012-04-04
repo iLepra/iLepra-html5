@@ -11,5 +11,15 @@
         }
     }
 
+    function isOldAndroid() {
+        var dv = device.version.split(".");
+        if( parseInt(dv[0]) <= 2 && dv[1] <= 2 ){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     window.isOnline = isOnline;
+    window.isOldAndroid = isOldAndroid;
 })();
