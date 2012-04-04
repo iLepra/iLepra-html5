@@ -8,12 +8,11 @@
 
         <div class="postMenu">
             <a href="#" id="replyPost" style="display: none;"><img src="../css/img/reply_32.png" /></a>
-            <a href="#" id="postVoteup" style="float:right; opacity: 0.3;">
-                <img src="../css/img/voteup_32.png" />
-            </a>
-            <a href="#" id="postVotedown" style="float:right; opacity: 0.3;">
-                <img src="../css/img/votedown_32.png" />
-            </a>
+
+            <div data-role="controlgroup" data-type="horizontal" data-mini="true" style="float:right;">
+                <a href="#" id="postVoteup" data-role="button" style="opacity: 0.3;" data-theme="a">+</a>
+                <a href="#" id="postVotedown" data-role="button" style="opacity: 0.3;" data-theme="a">-</a>
+            </div>
         </div>
 
         <div class="ui-footer ui-bar-a" style="padding-left:4px; margin-left: -15px; margin-right: -15px;">

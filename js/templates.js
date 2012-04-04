@@ -73,9 +73,7 @@ commentTemplate = '\
                     "><img src="../css/img/votedown_32.png" /></a>\
                 </div>\
             </li>\
-            <li data-role="list-divider" class="postInfo" data-user="<%= user %>"\
-            style="margin-left: <%= (5*indent) %>px; border-left: 3px solid <%= borderColors[indent] %>;"\
-            >\
+            <li data-role="list-divider" class="postInfo" data-user="<%= user %>" <%= style %>>\
                 <img />\
                 <b><%= user %></b>, \
                 <%= when %></span>\
