@@ -64,7 +64,7 @@ code                                { font-family: Courier New !important; font-
 .apple-navbar-ui .ui-icon                                    { position: absolute; background-color: transparent; background-image: none; height: 22px; margin: 0 0 22px; left: 0; top: 0 !important; width: 100%; overflow: visible !important; z-index: -1;
                                                               -moz-border-radius: 0px; -webkit-border-radius: 0px; border-radius: 0px;
                                                               filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorStr=#40ffffff,EndColorStr=#12ffffff);zoom: 1;
-                                                              left: 0 !important;
+                                                              left: 0 !important; margin-left: 0px !important;
                                                               }                                                                                                                       
 /*  all other  */                                                              
 .apple-navbar-ui  .ui-icon::before                            { width: 100%; position: absolute; top: 0; bottom: 0; left: 0; right: 0; content: ""; display: block; height: 44px; z-index: 0;
