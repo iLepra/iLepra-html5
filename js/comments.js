@@ -85,40 +85,8 @@
         commentsInput = $("#commentInput");
 
         // on comments request
-        $("#postCommentsButton").bind(iLepra.config.defaultTapEvent, function(e){
-            e.preventDefault();
-            e.stopImmediatePropagation();
-
-            if(commentsLoading) return;
-
-            // show loader
-            $.mobile.showPageLoadingMsg();
-            commentsLoading = true;
-
-            // on posts data
-            $(document).bind(iLepra.events.ready, function(event){
-                $(document).unbind(event);
-                //$.mobile.changePage("post_comments.html");
-                $.mobile.hidePageLoadingMsg();
-                $("#postCommentsButton").hide();
-                $("#postCommentsContent").show();
-                $("#replyPost").show();
-
-                // render comments
-                renderNewComments();
-
-                // hide button if needed
-                if( commentsLimit >= iLepra.post.comments.length ){
-                    $("#commentsButtons").hide();
-                }else{
-                    prepareCommentsButtons();
-                }
-
-                commentsLoading = false;
-            });
-
-            iLepra.post.getComments();
-        });
+        $("#postCommentsButton").bind(iLepra.config.defaultTapEvent, reloadComments);
+        $("#refreshComments").bind(iLepra.config.defaultTapEvent, reloadComments);
 
         $("#allComments").bind(iLepra.config.defaultTapEvent, function(e){
             e.preventDefault();
@@ -280,7 +248,40 @@
         }
     });
 
+    var reloadComments = function(e){
+        e.preventDefault();
+        e.stopImmediatePropagation();
 
+        if(commentsLoading) return;
+
+        // show loader
+        $.mobile.showPageLoadingMsg();
+        commentsLoading = true;
+
+        // on posts data
+        $(document).bind(iLepra.events.ready, function(event){
+            $(document).unbind(event);
+            //$.mobile.changePage("post_comments.html");
+            $.mobile.hidePageLoadingMsg();
+            $("#postCommentsButton").hide();
+            $("#postCommentsContent").show();
+            $("#replyPost").show();
+
+            // render comments
+            renderNewComments();
+
+            // hide button if needed
+            if( commentsLimit >= iLepra.post.comments.length ){
+                $("#commentsButtons").hide();
+            }else{
+                prepareCommentsButtons();
+            }
+
+            commentsLoading = false;
+        });
+
+        iLepra.post.getComments();
+    }
 
     // on add comment show
     var showCommentAdd = function(){
