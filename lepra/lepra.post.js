@@ -68,15 +68,27 @@ iLepra.post = (function() {
                     text = text.replace(/<\/p>/gi, '');
                     text = text.replace(/<nonimg/ig, '<img');
 
+
+                    var style = '';
+                    if(indent != 0){
+                        style = 'style="margin-left: '+5*indent+'px; border-left: 2px solid '+borderColors[indent]+'"';
+                    }
+
+                    var isNew = res[2].indexOf('new') != -1 ? 1 : 0;
+
                     var post = {
                         id: res[1],
-                        isNew: res[2].indexOf('new') != -1 ? 1 : 0,
+                        isNew: isNew,
                         indent: indent,
                         text: text,
                         rating: res[7],
                         user: res[4],
                         when: res[5],
-                        vote: vote
+                        vote: vote,
+
+                        // misc ui stuff
+                        newClass: isNew ? 'new" data-theme="d'  : "",
+                        style: style
                     };
 
                     iLepra.post.comments.push(post);
