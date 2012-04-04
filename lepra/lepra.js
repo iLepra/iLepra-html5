@@ -3,7 +3,7 @@
  */
 iLepra = (function() {
     // last fetch times for stuff
-    var cacheTime = 5 * 60000,
+    var cacheTime = 30 * 60000,
         lastPostFetchTime = null,
         myStuffFetchTime = null,
         inboxFetchTime = null,
