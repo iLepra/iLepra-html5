@@ -27,7 +27,7 @@
     };
 
     var animateToPage = function(url){
-        $(".ui-page-active").animate({marginLeft: "0px"}, 150, function(){
+        $(".ui-page-active").transition({marginLeft: "0px"}, 150, function(){
             hideMenu();
             $.mobile.changePage(url, {transition: 'none'});
         });
@@ -42,10 +42,10 @@
             if(menuStatus != true){
                 menu.show();
                 menu.css('top', $(window).scrollTop() +'px');
-                $(".ui-page-active").animate({marginLeft: "165px"}, 300, showMenu);
+                $(".ui-page-active").transition({marginLeft: "165px"}, 300, showMenu);
                 return false;
             } else {
-                $(".ui-page-active").animate({marginLeft: "0px"}, 300, hideMenu);
+                $(".ui-page-active").transition({marginLeft: "0px"}, 300, hideMenu);
                 return false;
             }
         });
