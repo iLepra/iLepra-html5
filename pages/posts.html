@@ -1,9 +1,14 @@
 <div data-role="page" id="postsPage">
+    <div data-role="header" data-position="fixed">
+        <a href="#" class="showMenu" data-iconpos="notext" data-icon="slide-menu">Menu</a>
+        <h1>Главная</h1>
+        <a href="#" id="refreshPostsButton" data-icon="refresh" data-iconpos="notext" class="ui-btn-right">Обновить</a>
+    </div>
+
     <div data-role="content">
         <div style="margin: -15px; padding-bottom: 20px; padding-top: 5px;">
-            <a href="#" id="refreshPostsButton" data-role="button" data-mini="true" data-icon="refresh" style="float:right; margin-top: 0px;">Обновить</a>
             <select id="layoutSelect" data-mini="true" data-inline="true">
-                <option>Посты</option>
+                <option disabled>Посты</option>
                 <option value="main">Главная</option>
                 <option value="all">Все</option>
                 <option value="sub">Подлепры</option>
@@ -13,22 +18,5 @@
         </ul>
         <br/>
         <a href="#" data-role="button" id="morePostsButton" style="display:none;">Еще? Еще!</a>
-    </div>
-
-    <div data-role="footer" data-position="fixed" data-theme="a" data-id="main-nav" class="ui-footer-bartender">
-        <div data-role="navbar" data-grid="c">
-            <ul class="apple-navbar-ui comboSprite">
-                <li><a href="#" class="ui-btn-active" data-icon="posts">Посты</a></li>
-                <li><a href="#" id="mystuffBar" data-icon="mystuff">
-                    Мои вещи
-                    <span class="mystuffCounter ui-li-count" style="display:none;"></span>
-                </a></li>
-                <li><a href="#" id="inboxBar" data-icon="inbox">
-                    Инбокс
-                    <span class="inboxCounter ui-li-count" style="display:none;"></span>
-                </a></li>
-                <li><a href="#" id="moreBar" data-icon="more">Еще</a></li>
-            </ul>
-        </div><!-- /navbar -->
     </div>
 </div>

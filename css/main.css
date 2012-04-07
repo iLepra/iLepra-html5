@@ -1,6 +1,7 @@
 /* don't allow callout opening */
 body { 
     -webkit-touch-callout: none;
+    background: #31394b !important;
 }
 
 /* undo text selection everywhere but inputs */
@@ -163,4 +164,70 @@ img {
     margin-right: -15px;
     padding-left: 5px;
     padding-right: 5px;
+}
+
+/* side menu stuff */
+.ui-icon-slide-menu {
+    background-image: url("img/slidemenu_16.png");
+    background-size: 16px 16px;
+}
+#menu{
+    width:165px;
+    height:100%;
+    margin-top: 40px;
+    display:block;
+    float:left;
+    position: absolute;
+    background:#31394b;
+}
+#menu ul{
+    margin:0;padding:0;
+    width:inherit;
+}
+#menu ul li{
+    list-style-type:none;
+    margin:0px 0;
+    box-shadow: 0 0 1px 0 #394150;
+    border-bottom: 1px solid #2E3543;
+}
+#menu ul li a:link, #menu ul li a:visited{
+    border-bottom:solid #333 1px;
+    color:#fff;
+    font-size:14px;
+    font-family:arial;
+    text-decoration:none;
+    width:165px;
+    display:block;
+    padding:10px 0px 10px 10px;
+    text-shadow: 0px 1px 1px #000000;
+}
+#menu ul li a:hover, #menu ul li a:active{
+    background-color:#716f6f;
+}
+#menu ul li.ui-li-divider {
+    background: #333a4a; /* Old browsers */
+    background: -moz-linear-gradient(top, #424a5d 0%, #333a4a 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#424a5d), color-stop(100%,#333a4a)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #424a5d 0%,#333a4a 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #424a5d 0%,#333a4a 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #424a5d 0%,#333a4a 100%); /* IE10+ */
+    background: linear-gradient(top, #424a5d 0%,#333a4a 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#424a5d', endColorstr='#333a4a',GradientType=0 ); /* IE6-9 */
+    color: #A1A9B7;
+    text-shadow: 0 1px 0 #000000;
+}
+.active{
+    background-color:#192031;
+}
+
+/* jqm overrides */
+.ui-btn-corner-all {
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+.ui-icon, .ui-icon-searchfield::after {
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
 }

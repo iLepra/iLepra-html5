@@ -1,64 +1,125 @@
 (function(){
-    $(document).on('pagecreate', "#morePage", function(){
-        updateNewsCounts();
+    var menu = null;
+    var menuStatus = false;
+
+    var clearActiveMenu = function(){
+        //hideMenu();
+        $('li.active').each(function(){
+            $(this).removeClass('active');
+        })
+    };
+    window.clearActiveMenu = clearActiveMenu;
+
+    var resetState = function(event, item){
+        event.preventDefault();
+        event.stopImmediatePropagation();
+
+        clearActiveMenu();
+        $(item).parent().addClass('active');
+    };
+
+    var hideMenu = function(){
+        menuStatus = false;
+        menu.hide();
+    };
+    var showMenu = function(){
+        menuStatus = true
+    };
+
+    var animateToPage = function(url){
+        $(".ui-page-active").animate({marginLeft: "0px"}, 150, function(){
+            hideMenu();
+            $.mobile.changePage(url, {transition: 'none'});
+        });
+    }
+
+    //
+    $(document).on('pagecreate', "#splashPage", function(){
+        menu = $("#menu");
+
+        // Show menu
+        $(document).on(iLepra.config.defaultTapEvent, "a.showMenu", function(){
+            if(menuStatus != true){
+                menu.show();
+                menu.css('top', $(window).scrollTop() +'px');
+                $(".ui-page-active").animate({marginLeft: "165px"}, 300, showMenu);
+                return false;
+            } else {
+                $(".ui-page-active").animate({marginLeft: "0px"}, 300, hideMenu);
+                return false;
+            }
+        });
+
+        // buttons
+        $("#postsButton").bind(iLepra.config.defaultTapEvent, function(e){
+            resetState(e, this);
+
+
+            animateToPage("posts.html");
+        });
+
+        $("#mystuffButton").bind(iLepra.config.defaultTapEvent, function(e){
+            resetState(e, this);
+
+            animateToPage("mystuff.html");
+        });
+
+        $("#inboxButton").bind(iLepra.config.defaultTapEvent, function(e){
+            resetState(e, this);
+
+            animateToPage("inbox.html");
+        });
 
         $("#favsButton").bind(iLepra.config.defaultTapEvent, function(e){
-            e.preventDefault();
-            e.stopImmediatePropagation();
+            resetState(e, this);
 
-            $.mobile.changePage("more_favs.html");
+            animateToPage("more_favs.html");
         });
 
         $("#myProfileButton").bind(iLepra.config.defaultTapEvent, function(e){
-            e.preventDefault();
-            e.stopImmediatePropagation();
+            resetState(e, this);
 
             profileName = iLepra.username;
-            $.mobile.changePage("more_profile.html");
+            animateToPage("more_profile.html");
         });
 
         $("#mySubsButton").bind(iLepra.config.defaultTapEvent, function(e){
-            e.preventDefault();
-            e.stopImmediatePropagation();
+            resetState(e, this);
 
             iLepra.sub.list = iLepra.userSubLepras;
             iLepra.sub.fetch = false;
-            $.mobile.changePage("more_subs.html");
+            animateToPage("more_subs.html");
         });
 
         $("#allSubsButton").bind(iLepra.config.defaultTapEvent, function(e){
-            e.preventDefault();
-            e.stopImmediatePropagation();
+            resetState(e, this);
 
             iLepra.sub.fetch = true;
-            $.mobile.changePage("more_subs.html");
+            animateToPage("more_subs.html");
         });
 
         $("#govButton").bind(iLepra.config.defaultTapEvent, function(e){
-            e.preventDefault();
-            e.stopImmediatePropagation();
+            resetState(e, this);
 
-            $.mobile.changePage("more_gov.html");
+            animateToPage("more_gov.html");
         });
 
         $("#chatButton").bind(iLepra.config.defaultTapEvent, function(e){
-            e.preventDefault();
-            e.stopImmediatePropagation();
+            resetState(e, this);
 
-            $.mobile.changePage("more_chat.html");
+            animateToPage("more_chat.html");
         });
 
         $("#settingsButton").bind(iLepra.config.defaultTapEvent, function(e){
-            e.preventDefault();
-            e.stopImmediatePropagation();
+            resetState(e, this);
 
-            $.mobile.changePage("more_settings.html");
+            animateToPage("more_settings.html");
         });
 
         $("#logoutButton").bind(iLepra.config.defaultTapEvent, function(e){
-            e.preventDefault();
-            e.stopImmediatePropagation();
+            resetState(e, this);
 
+            $(".ui-page-active").animate({marginLeft: "0px"}, 300, hideMenu);
             $.mobile.showPageLoadingMsg();
             $(document).bind(iLepra.events.ready, function(){
                $.mobile.changePage("login.html");

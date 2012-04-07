@@ -8,8 +8,6 @@
     <link rel="stylesheet"  href="css/jquery.mobile.min.css" />
     <!-- fixed toolbars polyfill -->
     <link rel="stylesheet" href="css/jquery.mobile.fixedToolbar.polyfill.css" />
-    <!-- bartender style -->
-    <link rel="stylesheet"  href="css/bartender.css" />
 
     <!-- app style -->
     <link rel="stylesheet"  href="css/main.css" />
@@ -18,7 +16,6 @@
     <script src="libs/jquery.min.js"></script>
     <!-- jquery mobile -->
     <script src="libs/jquery.mobile.min.js"></script>
-
     <!-- fixed toolbars polyfill -->
     <script src="libs/jquery.mobile.fixedToolbar.polyfill.js"></script>
 
@@ -51,9 +48,6 @@
     <!-- inbox logic -->
     <script src="js/inbox.js"></script>
 
-    <!-- navigation stuff -->
-    <script src="js/navbar.js"></script>
-
     <!-- posts stuff -->
     <script src="js/posts.js"></script>
     <script src="js/comments.js"></script>
@@ -67,6 +61,29 @@
     <script src="js/chat.js"></script>
 </head>
 <body>
+
+<div id="menu" style="display: none;">
+    <ul>
+        <li class="active"><a href="#" id="postsButton">Посты</a></li>
+        <li><a href="#" id="mystuffButton">Мои вещи</a></li>
+        <li><a href="#" id="inboxButton">Инбокс</a></li>
+
+        <li class="ui-li-divider">Мое</li>
+        <li><a href="#" id="myProfileButton">Профиль</a></li>
+        <li><a href="#" id="favsButton">Избранное</a></li>
+        <li><a href="#" id="mySubsButton">Мои подлепры</a></li>
+
+        <li class="ui-li-divider">Лепра</li>
+        <li><a href="#" id="chatButton">Чятик</a></li>
+        <li><a href="#" id="allSubsButton">Блоги Империи</a></li>
+        <li><a href="#" id="govButton">Белый дом</a></li>
+
+        <li class="ui-li-divider">iLepra</li>
+        <!--<li><a href="#" id="settingsButton">Настройки</a></li>-->
+        <li><a href="#" id="logoutButton">Выход</a></li>
+    </ul>
+</div>
+
 <div data-role="page" class="splashScreen" id="splashPage">
     <div class="splashText">
         Загружаемся..
