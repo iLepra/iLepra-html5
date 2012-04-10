@@ -2,6 +2,7 @@
 body { 
     -webkit-touch-callout: none;
     background: #31394b !important;
+    overflow-x: hidden;
 }
 
 /* undo text selection everywhere but inputs */
