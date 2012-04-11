@@ -1,7 +1,8 @@
 (function(){
     var postLimit = iLepra.config.postIncrement,
         inboxList = null,
-        moreInboxBtn = null;
+        moreInboxBtn = null,
+        loading = false;
 
     var renderNewPosts = function(){
         // render posts
@@ -19,16 +20,19 @@
 
     // render page on creation
     $(document).on('pageshow', "#inboxPage", function(){
+        if(loading) $.mobile.showPageLoadingMsg();
+    });
+    $(document).on('pagebeforeshow', "#inboxPage", function(){
         inboxList = $("#inboxList");
         moreInboxBtn = $("#moreInboxButton");
-
-        $.mobile.showPageLoadingMsg();
+        loading = true;
 
         $(document).bind(iLepra.events.ready, function(event){
             $(document).unbind(event);
 
             // hide loading msg
             $.mobile.hidePageLoadingMsg();
+            loading = false;
 
             renderNewPosts();
 

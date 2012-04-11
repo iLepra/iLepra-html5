@@ -23,7 +23,7 @@
         menu.hide();
     };
     var showMenu = function(){
-        menuStatus = true
+        menuStatus = true;
     };
 
     var animateToPage = function(url){
@@ -42,10 +42,20 @@
             if(menuStatus != true){
                 menu.show();
                 menu.css('top', $(window).scrollTop() +'px');
-                $(".ui-page-active").transition({marginLeft: "165px"}, 300, showMenu);
+                if(window.isOldAndroid()){
+                    $(".ui-page-active").css('marginLeft', '165px');
+                    showMenu();
+                }else{
+                    $(".ui-page-active").transition({marginLeft: "165px"}, 300, showMenu);
+                }
                 return false;
             } else {
-                $(".ui-page-active").transition({marginLeft: "0px"}, 300, hideMenu);
+                if(window.isOldAndroid()){
+                    $(".ui-page-active").css('marginLeft', '0px');
+                    hideMenu();
+                }else{
+                    $(".ui-page-active").transition({marginLeft: "0px"}, 300, hideMenu);
+                }
                 return false;
             }
         });

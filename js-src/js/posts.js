@@ -1,7 +1,8 @@
 (function(){
     var postLimit = iLepra.config.postIncrement,
         postsList = null,
-        morePostsBtn = null;
+        morePostsBtn = null,
+        loading = false;
 
     var renderNewPosts = function(){
         // render posts
@@ -35,16 +36,19 @@
 
     // render page on creation
     $(document).on('pageshow', "#postsPage", function(event){
+        if(loading) $.mobile.showPageLoadingMsg();
+    });
+    $(document).on('pagebeforeshow', "#postsPage", function(event){
         postsList = $("#postsList");
         morePostsBtn = $("#morePostsButton");
-
-        $.mobile.showPageLoadingMsg();
+        loading = true;
 
         $(document).bind(iLepra.events.ready, function(event){
             $(document).unbind(event);
 
             // hide loading msg
-            $.mobile.hidePageLoadingMsg()
+            $.mobile.hidePageLoadingMsg();
+            loading = false;
 
             morePostsBtn.show();
 

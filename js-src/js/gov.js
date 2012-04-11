@@ -1,13 +1,19 @@
 (function(){
+    var loading = false;
+
     // render page on creation
     $(document).on('pageshow', "#govPage", function(){
-        $.mobile.showPageLoadingMsg()
+        if(loading) $.mobile.showPageLoadingMsg()
+    });
+    $(document).on('pagebeforeshow', "#govPage", function(){
+        loading = true;
 
         $(document).bind(iLepra.events.ready, function(event){
             $(document).unbind(event);
 
             // hide loading msg
-            $.mobile.hidePageLoadingMsg()
+            $.mobile.hidePageLoadingMsg();
+            loading = false;
 
             // render posts
             $("#president").html(

@@ -33,7 +33,6 @@ iLepra.util = (function() {
                 }
 
                 var text = body.replace(/(<([^>]+)>)/ig," ").substr(0, 140);
-                //text = text.replace(/\s\s+/g, '').replace(/[\n\r\t]/g, '');
                 if(text.length == 140) text += "..";
 
                 var userSub = res[3].split('</a> в ');
@@ -45,6 +44,8 @@ iLepra.util = (function() {
                 }else if(res[10] != null && res[10].length > 0){
                     vote = -1;
                 }
+
+                body = body.replace(/href="(.+?)"/g, 'href="#" data-url="$1"');
 
                 var post = {
                     id: res[1].replace('p', ''),
@@ -97,8 +98,10 @@ iLepra.util = (function() {
                 var text = posts[i].body.replace(/(<([^>]+)>)/g," ").substr(0, 140);
                 if(text.length == 140) text += "..";
 
+                var body = posts[i].body.replace(/href="(.+?)"/g, 'href="#" data-url="$1"');
+
                 post.id = posts[i].id;
-                post.body = posts[i].body;
+                post.body = body;
                 post.rating = posts[i].rating;
                 post.domain_url = posts[i].domain_url;
                 post.image = img;

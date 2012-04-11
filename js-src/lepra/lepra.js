@@ -137,8 +137,6 @@ iLepra = (function() {
         init: function() {
             // detect device properties
             this.config.screenBiggest = window.screen.width > window.screen.height ? window.screen.width : window.screen.height;
-            // detect platform and set default event
-            //if( isMobile() ) this.config.defaultTapEvent = 'tap';
 
             // get lepra
             $.get("http://leprosorium.ru", function(data){

@@ -1,5 +1,7 @@
-// fired up when phonegap is ready
+// fired up when phonegap is ready - this requires a phonegap.js file :|
 document.addEventListener("deviceready", function(){
+//$(document).ready(function(){
+//window.addEventListener('load', function(){
     // jquery mobile stuff
     $.support.cors = true;
     $.mobile.allowCrossDomainPages = true;
@@ -8,16 +10,25 @@ document.addEventListener("deviceready", function(){
     $.mobile.loadingMessage = "Загружаемся ...";
     $.mobile.page.prototype.options.backBtnText = "Назад";
     $.mobile.fixedtoolbar.prototype.options.tapToggle = false;
+
+    var transition = '';
     if( window.isOldAndroid() ){
         $.mobile.defaultPageTransition = 'none';
         $.mobile.defaultDialogTransition = 'none';
+        transition = 'none';
+    }else{
+        $.mobile.defaultPageTransition = 'slide';
+        //$.mobile.defaultDialogTransition = 'none';
+        transition = 'fade';
     }
+
     $(document).on(iLepra.config.defaultTapEvent, "a", function(e){
-        var link = $(this).attr('href') ;
+        var link = $(this).data('url');
         if(link.indexOf('http://') != -1){
             e.preventDefault();
             e.stopImmediatePropagation();
             window.open(link);
+            return;
         }
     });
 
@@ -30,7 +41,7 @@ document.addEventListener("deviceready", function(){
             $(document).unbind(event);
 
             var add = fromIndex ? "pages/" : "";
-            $.mobile.changePage(add+"posts.html");
+            $.mobile.changePage(add+"posts.html", {transition: transition});
         });
 
         // get posts
@@ -43,7 +54,7 @@ document.addEventListener("deviceready", function(){
 
         if(!iLepra.isAuthenticated){
             // navigate to login page
-            $.mobile.changePage("pages/login.html");
+            $.mobile.changePage("pages/login.html", {transition: transition});
         }else{
             // get posts
             getLatestPosts(true);
@@ -52,7 +63,7 @@ document.addEventListener("deviceready", function(){
 
     $(document).on("pagecreate", "#loginPage", function(){
         if( iLepra.isAuthenticated ){
-            $.mobile.changePage("pages/posts.html");
+            $.mobile.changePage("pages/posts.html", {transition: transition});
             return;
         }
 
@@ -102,9 +113,9 @@ document.addEventListener("deviceready", function(){
         });
     });
 
-    $(document).on('pageshow', '#splashPage', function(){
+    $(document).on('pagebeforeshow', '#splashPage', function(){
         if( iLepra.isAuthenticated ){
-            $.mobile.changePage("pages/posts.html");
+            $.mobile.changePage("pages/posts.html", {transition: transition});
         }
     });
 
@@ -123,4 +134,4 @@ document.addEventListener("deviceready", function(){
     };
 
     tryInit();
-}, false);
+});

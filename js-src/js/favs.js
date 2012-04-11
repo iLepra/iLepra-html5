@@ -1,7 +1,8 @@
 (function(){
     var postLimit = iLepra.config.postIncrement,
         favsList = null,
-        moreFavsBtn = null;
+        moreFavsBtn = null,
+        loading = false;
 
     var renderNewPosts = function(){
         // render posts
@@ -20,16 +21,19 @@
 
     // render page on creation
     $(document).on('pageshow', "#favsPage", function(){
+        if(loading) $.mobile.showPageLoadingMsg();
+    });
+    $(document).on('pagebeforeshow', "#favsPage", function(){
         favsList = $("#favsList");
         moreFavsBtn = $("#moreFavsButton");
-
-        $.mobile.showPageLoadingMsg();
+        loading = true;
 
         $(document).bind(iLepra.events.ready, function(event){
             $(document).unbind(event);
 
             // hide loading msg
             $.mobile.hidePageLoadingMsg();
+            loading = false;
 
             renderNewPosts();
 

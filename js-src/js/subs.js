@@ -2,6 +2,7 @@ $(window).load(function(){
     var subName = null,
         subUrl = null,
         postLimit = iLepra.config.postIncrement,
+        loading = false,
 
         // dom
         subsList = null,
@@ -22,16 +23,20 @@ $(window).load(function(){
 
     // render page on creation
     $(document).on('pageshow', "#subsPage", function(){
+        if(loading) $.mobile.showPageLoadingMsg();
+    })
+    $(document).on('pagebeforeshow', "#subsPage", function(){
         subsList = $("#subsList");
 
         if( iLepra.sub.fetch ){
-            $.mobile.showPageLoadingMsg();
+            loading = true;
 
             $(document).bind(iLepra.events.ready, function(event){
                 $(document).unbind(event);
 
                 // hide loading msg
                 $.mobile.hidePageLoadingMsg();
+                loading = false;
 
                 rendreNew();
             });
@@ -66,11 +71,14 @@ $(window).load(function(){
         }catch(e){}
     }
 
-    $(document).on('pageshow', "#subpostsPage", function(){
+    $(document).on('pagebeforeshow', "#subpostsPage", function(){
+        if(loading) $.mobile.showPageLoadingMsg();
+    });
+    $(document).on('pagebeforeshow', "#subpostsPage", function(){
         subpostsList = $("#subpostsList");
         moreSubpostsBtn = $("#moreSubpostsButton");
 
-        $.mobile.showPageLoadingMsg();
+        loading = true;
 
         // on posts data
         $(document).bind(iLepra.events.ready, function(event){
@@ -78,6 +86,7 @@ $(window).load(function(){
 
             // hide loading msg
             $.mobile.hidePageLoadingMsg();
+            loading = false;
 
             moreSubpostsBtn.show();
 

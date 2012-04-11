@@ -1,6 +1,8 @@
 var profileName;
 
 (function(){
+    var loading = false;
+
     $(document).on(iLepra.config.defaultTapEvent, "ul li.postInfo", function(e){
         e.preventDefault();
         e.stopImmediatePropagation();
@@ -12,13 +14,18 @@ var profileName;
 
     // render page on creation
     $(document).on('pageshow', "#profilePage", function(){
-        $.mobile.showPageLoadingMsg()
+        if(loading) $.mobile.showPageLoadingMsg();
+    });
+    $(document).on('pagebeforeshow', "#profilePage", function(){
+        loading = true;
 
         $(document).bind(iLepra.events.ready, function(event){
             $(document).unbind(event);
 
             // hide loading msg
-            $.mobile.hidePageLoadingMsg()
+            $.mobile.hidePageLoadingMsg();
+            loading = false;
+
             $("#profileContent").show();
 
             var data = iLepra.profile.data;

@@ -1,6 +1,7 @@
 (function(){
     var data = null,
         refreshInterval = null,
+        loading = false,
 
         // dom
         chatList = null,
@@ -28,7 +29,8 @@
             refreshMessages();
             if( typeof isInit != 'undefined' && isInit ){
                 // hide loading msg
-                $.mobile.hidePageLoadingMsg()
+                $.mobile.hidePageLoadingMsg();
+                loading = false;
             }
         });
         iLepra.chat.getMessages();
@@ -36,8 +38,13 @@
 
     // render page on creation
     $(document).on('pageshow', "#chatPage", function(){
+        if(loading) $.mobile.showPageLoadingMsg();
+    });
+    $(document).on('pagebeforeshow', "#chatPage", function(){
         chatList = $("#chatList");
         chatInput = $("#chatInput");
+
+        loading = true;
 
         $("#submitChat").bind(iLepra.config.defaultTapEvent, function(e){
             e.preventDefault();
@@ -64,7 +71,6 @@
             iLepra.chat.sendMessage(text);
         });
 
-        $.mobile.showPageLoadingMsg()
         requestNewChatData(true);
         // set refresh interval
         refreshInterval = setInterval ( "requestNewChatData()", 10000 );
