@@ -24,7 +24,7 @@ document.addEventListener("deviceready", function(){
 
     $(document).on(iLepra.config.defaultTapEvent, "a", function(e){
         var link = $(this).data('url');
-        if(link.indexOf('http://') != -1){
+        if(typeof link != 'undefined' && link.indexOf('http://') != -1){
             e.preventDefault();
             e.stopImmediatePropagation();
             window.open(link);

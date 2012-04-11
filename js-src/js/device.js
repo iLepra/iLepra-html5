@@ -4,7 +4,7 @@
     function isOnline() {
         var networkState = navigator.network.connection.type;
 
-        if(networkState == Connection.NONE || networkState == Connection.UNKNOWN){
+        if(networkState == Connection.NONE){
             return false;
         }else{
             return true;

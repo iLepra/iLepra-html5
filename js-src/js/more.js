@@ -27,10 +27,16 @@
     };
 
     var animateToPage = function(url){
-        $(".ui-page-active").transition({marginLeft: "0px"}, 150, function(){
+        if(window.isOldAndroid()){
+            $(".ui-page-active").css('marginLeft', '0px');
             hideMenu();
             $.mobile.changePage(url, {transition: 'none'});
-        });
+        }else{
+            $(".ui-page-active").transition({marginLeft: "0px"}, 150, function(){
+                hideMenu();
+                $.mobile.changePage(url, {transition: 'none'});
+            });
+        }
     }
 
     //
