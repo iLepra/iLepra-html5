@@ -182,9 +182,13 @@ img {
     position: fixed;
     background:#31394b;
     z-index: 1000;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
 }
 #menu ul{
-    margin:0;padding:0;
+    margin:0;
+    padding:0;
+    padding-bottom: 40px;
     width:inherit;
 }
 #menu ul li{

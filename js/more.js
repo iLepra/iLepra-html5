@@ -39,7 +39,7 @@
         // Show menu
         $(document).on(iLepra.config.defaultTapEvent, "a.showMenu", function(){
             if(menuStatus != true){
-                menu.css('top', $(window).scrollTop() +'px');
+                //menu.css('top', $(window).scrollTop() +'px');
                 menu.transition({marginLeft: "0px"}, 300, showMenu);
                 //$(".ui-page-active").transition({marginLeft: "165px"}, 300, showMenu);
                 return false;
