@@ -20,14 +20,13 @@
 
     var hideMenu = function(){
         menuStatus = false;
-        menu.hide();
     };
     var showMenu = function(){
-        menuStatus = true
+        menuStatus = true;
     };
 
     var animateToPage = function(url){
-        $(".ui-page-active").transition({marginLeft: "0px"}, 150, function(){
+        menu.transition({marginLeft: "-175px"}, 150, function(){
             hideMenu();
             $.mobile.changePage(url, {transition: 'none'});
         });
@@ -40,12 +39,13 @@
         // Show menu
         $(document).on(iLepra.config.defaultTapEvent, "a.showMenu", function(){
             if(menuStatus != true){
-                menu.show();
                 menu.css('top', $(window).scrollTop() +'px');
-                $(".ui-page-active").transition({marginLeft: "165px"}, 300, showMenu);
+                menu.transition({marginLeft: "0px"}, 300, showMenu);
+                //$(".ui-page-active").transition({marginLeft: "165px"}, 300, showMenu);
                 return false;
             } else {
-                $(".ui-page-active").transition({marginLeft: "0px"}, 300, hideMenu);
+                menu.transition({marginLeft: "-175px"}, 300, hideMenu);
+                //$(".ui-page-active").transition({marginLeft: "0px"}, 300, hideMenu);
                 return false;
             }
         });

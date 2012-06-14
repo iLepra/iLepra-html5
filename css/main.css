@@ -1,7 +1,7 @@
 /* don't allow callout opening */
 body { 
     -webkit-touch-callout: none;
-    background: #31394b !important;
+    /*background: #31394b !important;*/
     overflow-x: hidden;
 }
 
@@ -173,13 +173,15 @@ img {
     background-size: 16px 16px;
 }
 #menu{
-    width:165px;
+    width:175px;
     height:100%;
     margin-top: 40px;
+    margin-left: -175px;
     display:block;
     float:left;
-    position: absolute;
+    position: fixed;
     background:#31394b;
+    z-index: 1000;
 }
 #menu ul{
     margin:0;padding:0;
