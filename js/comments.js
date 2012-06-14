@@ -86,6 +86,12 @@
 
         // on comments request
         $("#postCommentsButton").bind(iLepra.config.defaultTapEvent, reloadComments);
+        $("#postNewCommentsButton").bind(iLepra.config.defaultTapEvent, function(e){
+            $("#allComments").removeClass('ui-btn-active');
+            $("#newComments").addClass('ui-btn-active');
+            type = "new";
+            reloadComments(e);
+        });
         $("#refreshComments").bind(iLepra.config.defaultTapEvent, reloadComments);
 
         $("#allComments").bind(iLepra.config.defaultTapEvent, function(e){
@@ -263,7 +269,7 @@
             $(document).unbind(event);
             //$.mobile.changePage("post_comments.html");
             $.mobile.hidePageLoadingMsg();
-            $("#postCommentsButton").hide();
+            $("#postCommentsButtonsGroup").hide();
             $("#postCommentsContent").show();
             $("#replyPost").show();
 

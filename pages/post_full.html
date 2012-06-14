@@ -10,7 +10,7 @@
         <div class="postMenu">
             <a href="#" id="replyPost" style="display: none;"><img src="../css/img/reply_32.png" /></a>
 
-            <div data-role="controlgroup" data-type="horizontal" data-mini="true" style="float:right;">
+            <div data-role="controlgroup" data-type="horizontal" data-mini="true" style="float:right; width:70px;">
                 <a href="#" id="postVoteup" data-role="button" style="opacity: 0.6;" data-theme="a">+</a>
                 <a href="#" id="postVotedown" data-role="button" style="opacity: 0.6;" data-theme="a">-</a>
             </div>
@@ -25,7 +25,10 @@
             <span style="font-weight: bold;" id="postRating">462</span>
         </div>
 
-        <a href="#" id="postCommentsButton" data-role="button">Комментарии</a>
+        <div data-role="controlgroup" data-type="horizontal" id="postCommentsButtonsGroup">
+            <a href="#" id="postCommentsButton" data-role="button">Все комментарии</a>
+            <a href="#" id="postNewCommentsButton" data-role="button">Новые</a>
+        </div>
     </div>
 
     <div data-role="content" id="postCommentsContent" style="display:none; padding-top: 0px;">
